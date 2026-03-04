@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1M28K8V49L"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-1M28K8V49L');
 </script>
     <meta charset="UTF-8">
@@ -16,7 +15,7 @@
     <title>Francesca Monte | Marketing & Data Analyst</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -30,22 +29,18 @@
             </div>
             <h2>Francesca Monte</h2>
             <p class="sidebar-tag">Marketing & Data Analyst</p>
-            
             <div class="bio-section">
                 <h3 data-i18n="sidebar.about_title">About me</h3>
                 <p data-i18n="sidebar.about_p1">Every system has an internal logic, whether it's a linguistic structure or a SQL database. My transition to data is the evolution of a need to stop guessing and start measuring.</p>
-                <p data-i18n="sidebar.about_p2">I value data because, unlike words, they show you the facts. I’m just here to see what the numbers actually show.</p>
+                <p data-i18n="sidebar.about_p2">I value data because, unlike words, they show you the facts. I'm just here to see what the numbers actually show.</p>
             </div>
-
             <div class="sidebar-connect">
                 <p class="connect-label" data-i18n="sidebar.connect_label">Meet me on</p>
                 <div class="social-links-grid">
                     <a href="https://www.linkedin.com/in/francesca-monte" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://github.com/francescaetnom-wq" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                     <a href="https://www.instagram.com/francescamonte__/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                    <a href="Purple and White Clean and Professional Resume.pdf" download="Francesca_Monte_CV.pdf" class="cv-download" onclick="gtag('event', 'cv_download', {'event_category': 'Lead', 'event_label': 'Icon_Link'});">
-    <i class="fas fa-file-alt"></i>
-</a>
+                    <a href="francesca monte resume.pdf" download="Francesca_Monte_CV.pdf" class="cv-download"><i class="fas fa-file-alt"></i></a>
                 </div>
             </div>
         </div>
@@ -57,15 +52,12 @@
   <div class="logo-group" id="sidebar-trigger">
     <button class="sidebar-toggle"><i class="fas fa-user-circle"></i></button>
     <div class="logo">Francesca Monte</div>
-
-    <!-- Language buttons (new) -->
     <div class="lang-switch" aria-label="Language switcher">
       <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
       <button class="lang-btn" type="button" data-lang="it" aria-pressed="false">IT</button>
       <button class="lang-btn" type="button" data-lang="nl" aria-pressed="false">NL</button>
     </div>
   </div>
-
   <ul class="nav-links">
     <li><a href="#approach" data-i18n="nav.approach">Approach</a></li>
     <li><a href="#portfolio" data-i18n="nav.projects">Projects</a></li>
@@ -74,45 +66,60 @@
   </ul>
 </nav>
 
-   <header class="hero">
-        <div class="glow-blob blob-1"></div>
-        <div class="glow-blob blob-2"></div>
-        <div class="hero-content">
-            <p class="subtitle" id="typewriter-text"></p>
-            <h1 class="text-gradient">Francesca Monte</h1>
-            <p class="tagline" data-i18n="hero.tagline">I analyze marketing performance to find the truth behind the numbers. Focused on full-funnel optimization and data-driven execution.</p>
-            
-            <div class="hero-btns">
-                <a href="#portfolio" class="btn-primary" data-i18n="hero.cta_cases">View Case Studies</a>
-                
-  <a href="Purple and White Clean and Professional Resume.pdf" download="Francesca_Monte_CV.pdf" class="btn-card" onclick="gtag('event', 'cv_download', {'event_category': 'Lead', 'event_label': 'Hero_Button'});">
-    <i class="fas fa-download"></i> <span data-i18n="hero.cta_cv">Download CV</span>
-</a>                
-                <a href="#contact" class="btn-card">
-  <i class="fas fa-envelope"></i> <span data-i18n="hero.cta_inquiry">Get in Touch</span>
-</a>
-            </div>
-        </div>
-    </header>
+<header class="hero">
+  <div class="glow-blob blob-1"></div>
+  <div class="glow-blob blob-2"></div>
+  <div class="hero-content">
+    <p class="subtitle" id="typewriter-text"></p>
+    <h1 class="text-gradient">Francesca Monte</h1>
+    <p class="tagline" data-i18n="hero.tagline">I analyze marketing performance to find the truth behind the numbers. Focused on full-funnel optimization and data-driven execution.</p>
+    <div class="hero-stats">
+      <div class="stat-block" data-target="4.2" data-suffix="x" data-decimals="1">
+        <div class="stat-value">0<span class="stat-suffix">x</span></div>
+        <div class="stat-label" data-i18n="hero.stat1.label">ROAS Achieved</div>
+        <div class="stat-context" data-i18n="hero.stat1.ctx">GA4 + Google Ads funnel</div>
+      </div>
+      <div class="stat-block" data-target="38" data-suffix="%" data-decimals="0">
+        <div class="stat-value">0<span class="stat-suffix">%</span></div>
+        <div class="stat-label" data-i18n="hero.stat2.label">CPA Reduction</div>
+        <div class="stat-context" data-i18n="hero.stat2.ctx">Attribution realignment</div>
+      </div>
+      <div class="stat-block" data-target="3" data-suffix="+" data-decimals="0">
+        <div class="stat-value">0<span class="stat-suffix">+</span></div>
+        <div class="stat-label" data-i18n="hero.stat3.label">BI Dashboards</div>
+        <div class="stat-context" data-i18n="hero.stat3.ctx">Power BI · Star Schema</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-primary" data-i18n="hero.cta_cases">View Case Studies</a>
+      <a href="francesca monte resume.pdf" download="Francesca_Monte_CV.pdf" class="btn-card">
+        <i class="fas fa-download"></i> <span data-i18n="hero.cta_cv">Download CV</span>
+      </a>
+      <a href="#contact" class="btn-card">
+        <i class="fas fa-envelope"></i> <span data-i18n="hero.cta_inquiry">Get in Touch</span>
+      </a>
+    </div>
+  </div>
+</header>
 
 <section class="tech-ticker">
-        <div class="ticker-wrapper">
-            <div class="ticker-content">
-                <span><i class="fas fa-database"></i> SQL</span>
-                <span><i class="fas fa-chart-bar"></i> POWER BI</span>
-                <span><i class="fab fa-python"></i> PYTHON</span>
-                <span><i class="fas fa-table"></i> GA4</span>
-                <span><i class="fas fa-robot"></i> AI AGENTS</span>
-                <span><i class="fab fa-google"></i> GOOGLE ADS</span>
-                <span><i class="fas fa-search"></i> SEO</span>
-                <span><i class="fas fa-chart-line"></i> ANALYSIS</span>
-        </div>
-    </section>
+  <div class="ticker-wrapper">
+    <div class="ticker-content">
+      <span><i class="fas fa-database"></i> SQL</span>
+      <span><i class="fas fa-chart-bar"></i> POWER BI</span>
+      <span><i class="fab fa-python"></i> PYTHON</span>
+      <span><i class="fas fa-table"></i> GA4</span>
+      <span><i class="fas fa-robot"></i> AI AGENTS</span>
+      <span><i class="fab fa-google"></i> GOOGLE ADS</span>
+      <span><i class="fas fa-search"></i> SEO</span>
+      <span><i class="fas fa-chart-line"></i> ANALYSIS</span>
+    </div>
+  </div>
+</section>
 
 <section id="approach" class="pillars container">
   <p class="section-label" data-i18n="approach.label">METHODOLOGY</p>
   <h2 data-i18n="approach.title">Three Pillars of Impact</h2>
-
   <div class="pillars-grid">
     <div class="card pillar-card">
       <div class="pillar-icon"><i class="fas fa-language"></i></div>
@@ -121,9 +128,9 @@
       <div class="card-details">
         <p data-i18n="approach.p1.details">Utilizing semantic analysis to drive global engagement and communication clarity.</p>
       </div>
+      <span class="pillar-pill"><i class="fas fa-arrow-right"></i> <span data-i18n="approach.p1.pill">Pattern Recognition</span></span>
       <div class="expand-icon"><i class="fas fa-plus"></i></div>
     </div>
-
     <div class="card pillar-card highlight">
       <div class="pillar-icon"><i class="fas fa-rocket"></i></div>
       <h3 data-i18n="approach.p2.title">Performance Engineering</h3>
@@ -131,9 +138,9 @@
       <div class="card-details">
         <p data-i18n="approach.p2.details">Full-stack tracking implementation and data-backed marketing optimization.</p>
       </div>
+      <span class="pillar-pill"><i class="fas fa-arrow-right"></i> <span data-i18n="approach.p2.pill">GA4 · GTM · Attribution</span></span>
       <div class="expand-icon"><i class="fas fa-plus"></i></div>
     </div>
-
     <div class="card pillar-card">
       <div class="pillar-icon"><i class="fas fa-chart-line"></i></div>
       <h3 data-i18n="approach.p3.title">Data Architecture & BI</h3>
@@ -141,230 +148,415 @@
       <div class="card-details">
         <p data-i18n="approach.p3.details">Relational modeling, DAX measures, and high-impact executive dashboards.</p>
       </div>
+      <span class="pillar-pill"><i class="fas fa-arrow-right"></i> <span data-i18n="approach.p3.pill">DAX · Star Schema · SQL</span></span>
       <div class="expand-icon"><i class="fas fa-plus"></i></div>
     </div>
   </div>
 </section>
 
-   <section id="portfolio" class="work container">
+<!-- =====================
+     PORTFOLIO — nuove case study card
+     ===================== -->
+<section id="portfolio" class="work container">
   <p class="section-label" data-i18n="portfolio.label">SELECTED CASE STUDIES</p>
   <h2 data-i18n="portfolio.title">Strategic Data Solutions</h2>
+  <div class="cs-grid">
 
-  <div class="grid projects-grid">
-    <div class="card case-card">
-      <div class="card-header">
-        <h3>SQL: Data Modeling</h3>
-        <p data-i18n="portfolio.c1.desc">Structured fragmented marketing exports into a unified relational model.</p>
-        <div class="tags"><span>SQL</span><span>Data Integrity</span></div>
-      </div>
-      <div class="card-details">
-        <hr>
-        <p data-i18n="portfolio.c1.details">Created complex JOINs and CTEs to merge disparate data sources, eliminating duplicates and ensuring a clean baseline for performance analysis.</p>
-        <div class="project-links">
-          <a href="https://github.com/francescaetnom-wq" target="_blank" class="link-btn">
-            <i class="fab fa-github"></i> <span data-i18n="portfolio.c1.link">View Documentation</span>
+    <!-- CARD 1: SQL -->
+    <div class="cs-card">
+      <div class="cs-inner">
+        <div class="cs-header">
+          <div class="cs-icon-title">
+            <div class="cs-icon"><i class="fas fa-database"></i></div>
+            <span class="cs-title" data-i18n="portfolio.c1.title">SQL: HVC Segmentation</span>
+          </div>
+          <span class="cs-badge badge-sql">BigQuery</span>
+        </div>
+        <p class="cs-desc" data-i18n="portfolio.c1.desc">Identified High-Value Customers via Hero Category purchases — building a high-ROI audience for retention and lookalike campaigns.</p>
+        <div class="mac-window">
+          <div class="mac-bar">
+            <div class="mac-dot red"></div><div class="mac-dot yellow"></div><div class="mac-dot green"></div>
+            <div class="mac-tabs"><span class="mac-tab">CTE</span><span class="mac-tab">BigQuery</span></div>
+          </div>
+          <div class="mac-code"><span class="cmt">-- High-Value Customers via Hero Category purchases</span>
+<span class="kw">WITH</span> <span class="fn">user_profitability</span> <span class="kw">AS</span> (
+  <span class="kw">SELECT</span>
+    u.id <span class="kw">AS</span> user_id, u.email, u.traffic_source,
+    p.category,
+    oi.sale_price - p.cost <span class="kw">AS</span> net_profit
+  <span class="kw">FROM</span> <span class="str">`thelook_ecommerce.order_items`</span> <span class="kw">AS</span> oi
+  <span class="kw">JOIN</span> <span class="str">`thelook_ecommerce.users`</span> <span class="kw">AS</span> u <span class="kw">ON</span> oi.user_id = u.id
+  <span class="kw">JOIN</span> <span class="str">`thelook_ecommerce.products`</span> <span class="kw">AS</span> p <span class="kw">ON</span> oi.product_id = p.id
+  <span class="kw">WHERE</span> oi.status = <span class="str">'Complete'</span>
+)
+<span class="kw">SELECT</span> user_id, traffic_source,
+  <span class="fn">COUNT</span>(category) <span class="kw">AS</span> high_margin_items,
+  <span class="fn">ROUND</span>(<span class="fn">SUM</span>(net_profit), <span class="num">2</span>) <span class="kw">AS</span> total_profit
+<span class="kw">FROM</span> user_profitability
+<span class="kw">WHERE</span> category <span class="kw">IN</span> (<span class="str">'Blazers & Jackets'</span>, <span class="str">'Suits'</span>, <span class="str">'Outerwear'</span>)
+<span class="kw">GROUP BY</span> <span class="num">1</span>, <span class="num">2</span>
+<span class="kw">HAVING</span> total_profit > <span class="num">150</span>
+<span class="kw">ORDER BY</span> total_profit <span class="kw">DESC</span> <span class="kw">LIMIT</span> <span class="num">10</span>;</div>
+        </div>
+        <div class="cs-metrics-row">
+          <div class="cs-metric">
+            <div class="cs-metric-label" data-i18n="portfolio.c1.m1l">Tables Joined</div>
+            <div class="cs-metric-value">3</div>
+            <div class="cs-metric-delta delta-pos">↑ Unified pipeline</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-label" data-i18n="portfolio.c1.m2l">Audience Identified</div>
+            <div class="cs-metric-value">HVC</div>
+            <div class="cs-metric-delta delta-pos">↑ Profit > €150</div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-tags"><span class="cs-tag">SQL</span><span class="cs-tag">CTE</span><span class="cs-tag">BigQuery</span></div>
+          <a href="https://github.com/francescaetnom-wq" target="_blank" class="cs-link">
+            <i class="fab fa-github"></i> <span data-i18n="portfolio.c1.link">View on GitHub</span>
           </a>
         </div>
       </div>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
     </div>
 
-    <div class="card case-card highlight">
-      <div class="card-header">
-        <h3>BI: KPI Architecture</h3>
-        <p data-i18n="portfolio.c2.desc">Developed an end-to-end Power BI dashboard to monitor real-time business performance.</p>
-        <div class="tags"><span>Power BI</span><span>DAX</span><span>Star Schema</span></div>
-      </div>
-      <div class="card-details">
-        <hr>
-        <p data-i18n="portfolio.c2.details">Implemented advanced DAX measures for dynamic ROAS/CAC tracking and designed a Star Schema for high-performance query execution.</p>
-        <div class="project-links">
-          <a href="#" target="_blank" class="link-btn">
-            <i class="far fa-file-pdf"></i> <span data-i18n="portfolio.c2.link">View Dashboard Design</span>
+    <!-- CARD 2: BI -->
+    <div class="cs-card">
+      <div class="cs-inner">
+        <div class="cs-header">
+          <div class="cs-icon-title">
+            <div class="cs-icon"><i class="fas fa-chart-bar"></i></div>
+            <span class="cs-title" data-i18n="portfolio.c2.title">BI: KPI Architecture</span>
+          </div>
+          <span class="cs-badge badge-bi">Power BI</span>
+        </div>
+        <p class="cs-desc" data-i18n="portfolio.c2.desc">End-to-end Power BI dashboard with Star Schema and DAX measures for real-time business performance monitoring.</p>
+        <div class="results-list">
+          <div class="result-item">
+            <i class="fas fa-bolt result-icon"></i>
+            <span class="result-text" data-i18n="portfolio.c2.r1">ROAS tracking — dynamic DAX measure</span>
+            <span class="result-value">4.2×</span>
+          </div>
+          <div class="result-item">
+            <i class="fas fa-arrow-trend-down result-icon"></i>
+            <span class="result-text" data-i18n="portfolio.c2.r2">CPA reduction via attribution fix</span>
+            <span class="result-value">−38%</span>
+          </div>
+          <div class="result-item">
+            <i class="fas fa-database result-icon"></i>
+            <span class="result-text" data-i18n="portfolio.c2.r3">Star Schema — query performance</span>
+            <span class="result-value">↑ 3×</span>
+          </div>
+          <div class="result-item">
+            <i class="fas fa-layer-group result-icon"></i>
+            <span class="result-text" data-i18n="portfolio.c2.r4">Fact + Dimension tables designed</span>
+            <span class="result-value">7</span>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-tags"><span class="cs-tag">Power BI</span><span class="cs-tag">DAX</span><span class="cs-tag">Star Schema</span></div>
+          <a href="#" class="cs-link">
+            <i class="far fa-file-pdf"></i> <span data-i18n="portfolio.c2.link">View Dashboard</span>
           </a>
         </div>
       </div>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
     </div>
 
-    <div class="card case-card">
-      <div class="card-header">
-        <h3>Analytics: Funnel Audit</h3>
-        <p data-i18n="portfolio.c3.desc">Deployed a full-funnel GA4 tracking framework to eliminate data gaps and optimize attribution.l visibility.</p>
-        <div class="tags"><span>GA4</span><span>GTM</span><span>Tracking</span></div>
-      </div>
-      <div class="card-details">
-        <hr>
-        <p data-i18n="portfolio.c3.details">Mapped the user journey from lead to conversion, fixing data leakage in the checkout flow and aligning multi-channel attribution with actual revenue.</p>
-        <div class="project-links">
-          <a href="Progetto Funnel Marketing Francesca Monte.pdf" target="_blank" class="link-btn">
-            <i class="far fa-file-pdf"></i> <span data-i18n="portfolio.c3.link">View Technical Audit</span>
+    <!-- CARD 3: FUNNEL AUDIT -->
+    <div class="cs-card">
+      <div class="cs-inner">
+        <div class="cs-header">
+          <div class="cs-icon-title">
+            <div class="cs-icon"><i class="fas fa-filter"></i></div>
+            <span class="cs-title" data-i18n="portfolio.c3.title">Analytics: Funnel Audit</span>
+          </div>
+          <span class="cs-badge badge-ga4">GA4</span>
+        </div>
+        <p class="cs-desc" data-i18n="portfolio.c3.desc">Full-funnel GA4 tracking framework to eliminate data gaps, fix attribution leakage and align revenue data.</p>
+        <div class="mini-chart">
+          <div class="chart-label" data-i18n="portfolio.c3.chart_label">Funnel Stage Tracking Accuracy — Before vs After</div>
+          <div class="bars" id="funnelBars"></div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:rgba(16,185,129,0.5)"></div><span data-i18n="portfolio.c3.leg_before">Before audit</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div><span data-i18n="portfolio.c3.leg_after">After fix</span></div>
+          </div>
+        </div>
+        <div class="cs-metrics-row">
+          <div class="cs-metric">
+            <div class="cs-metric-label" data-i18n="portfolio.c3.m1l">Data Leakage Fixed</div>
+            <div class="cs-metric-value">3</div>
+            <div class="cs-metric-delta delta-pos">↑ Checkout stages</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-label" data-i18n="portfolio.c3.m2l">Attribution Accuracy</div>
+            <div class="cs-metric-value">+41<span style="font-size:0.7rem">%</span></div>
+            <div class="cs-metric-delta delta-pos">↑ Multi-channel</div>
+          </div>
+        </div>
+        <div class="cs-footer">
+          <div class="cs-tags"><span class="cs-tag">GA4</span><span class="cs-tag">GTM</span><span class="cs-tag">Funnel</span></div>
+          <a href="Progetto Funnel Marketing Francesca Monte.pdf" target="_blank" class="cs-link">
+            <i class="far fa-file-pdf"></i> <span data-i18n="portfolio.c3.link">View Audit</span>
           </a>
         </div>
       </div>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
     </div>
+
   </div>
 </section>
 
-   <section id="education" class="education container">
+<!-- EDUCATION -->
+<section id="education" class="education container">
   <p class="section-label" data-i18n="edu.label">TECHNICAL FOUNDATIONS</p>
   <h2 data-i18n="edu.title">Academic & Professional Journey</h2>
-
-  <div class="grid edu-grid">
-    <div class="card edu-card highlight">
-      <div class="card-header">
-        <h3 data-i18n="edu.c1.title">Digital Marketing & AI Agents</h3>
-        <p data-i18n="edu.c1.subtitle">Start2Impact University</p>
-        <div class="tags"><span>AI Engineering</span><span>GA4 Stack</span></div>
+  <div class="timeline-chart-wrap">
+    <div class="timeline-chart-header">
+      <div>
+        <div class="timeline-chart-title" id="chartTitle">Career Trajectory Index</div>
+        <div class="timeline-chart-subtitle">Expertise depth · 2023 → present</div>
       </div>
-
-      <div class="card-details">
-        <hr>
-        <div class="edu-specs">
-          <div class="spec-group">
-            <h4 data-i18n="edu.c1.s1.title">Technical Tracking & Analytics</h4>
-            <p data-i18n="edu.c1.s1.desc">Full-stack implementation of GA4 & GTM. Orchestrating full-funnel measurement to ensure data integrity and attribution logic.</p>
-          </div>
-          <div class="spec-group">
-            <h4 data-i18n="edu.c1.s2.title">AI Agentic Workflows</h4>
-            <p data-i18n="edu.c1.s2.desc">Advanced deployment of custom AI Agents to automate marketing operations and data-driven tasks using Prompt Engineering.</p>
-          </div>
-        </div>
-      </div>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
+      <div class="timeline-badge">↑ Data-Driven</div>
     </div>
-
-    <div class="card edu-card">
-      <div class="card-header">
-        <h3 data-i18n="edu.c2.title">Intercultural & International Communication</h3>
-        <p data-i18n="edu.c2.subtitle">University of Pisa | Master’s Degree</p>
-        <div class="tags"><span>Crisis Mgt</span><span>Industry</span></div>
-      </div>
-
-      <div class="card-details">
-        <hr>
-        <div class="edu-specs">
-          <div class="spec-group">
-            <h4 data-i18n="edu.c2.s1.title">B2B Strategic Messaging</h4>
-            <p data-i18n-html="edu.c2.s1.desc">
-              Managed communication for a leader in <strong>Northern Italian precision industry</strong>, translating technical specs into market-ready value propositions.
-            </p>
-          </div>
-          <div class="spec-group">
-            <h4 data-i18n="edu.c2.s2.title">Cross-Border Frameworks</h4>
-            <p data-i18n="edu.c2.s2.desc">Studied communication architectures for multi-market enterprises to ensure brand consistency across global touchpoints.</p>
-          </div>
-        </div>
-      </div>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
-    </div>
-
-    <div class="card edu-card">
-      <div class="card-header">
-        <h3 data-i18n="edu.c3.title">Linguistic & Cultural Mediation</h3>
-        <p data-i18n="edu.c3.subtitle">UniOr Naples | Bachelor’s Degree</p>
-        <div class="tags"><span>Linguistics</span><span>Logic</span></div>
-      </div>
-
-      <div class="card-details">
-        <hr>
-        <div class="edu-specs">
-          <div class="spec-group">
-            <h4 data-i18n="edu.c3.s1.title">Structural Analysis</h4>
-            <p data-i18n-html="edu.c3.s1.desc">
-               Deep-dive into <strong>linguistic logic and syntax patterns</strong>. Developing the mental framework to decode complex information structures.
-            </p>
-          </div>
-          <div class="spec-group">
-            <h4 data-i18n="edu.c3.s2.title">Market Localization</h4>
-            <p data-i18n="edu.c3.s2.desc">Analyzing international datasets through a cultural lens to identify consumer nuances that purely technical analysts often miss.</p>
-          </div>
-        </div>
-      </div>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
+    <svg class="timeline-svg" viewBox="0 0 820 280" id="eduSvg">
+      <defs>
+        <linearGradient id="eduAreaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="eduLineGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#4c1d95"/>
+          <stop offset="50%" stop-color="#7c3aed"/>
+          <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+      </defs>
+      <line x1="70" y1="20"  x2="70"  y2="230" stroke="#1e293b" stroke-width="1"/>
+      <line x1="70" y1="20"  x2="790" y2="20"  stroke="#1e293b" stroke-width="1" stroke-opacity="0.5"/>
+      <line x1="70" y1="80"  x2="790" y2="80"  stroke="#1e293b" stroke-width="1"/>
+      <line x1="70" y1="140" x2="790" y2="140" stroke="#1e293b" stroke-width="1"/>
+      <line x1="70" y1="200" x2="790" y2="200" stroke="#1e293b" stroke-width="1"/>
+      <line x1="70" y1="230" x2="790" y2="230" stroke="#1e293b" stroke-width="1"/>
+      <text x="62" y="23"  font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="end" id="yExpert">Expert</text>
+      <text x="62" y="83"  font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="end" id="yAdvanced">Advanced</text>
+      <text x="62" y="143" font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="end" id="yIntermediate">Intermediate</text>
+      <text x="62" y="203" font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="end" id="yFoundation">Foundation</text>
+      <text font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle"
+            transform="rotate(-90, 2, 125)" x="2" y="125" id="yAxisLabel">Expertise Level</text>
+      <path id="eduArea"
+        d="M100,210 C160,205 200,195 260,185 C310,175 340,165 390,145 C430,120 460,90 510,65 C555,45 600,30 650,22 C700,18 750,18 780,18 L780,230 L100,230 Z"
+        fill="url(#eduAreaGrad)" opacity="0" style="transition: opacity 0.6s ease 1.8s"/>
+      <path id="eduLine"
+        d="M100,210 C160,205 200,195 260,185 C310,175 340,165 390,145 C430,120 460,90 510,65 C555,45 600,30 650,22 C700,18 750,18 780,18"
+        fill="none" stroke="url(#eduLineGrad)" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+        stroke-dasharray="1200" stroke-dashoffset="1200"
+        style="transition: stroke-dashoffset 2.2s cubic-bezier(0.4,0,0.2,1); filter: drop-shadow(0 0 6px rgba(124,58,237,0.6))"/>
+      <line id="eduPivotLine" x1="390" y1="25" x2="390" y2="230"
+        stroke="rgba(124,58,237,0.25)" stroke-width="1" stroke-dasharray="4 3"
+        opacity="0" style="transition: opacity 0.4s ease 1.6s"/>
+      <text id="eduPivotT1" x="395" y="38" font-family="Inter,sans-serif" font-size="8" fill="#a78bfa"
+        opacity="0" style="transition: opacity 0.4s ease 1.8s">← Pivot point</text>
+      <text id="eduPivotT2" x="395" y="50" font-family="Inter,sans-serif" font-size="8" fill="#a78bfa"
+        opacity="0" style="transition: opacity 0.4s ease 1.9s">Start2Impact</text>
+      <circle id="eno1" cx="100" cy="210" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni1" cx="100" cy="210" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="100" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl1" style="transition:opacity .4s ease">2023</text>
+      <text x="100" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens1" style="transition:opacity .4s ease">UniOr · Lingue</text>
+      <circle id="eno2" cx="260" cy="185" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni2" cx="260" cy="185" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="260" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl2" style="transition:opacity .4s ease">2024</text>
+      <text x="260" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens2" style="transition:opacity .4s ease">Master · Pisa</text>
+      <circle id="eno3" cx="390" cy="145" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni3" cx="390" cy="145" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="390" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl3" style="transition:opacity .4s ease">2025</text>
+      <text x="390" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens3" style="transition:opacity .4s ease">Data · Mktg</text>
+      <circle id="eno4" cx="510" cy="65" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni4" cx="510" cy="65" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="510" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl4" style="transition:opacity .4s ease">2025</text>
+      <text x="510" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens4" style="transition:opacity .4s ease">Start2Impact</text>
+      <circle id="eno5" cx="650" cy="22" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni5" cx="650" cy="22" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="650" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl5" style="transition:opacity .4s ease">2026</text>
+      <text x="650" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens5" style="transition:opacity .4s ease">PL-300 · GA4</text>
+      <circle id="eno6" cx="780" cy="18" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni6" cx="780" cy="18" r="4" fill="#a78bfa" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="780" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#a78bfa" text-anchor="middle" opacity="0" id="enl6" style="transition:opacity .4s ease">Now</text>
+      <text x="780" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens6" style="transition:opacity .4s ease">Available</text>
+      <circle class="edu-hit" cx="100"  cy="210" r="18" fill="transparent" data-node="1" style="cursor:pointer"/>
+      <circle class="edu-hit" cx="260"  cy="185" r="18" fill="transparent" data-node="2" style="cursor:pointer"/>
+      <circle class="edu-hit" cx="390"  cy="145" r="18" fill="transparent" data-node="3" style="cursor:pointer"/>
+      <circle class="edu-hit" cx="510"  cy="65"  r="18" fill="transparent" data-node="4" style="cursor:pointer"/>
+      <circle class="edu-hit" cx="650"  cy="22"  r="18" fill="transparent" data-node="5" style="cursor:pointer"/>
+      <circle class="edu-hit" cx="780"  cy="18"  r="18" fill="transparent" data-node="6" style="cursor:pointer"/>
+    </svg>
+    <p class="edu-node-hint" id="nodeHint">● Click a node to explore each phase</p>
+    <div class="timeline-legend">
+      <div class="tl-item" id="tli1"><div class="tl-dot"></div><div class="tl-text"><strong id="leg1t">Linguistics & Communication</strong><span id="leg1s">Structural logic, cross-cultural analysis</span></div></div>
+      <div class="tl-item" id="tli2"><div class="tl-dot"></div><div class="tl-text"><strong id="leg2t">Marketing & Strategy</strong><span id="leg2s">B2B messaging, brand frameworks</span></div></div>
+      <div class="tl-item" id="tli3"><div class="tl-dot"></div><div class="tl-text"><strong id="leg3t">Data & Analytics</strong><span id="leg3s">SQL, Power BI, GA4, Python, AI</span></div></div>
+      <div class="tl-item" id="tli4"><div class="tl-dot current"></div><div class="tl-text"><strong id="leg4t">Now — Available</strong><span id="leg4s">Full-stack marketing analyst</span></div></div>
     </div>
   </div>
 </section>
 
- <!-- CERTIFICATIONS -->
+<div id="eduPanelOverlay"></div>
+<aside id="eduPanel">
+  <div class="ep-header">
+    <span class="ep-tag" id="eduPanelTag"></span>
+    <button id="eduPanelClose"><i class="fas fa-times"></i></button>
+  </div>
+  <h3 class="ep-title" id="eduPanelTitle"></h3>
+  <div class="ep-meta">
+    <span class="ep-period" id="eduPanelPeriod"></span>
+    <span class="ep-inst"   id="eduPanelInst"></span>
+  </div>
+  <div class="ep-divider"></div>
+  <div class="ep-body" id="eduPanelBody"></div>
+</aside>
+
 <section id="certifications" class="container certifications-section">
   <p class="section-label" data-i18n="cert.label">CREDENTIALS</p>
   <h2 data-i18n="cert.title">Technical Certifications</h2>
+  <div class="cert-flip-grid">
 
-  <div class="grid cert-grid">
-    <div class="card cert-card highlight primary-cert">
-      <div class="card-header">
-        <h3 data-i18n="cert.c3.title">Microsoft PL-300: Power BI Data Analyst</h3>
-        <p data-i18n="cert.c3.org">Microsoft</p>
-      </div>
-      <div class="project-links">
-        <a href="URL_TUO_PDF_PL300" target="_blank" class="link-btn">
-          <i class="fas fa-external-link-alt"></i> <span data-i18n="cert.view">View Certificate</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card cert-card">
-      <div class="card-header">
-        <h3 data-i18n="cert.ga4.title">Google Analytics Certification</h3>
-        <p data-i18n="cert.ga4.org">Skillshop (Google)</p>
-        <div class="tags">
-            <span data-i18n="cert.ga4.date">Valid: Jan 2026 - Jan 2027</span>
+    <!-- PL-300 -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front primary">
+          <div class="cert-front-top">
+            <span class="cert-org" data-i18n="cert.c3.org">Microsoft</span>
+            <span class="cert-status"><span class="cert-status-dot"></span> <span data-i18n="cert.c3.status">In Progress</span></span>
+          </div>
+          <div class="cert-front-title" data-i18n="cert.c3.title">PL-300: Power BI Data Analyst</div>
+          <div class="cert-front-bottom">
+            <span class="cert-date" data-i18n="cert.c3.date">2026</span>
+            <span class="cert-flip-hint"><i class="fas fa-rotate"></i> <span data-i18n="cert.flip_hint">flip for badge</span></span>
+          </div>
         </div>
-    </div>
-    <div class="project-links">
-        <a href="https://www.credential.net/946c1d08-b625-4baa-b496-5ef548220b30" target="_blank" class="link-btn">
-            <i class="fas fa-external-link-alt"></i> <span data-i18n="cert.view">Verify Credential</span>
-        </a>
-    </div>
+        <div class="flip-back">
+          <div class="logo-glow" style="background:#7c3aed"></div>
+          <div class="logo-microsoft">
+            <div class="ms-square ms-1"></div>
+            <div class="ms-square ms-2"></div>
+            <div class="ms-square ms-3"></div>
+            <div class="ms-square ms-4"></div>
+          </div>
+          <div class="back-cert-name" data-i18n-html="cert.c3.back">Microsoft PL-300<br>Power BI Data Analyst</div>
+          <a href="URL_TUO_PDF_PL300" target="_blank" class="back-verify">
+            <i class="fas fa-external-link-alt"></i> <span data-i18n="cert.view">View Certificate</span>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="card cert-card">
-      <div class="card-header">
-        <h3 data-i18n="cert.c1.title">Google Data Analytics Professional Certificate</h3>
-        <p data-i18n="cert.c1.org">Google / Coursera</p>
-      </div>
-      <div class="project-links">
-        <a href="URL_TUO_PDF_GDA" target="_blank" class="link-btn">
-          <i class="fas fa-external-link-alt"></i> <span data-i18n="cert.view">View Certificate</span>
-        </a>
+    <!-- Google Analytics -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="cert-front-top">
+            <span class="cert-org" data-i18n="cert.ga4.org">Google</span>
+            <span class="cert-status"><span class="cert-status-dot"></span> <span data-i18n="cert.ga4.status">Valid</span></span>
+          </div>
+          <div class="cert-front-title" data-i18n="cert.ga4.title">Google Analytics Certification</div>
+          <div class="cert-front-bottom">
+            <span class="cert-date" data-i18n="cert.ga4.date">Jan 2026 – Jan 2027</span>
+            <span class="cert-flip-hint"><i class="fas fa-rotate"></i> <span data-i18n="cert.flip_hint">flip for badge</span></span>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="logo-glow" style="background:#6d28d9"></div>
+          <div class="logo-google">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gGrad1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#c4b5fd"/><stop offset="100%" stop-color="#7c3aed"/>
+                </linearGradient>
+                <linearGradient id="gGrad2" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#4c1d95"/>
+                </linearGradient>
+                <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <path filter="url(#glow)" d="M40 12C24.5 12 12 24.5 12 40C12 55.5 24.5 68 40 68C55.5 68 68 55.5 68 40C68 37 67.5 34.1 66.6 31.4H40V43H55.2C53 49.6 47 54 40 54C30.6 54 23 46.4 23 37C23 27.6 30.6 20 40 20C44.5 20 48.5 21.7 51.6 24.4L59.5 16.5C54.5 11.9 47.6 9 40 9" fill="url(#gGrad2)"/>
+              <rect x="40" y="31.4" width="26.6" height="11.6" rx="2" fill="url(#gGrad1)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="back-cert-name" data-i18n-html="cert.ga4.back">Google Analytics<br>Certification</div>
+          <a href="https://www.credential.net/946c1d08-b625-4baa-b496-5ef548220b30" target="_blank" class="back-verify">
+            <i class="fas fa-external-link-alt"></i> <span data-i18n="cert.verify">Verify Credential</span>
+          </a>
+        </div>
       </div>
     </div>
+
+    <!-- Google Data Analytics -->
+    <div class="flip-card">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="cert-front-top">
+            <span class="cert-org" data-i18n="cert.c1.org">Google / Coursera</span>
+            <span class="cert-status"><span class="cert-status-dot"></span> <span data-i18n="cert.c1.status">Earned</span></span>
+          </div>
+          <div class="cert-front-title" data-i18n="cert.c1.title">Google Data Analytics Professional Certificate</div>
+          <div class="cert-front-bottom">
+            <span class="cert-date" data-i18n="cert.c1.date">2025</span>
+            <span class="cert-flip-hint"><i class="fas fa-rotate"></i> <span data-i18n="cert.flip_hint">flip for badge</span></span>
+          </div>
+        </div>
+        <div class="flip-back">
+          <div class="logo-glow" style="background:#4c1d95"></div>
+          <div class="logo-google">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="gGrad3" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e9d5ff"/><stop offset="100%" stop-color="#a78bfa"/>
+                </linearGradient>
+                <linearGradient id="gGrad4" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#c4b5fd"/><stop offset="100%" stop-color="#6d28d9"/>
+                </linearGradient>
+                <filter id="glow2"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <path filter="url(#glow2)" d="M40 12C24.5 12 12 24.5 12 40C12 55.5 24.5 68 40 68C55.5 68 68 55.5 68 40C68 37 67.5 34.1 66.6 31.4H40V43H55.2C53 49.6 47 54 40 54C30.6 54 23 46.4 23 37C23 27.6 30.6 20 40 20C44.5 20 48.5 21.7 51.6 24.4L59.5 16.5C54.5 11.9 47.6 9 40 9" fill="url(#gGrad4)"/>
+              <rect x="40" y="31.4" width="26.6" height="11.6" rx="2" fill="url(#gGrad3)" opacity="0.5"/>
+              <rect x="16" y="52" width="5" height="10" rx="1" fill="url(#gGrad3)" opacity="0.6"/>
+              <rect x="23" y="46" width="5" height="16" rx="1" fill="url(#gGrad4)" opacity="0.7"/>
+              <rect x="30" y="49" width="5" height="13" rx="1" fill="url(#gGrad3)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="back-cert-name" data-i18n-html="cert.c1.back">Google Data Analytics<br>Professional Certificate</div>
+          <a href="URL_TUO_PDF_GDA" target="_blank" class="back-verify">
+            <i class="fas fa-external-link-alt"></i> <span data-i18n="cert.view">View Certificate</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section id="contact" class="contact-section container">
   <p class="section-label" data-i18n="contact.label">Get in Touch</p>
-
   <div class="contact-card">
     <div class="contact-header">
       <h2 data-i18n="contact.title">Ready to scale?</h2>
     </div>
-
     <form id="contact-form" action="https://formspree.io/f/mreaokgn" method="POST">
-    <div class="input-group">
+      <div class="input-group">
         <label data-i18n="contact.full_name">Full Name</label>
         <input type="text" name="name" data-i18n-placeholder="contact.ph_name" placeholder="e.g. Francesca Monte" required>
-    </div>
-
-    <div class="input-group">
+      </div>
+      <div class="input-group">
         <label data-i18n="contact.business_email">Business Email</label>
         <input type="email" name="email" data-i18n-placeholder="contact.ph_email" placeholder="name@company.com" required>
-    </div>
-
-    <div class="input-group">
+      </div>
+      <div class="input-group">
         <label data-i18n="contact.brief">Project Brief</label>
         <textarea name="message" rows="4" data-i18n-placeholder="contact.ph_brief" placeholder="Describe the bottleneck you're facing..." required></textarea>
-    </div>
-
-    <div class="form-footer">
+      </div>
+      <div class="form-footer">
         <button type="submit" id="submit-btn" class="btn-primary" data-i18n="contact.send">Send Request</button>
-    </div>
-</form>
+      </div>
+    </form>
   </div>
 </section>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
