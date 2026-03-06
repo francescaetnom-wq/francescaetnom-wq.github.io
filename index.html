@@ -20,30 +20,63 @@
 <body>
 
     <aside id="about-sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <button id="close-sidebar"><i class="fas fa-times"></i></button>
+      <div class="sidebar-glow-top"></div>
+      <div class="sidebar-noise"></div>
+      <div class="sidebar-content">
+
+        <button id="close-sidebar" class="close-btn"><i class="fas fa-times"></i></button>
+
+        <div class="profile-area">
+          <div class="avatar-ring">
+            <img src="profilepic.webp" alt="Francesca Monte" class="avatar-img">
+          </div>
+          <div class="profile-name">Francesca Monte</div>
+          <div class="profile-role"><span class="role-dot"></span> <span data-i18n="sidebar.role">Marketing & Data Analyst</span></div>
         </div>
-        <div class="sidebar-content">
-            <div class="profile-pic-wrapper">
-                <img src="profilepic.webp" alt="Francesca Monte" class="profile-pic">
-            </div>
-            <h2>Francesca Monte</h2>
-            <p class="sidebar-tag">Marketing & Data Analyst</p>
-            <div class="bio-section">
-                <h3 data-i18n="sidebar.about_title">About me</h3>
-                <p data-i18n="sidebar.about_p1">Every system has an internal logic, whether it's a linguistic structure or a SQL database. My transition to data is the evolution of a need to stop guessing and start measuring.</p>
-                <p data-i18n="sidebar.about_p2">I value data because, unlike words, they show you the facts. I'm just here to see what the numbers actually show.</p>
-            </div>
-            <div class="sidebar-connect">
-                <p class="connect-label" data-i18n="sidebar.connect_label">Meet me on</p>
-                <div class="social-links-grid">
-                    <a href="https://www.linkedin.com/in/francesca-monte" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/francescaetnom-wq" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                    <a href="https://www.instagram.com/francescamonte__/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                    <a href="francesca_monte_cv.pdf" download="Francesca_Monte_CV.pdf" class="cv-download"><i class="fas fa-file-alt"></i></a>
-                </div>
-            </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="bio-area">
+          <div class="bio-label" data-i18n="sidebar.about_title">About me</div>
+          <div class="bio-text bio-quote" data-i18n="sidebar.about_p1">Every system has an internal logic, whether it's a linguistic structure or a SQL database. My transition to data is the evolution of a need to stop guessing and start measuring.</div>
+          <div class="bio-text bio-dim" data-i18n="sidebar.about_p2">I value data because, unlike words, they show you the facts. I'm just here to see what the numbers actually show.</div>
         </div>
+
+        <div class="sidebar-stats">
+          <div class="stat-mini">
+            <div class="stat-mini-val">4.2<span>x</span></div>
+            <div class="stat-mini-lbl" data-i18n="hero.stat1.label">ROAS</div>
+          </div>
+          <div class="stat-mini">
+            <div class="stat-mini-val">38<span>%</span></div>
+            <div class="stat-mini-lbl" data-i18n="hero.stat2.label">CPA ↓</div>
+          </div>
+          <div class="stat-mini">
+            <div class="stat-mini-val">3<span>+</span></div>
+            <div class="stat-mini-lbl" data-i18n="hero.stat3.label">Dashboards</div>
+          </div>
+        </div>
+
+        <div class="availability">
+          <div class="avail-dot"></div>
+          <div class="avail-text" data-i18n="sidebar.availability">Open to opportunities · Amsterdam & Remote</div>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="social-area">
+          <div class="social-label" data-i18n="sidebar.connect_label">Meet me on</div>
+          <div class="social-row">
+            <a href="https://www.linkedin.com/in/francesca-monte" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/francescaetnom-wq" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/francescamonte__/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-instagram"></i></a>
+          </div>
+          <a href="francesca_monte_cv.pdf" download="Francesca_Monte_CV.pdf" class="cv-btn">
+            <i class="fas fa-file-alt"></i> <span data-i18n="hero.cta_cv">Download CV</span>
+          </a>
+        </div>
+
+      </div>
     </aside>
 
     <div id="sidebar-overlay" class="overlay"></div>
@@ -92,7 +125,7 @@
     </div>
     <div class="hero-btns">
       <a href="#portfolio" class="btn-primary" data-i18n="hero.cta_cases">View Case Studies</a>
-      <a href="francesca monte resume.pdf" download="francesca_monte_cv.pdf" class="btn-card">
+      <a href="francesca_monte_cv.pdf" download="Francesca_Monte_CV.pdf" class="btn-card">
         <i class="fas fa-download"></i> <span data-i18n="hero.cta_cv">Download CV</span>
       </a>
       <a href="#contact" class="btn-card">
@@ -154,15 +187,11 @@
   </div>
 </section>
 
-<!-- =====================
-     PORTFOLIO — nuove case study card
-     ===================== -->
 <section id="portfolio" class="work container">
   <p class="section-label" data-i18n="portfolio.label">SELECTED CASE STUDIES</p>
   <h2 data-i18n="portfolio.title">Strategic Data Solutions</h2>
   <div class="cs-grid">
 
-    <!-- CARD 1: SQL -->
     <div class="cs-card">
       <div class="cs-inner">
         <div class="cs-header">
@@ -219,7 +248,6 @@
       </div>
     </div>
 
-    <!-- CARD 2: BI -->
     <div class="cs-card">
       <div class="cs-inner">
         <div class="cs-header">
@@ -261,7 +289,6 @@
       </div>
     </div>
 
-    <!-- CARD 3: FUNNEL AUDIT -->
     <div class="cs-card">
       <div class="cs-inner">
         <div class="cs-header">
@@ -304,7 +331,6 @@
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education" class="education container">
   <p class="section-label" data-i18n="edu.label">TECHNICAL FOUNDATIONS</p>
   <h2 data-i18n="edu.title">Academic & Professional Journey</h2>
@@ -417,7 +443,6 @@
   <h2 data-i18n="cert.title">Technical Certifications</h2>
   <div class="cert-flip-grid">
 
-    <!-- PL-300 -->
     <div class="flip-card">
       <div class="flip-inner">
         <div class="flip-front primary">
@@ -447,7 +472,6 @@
       </div>
     </div>
 
-    <!-- Google Analytics -->
     <div class="flip-card">
       <div class="flip-inner">
         <div class="flip-front">
@@ -486,7 +510,6 @@
       </div>
     </div>
 
-    <!-- Google Data Analytics -->
     <div class="flip-card">
       <div class="flip-inner">
         <div class="flip-front">
@@ -496,7 +519,7 @@
           </div>
           <div class="cert-front-title" data-i18n="cert.c1.title">Google Data Analytics Professional Certificate</div>
           <div class="cert-front-bottom">
-            <span class="cert-date" data-i18n="cert.c1.date">2026</span>
+            <span class="cert-date" data-i18n="cert.c1.date">2025</span>
             <span class="cert-flip-hint"><i class="fas fa-rotate"></i> <span data-i18n="cert.flip_hint">flip for badge</span></span>
           </div>
         </div>
