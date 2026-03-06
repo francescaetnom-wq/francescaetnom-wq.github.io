@@ -75,7 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav.education": "Education",
       "nav.contact": "Contact",
 
+      "sidebar.role": "Marketing & Data Analyst",
       "sidebar.about_title": "About me",
+      "sidebar.availability": "Open to opportunities · Amsterdam & Remote",
       "sidebar.about_p1": "Every system has an internal logic, whether it's a linguistic structure or a SQL database. My transition to data is the evolution of a need to stop guessing and start measuring.",
       "sidebar.about_p2": "I value data because, unlike words, they show you the facts. I'm just here to see what the numbers actually show.",
       "sidebar.meet_me": "Meet me on",
@@ -189,7 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav.education": "Formazione",
       "nav.contact": "Contatti",
 
+      "sidebar.role": "Marketing & Data Analyst",
       "sidebar.about_title": "Chi sono",
+      "sidebar.availability": "Aperta a opportunità · Amsterdam e Remote",
       "sidebar.about_p1": "Ogni sistema ha una logica interna, che sia una struttura linguistica o un database SQL. Il mio passaggio ai dati è l'evoluzione di un bisogno: smettere di intuire e iniziare a misurare.",
       "sidebar.about_p2": "Valorizzo i dati perché, a differenza delle parole, mostrano i fatti. Io sono qui per vedere cosa dicono davvero i numeri.",
       "sidebar.meet_me": "Mi trovi su",
@@ -302,7 +306,9 @@ document.addEventListener('DOMContentLoaded', () => {
       "nav.education": "Opleiding",
       "nav.contact": "Contact",
 
+      "sidebar.role": "Marketing & Data Analyst",
       "sidebar.about_title": "Over mij",
+      "sidebar.availability": "Open voor kansen · Amsterdam & Remote",
       "sidebar.about_p1": "Elk systeem heeft een interne logica, of het nu een taalkundige structuur is of een SQL-database. Mijn overstap naar data is de evolutie van een behoefte: stoppen met gokken en beginnen met meten.",
       "sidebar.about_p2": "Ik waardeer data omdat ze, in tegenstelling tot woorden, de feiten laten zien. Ik ben hier om te ontdekken wat de cijfers echt vertellen.",
       "sidebar.meet_me": "Vind mij op",
