@@ -1,974 +1,765 @@
-:root {
-  --bg-color: #030303;
-  --card-bg: #0d0d0d;
-  --primary-purple: #a78bfa;
-  --primary-gradient: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
-  --text-main: #f8fafc;
-  --text-dim: #94a3b8;
-  --border-color: #1e293b;
-  --sidebar-width: 350px;
-}
+document.addEventListener('DOMContentLoaded', () => {
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-  width: 100%;
-}
+  // =========================
+  // 1. SIDEBAR
+  // =========================
+  const sidebar = document.getElementById('about-sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const trigger = document.getElementById('sidebar-trigger');
+  const closeBtn = document.getElementById('close-sidebar');
 
-section { padding: 5rem 6%; }
-.container { max-width: 1400px; margin: 0 auto; }
+  const toggleSidebar = () => {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
+  };
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 5%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(3, 3, 3, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-color);
-}
+  if (trigger)  trigger.addEventListener('click', toggleSidebar);
+  if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
+  if (overlay)  overlay.addEventListener('click', toggleSidebar);
 
-.logo-group { display: flex; align-items: center; gap: 1rem; cursor: pointer; }
-.sidebar-toggle { background: none; border: none; color: var(--primary-purple); font-size: 1.8rem; pointer-events: none; }
-nav .logo { font-weight: 800; font-size: 1.1rem; color: #fff; }
-.nav-links { display: none; }
-
-@media (min-width: 1024px) {
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
+  // =========================
+  // 2. TICKER
+  // =========================
+  const ticker = document.querySelector('.ticker-content');
+  if (ticker && !ticker.dataset.cloned) {
+    ticker.dataset.cloned = "true";
+    ticker.innerHTML += ticker.innerHTML;
   }
-  .nav-links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+
+  // =========================
+  // 3. TYPEWRITER
+  // =========================
+  const text = "MARKETING & DATA ANALYST";
+  let i = 0;
+  const typeElement = document.getElementById("typewriter-text");
+  function typeEffect() {
+    if (typeElement && i < text.length) {
+      typeElement.innerHTML += text.charAt(i++);
+      setTimeout(typeEffect, 90);
+    }
   }
-}
+  typeEffect();
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: calc(var(--sidebar-width) * -1);
-  width: var(--sidebar-width);
-  height: 100%;
-  background: #0a0a0a;
-  border-right: 1px solid var(--border-color);
-  z-index: 2000;
-  transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-  padding: 2rem;
-  overflow-y: auto;
-}
-.sidebar.active { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.8); }
+  // =========================
+  // 4. CARD EXPANSION
+  // =========================
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      document.querySelectorAll('.card').forEach(otherCard => {
+        if (otherCard !== card) otherCard.classList.remove('expanded');
+      });
+      card.classList.toggle('expanded');
+    });
+  });
 
-.overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  z-index: 1500;
-  display: none;
-}
-.overlay.active { display: block; }
+  // =========================
+  // 5. TRANSLATIONS (EN / IT / NL)
+  // =========================
+  const translations = {
+    en: {
+      // hero stats
+      "hero.stat1.label": "ROAS Achieved",
+      "hero.stat1.ctx":   "GA4 + Google Ads funnel",
+      "hero.stat2.label": "CPA Reduction",
+      "hero.stat2.ctx":   "Attribution realignment",
+      "hero.stat3.label": "BI Dashboards",
+      "hero.stat3.ctx":   "Power BI · Star Schema",
+      // pillar pills
+      "approach.p1.pill": "Pattern Recognition",
+      "approach.p2.pill": "GA4 · GTM · Attribution",
+      "approach.p3.pill": "DAX · Star Schema · SQL",
+      "nav.approach": "Approach",
+      "nav.projects": "Projects",
+      "nav.education": "Education",
+      "nav.contact": "Contact",
 
-.profile-pic-wrapper {
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  border: 2px solid var(--primary-purple);
-  margin: 1rem auto;
-  overflow: hidden;
-}
-.profile-pic { width: 100%; height: 100%; object-fit: cover; }
-.sidebar-content h2 { text-align: center; margin-top: 1rem; }
-.sidebar-tag {
-  color: var(--primary-purple);
-  text-align: center;
-  font-weight: 800;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-}
-.bio-section h3 {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 5px;
-}
-.bio-section p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+      "sidebar.role": "Marketing & Data Analyst",
+      "sidebar.about_title": "About me",
+      "sidebar.availability": "Open to opportunities · Amsterdam & Remote",
+      "sidebar.about_p1": "Every system has an internal logic, whether it's a linguistic structure or a SQL database. My transition to data is the evolution of a need to stop guessing and start measuring.",
+      "sidebar.about_p2": "I value data because, unlike words, they show you the facts. I'm just here to see what the numbers actually show.",
+      "sidebar.meet_me": "Meet me on",
 
-.social-links-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.social-links-grid a {
-  aspect-ratio: 1;
-  background: #151515;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-dim);
-  text-decoration: none;
-  transition: 0.3s;
-  font-size: 1.2rem;
-}
-.social-links-grid a:hover {
-  border-color: var(--primary-purple);
-  color: #fff;
-  transform: translateY(-3px);
-}
+      "hero.tagline": "I analyze marketing performance to find the truth behind the numbers. Focused on full-funnel optimization and data-driven execution.",
+      "hero.cta_cases": "View Case Studies",
+      "hero.cta_cv": "Download CV",
+      "hero.cta_inquiry": "Get in Touch",
 
-.hero {
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 5%;
-  position: relative;
-  overflow: hidden;
-}
+      "approach.label": "METHODOLOGY",
+      "approach.title": "Three Pillars of Impact",
+      "approach.p1.title": "Linguistic Logic",
+      "approach.p1.desc": "Applying the analytical rigor of linguistics to market behaviors. I leverage my background in structural logic to decode complex datasets and consumer patterns.",
+      "approach.p1.details": "Utilizing semantic analysis to drive global engagement and communication clarity.",
+      "approach.p2.title": "Performance Engineering",
+      "approach.p2.desc": "Bridging the gap between strategy and execution. I manage the technical infrastructure to ensure that tracking and funnel logic translate into measurable revenue.",
+      "approach.p2.details": "Full-stack tracking implementation and data-backed marketing optimization.",
+      "approach.p3.title": "Data Architecture & BI",
+      "approach.p3.desc": "Transforming raw data into strategic business intelligence. Using SQL and Power BI to build robust models that empower stakeholders to make informed decisions.",
+      "approach.p3.details": "Relational modeling, DAX measures, and high-impact executive dashboards.",
 
-.text-gradient {
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: clamp(2.6rem, 10vw, 5rem);
-  font-weight: 800;
-}
+      "portfolio.label": "SELECTED CASE STUDIES",
+      "portfolio.title": "Strategic Data Solutions",
+      "portfolio.c1.title": "SQL: HVC Segmentation",
+      "portfolio.c1.desc": "Identified High-Value Customers via Hero Category purchases — building a high-ROI audience for retention and lookalike campaigns.",
+      "portfolio.c1.m1l": "Tables Joined",
+      "portfolio.c1.m2l": "Audience Identified",
+      "portfolio.c1.link": "View on GitHub",
+      "portfolio.c2.title": "BI: KPI Architecture",
+      "portfolio.c2.desc": "End-to-end Power BI dashboard with Star Schema and DAX measures for real-time business performance monitoring.",
+      "portfolio.c2.r1": "ROAS tracking — dynamic DAX measure",
+      "portfolio.c2.r2": "CPA reduction via attribution fix",
+      "portfolio.c2.r3": "Star Schema — query performance",
+      "portfolio.c2.r4": "Fact + Dimension tables designed",
+      "portfolio.c2.link": "View Dashboard",
+      "portfolio.c3.title": "Analytics: Funnel Audit",
+      "portfolio.c3.desc": "Full-funnel GA4 tracking framework to eliminate data gaps, fix attribution leakage and align revenue data.",
+      "portfolio.c3.chart_label": "Funnel Stage Tracking Accuracy — Before vs After",
+      "portfolio.c3.leg_before": "Before audit",
+      "portfolio.c3.leg_after": "After fix",
+      "portfolio.c3.m1l": "Data Leakage Fixed",
+      "portfolio.c3.m2l": "Attribution Accuracy",
+      "portfolio.c3.link": "View Audit",
 
-.hero .subtitle {
-  color: var(--primary-purple);
-  font-weight: 800;
-  font-size: 0.8rem;
-  letter-spacing: 5px;
-  margin-bottom: 1rem;
-  height: 1.2rem;
-}
+      "edu.label": "TECHNICAL FOUNDATIONS",
+      "edu.title": "Academic & Professional Journey",
 
-.tagline {
-  color: var(--text-dim);
-  font-size: 1.05rem;
-  margin: 1.6rem auto;
-  max-width: 34ch;
-}
+      "cert.label": "CREDENTIALS",
+      "cert.title": "Technical Certifications",
+      "cert.flip_hint": "flip for badge",
+      "cert.c1.title": "Google Data Analytics Professional Certificate",
+      "cert.c1.org": "Google / Coursera",
+      "cert.c1.status": "Earned",
+      "cert.c1.date": "2025",
+      "cert.c1.back": "Google Data Analytics<br>Professional Certificate",
+      "cert.ga4.title": "Google Analytics Certification",
+      "cert.ga4.org": "Google · Skillshop",
+      "cert.ga4.status": "Valid",
+      "cert.ga4.date": "Jan 2026 – Jan 2027",
+      "cert.ga4.back": "Google Analytics<br>Certification",
+      "cert.c3.title": "PL-300: Power BI Data Analyst",
+      "cert.c3.org": "Microsoft",
+      "cert.c3.status": "In Progress",
+      "cert.c3.date": "2026",
+      "cert.c3.back": "Microsoft PL-300<br>Power BI Data Analyst",
+      "cert.view": "View Certificate",
+      "cert.verify": "Verify Credential",
 
-.hero-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  align-items: stretch;
-  margin-top: 2rem;
-}
-.hero-btns a { width: 100%; justify-content: center; }
+      "contact.label": "Get in Touch",
+      "contact.title": "Ready to scale?",
+      "contact.full_name": "Full Name",
+      "contact.business_email": "Business Email",
+      "contact.brief": "Project Brief",
+      "contact.ph_name": "e.g. Francesca Monte",
+      "contact.ph_email": "name@company.com",
+      "contact.ph_brief": "Describe the bottleneck you're facing...",
+      "contact.send": "Send Request",
 
-.btn-primary {
-  background: var(--primary-gradient);
-  color: #fff;
-  padding: 16px 32px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: 0.4s;
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(109, 40, 217, 0.3); }
+      // edu timeline legend + chart
+      "edu.chart.title": "Career Trajectory Index",
+      "edu.chart.hint": "● Click a node to explore each phase",
+      "edu.leg1t": "Linguistics & Communication",
+      "edu.leg1s": "Structural logic, cross-cultural analysis",
+      "edu.leg2t": "Marketing & Strategy",
+      "edu.leg2s": "B2B messaging, brand frameworks",
+      "edu.leg3t": "Data & Analytics",
+      "edu.leg3s": "SQL, Power BI, GA4, Python, AI",
+      "edu.leg4t": "Now — Available",
+      "edu.leg4s": "Full-stack marketing analyst",
+      "edu.yExpert": "Expert",
+      "edu.yAdvanced": "Advanced",
+      "edu.yIntermediate": "Intermediate",
+      "edu.yFoundation": "Foundation",
+      "edu.yAxis": "Expertise Level"
+    },
 
-.btn-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-color);
-  color: #fff;
-  padding: 16px 32px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: 0.3s;
-}
-.btn-card:hover {
-  border-color: var(--primary-purple);
-  background: rgba(167, 139, 250, 0.05);
-  transform: translateY(-3px);
-}
+    it: {
+      // hero stats
+      "hero.stat1.label": "ROAS Raggiunto",
+      "hero.stat1.ctx":   "Funnel GA4 + Google Ads",
+      "hero.stat2.label": "Riduzione CPA",
+      "hero.stat2.ctx":   "Riallineamento attribuzione",
+      "hero.stat3.label": "Dashboard BI",
+      "hero.stat3.ctx":   "Power BI · Star Schema",
+      // pillar pills
+      "approach.p1.pill": "Riconoscimento Pattern",
+      "approach.p2.pill": "GA4 · GTM · Attribuzione",
+      "approach.p3.pill": "DAX · Star Schema · SQL",
+      "nav.approach": "Approccio",
+      "nav.projects": "Progetti",
+      "nav.education": "Formazione",
+      "nav.contact": "Contatti",
 
-.btn-secondary {
-  color: #fff;
-  border: 1px solid var(--border-color);
-  padding: 14px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.btn-secondary:hover { border-color: var(--primary-purple); }
+      "sidebar.role": "Marketing & Data Analyst",
+      "sidebar.about_title": "Chi sono",
+      "sidebar.availability": "Aperta a opportunità · Amsterdam e Remote",
+      "sidebar.about_p1": "Ogni sistema ha una logica interna, che sia una struttura linguistica o un database SQL. Il mio passaggio ai dati è l'evoluzione di un bisogno: smettere di intuire e iniziare a misurare.",
+      "sidebar.about_p2": "Valorizzo i dati perché, a differenza delle parole, mostrano i fatti. Io sono qui per vedere cosa dicono davvero i numeri.",
+      "sidebar.meet_me": "Mi trovi su",
 
-.btn-tertiary {
-  color: var(--text-dim);
-  padding: 14px;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-  font-size: 0.9rem;
-}
+      "hero.tagline": "Analizzo le performance attraverso l'integrità dei dati per ottimizzare ogni fase del funnel con un approccio puramente data-driven.",
+      "hero.cta_cases": "Vedi Case Studies",
+      "hero.cta_cv": "Scarica CV",
+      "hero.cta_inquiry": "Invia una richiesta",
 
-@media (min-width: 768px) {
-  .tagline { max-width: 600px; font-size: 1.2rem; margin: 2rem auto; }
-  .hero-btns {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-    margin-top: 3.5rem;
+      "approach.label": "METODOLOGIA",
+      "approach.title": "I tre pilastri del mio impatto",
+      "approach.p1.title": "Logica Linguistica",
+      "approach.p1.desc": "Applico il rigore analitico della linguistica ai comportamenti di mercato. Sfrutto il mio background nella logica strutturale per decodificare dataset complessi e pattern di consumo.",
+      "approach.p1.details": "Utilizzo dell'analisi semantica per guidare l'engagement globale e la chiarezza comunicativa.",
+      "approach.p2.title": "Performance Engineering",
+      "approach.p2.desc": "Colmo il divario tra strategia ed esecuzione. Gestisco l'infrastruttura tecnica per garantire che il tracking e la logica dei funnel si traducano in revenue misurabile.",
+      "approach.p2.details": "Implementazione tracking full-stack e ottimizzazione del marketing data-driven.",
+      "approach.p3.title": "Data Architecture & BI",
+      "approach.p3.desc": "Trasformo dati grezzi in business intelligence strategica. Utilizzo SQL e Power BI per costruire modelli robusti che permettano agli stakeholder di prendere decisioni informate.",
+      "approach.p3.details": "Modellazione relazionale, misure DAX e dashboard direzionali ad alto impatto.",
+
+      "portfolio.label": "CASE STUDIES SELEZIONATI",
+      "portfolio.title": "Soluzioni Strategiche di Dati",
+      "portfolio.c1.title": "SQL: Segmentazione HVC",
+      "portfolio.c1.desc": "Identificazione dei clienti ad alto valore tramite acquisti Hero Category — audience ad alto ROI per campagne di retention e lookalike.",
+      "portfolio.c1.m1l": "Tabelle Unite",
+      "portfolio.c1.m2l": "Audience Identificata",
+      "portfolio.c1.link": "Vedi su GitHub",
+      "portfolio.c2.title": "BI: Architettura KPI",
+      "portfolio.c2.desc": "Dashboard Power BI end-to-end con Star Schema e misure DAX per il monitoraggio in tempo reale delle performance aziendali.",
+      "portfolio.c2.r1": "ROAS tracking — misura DAX dinamica",
+      "portfolio.c2.r2": "Riduzione CPA tramite fix attribuzione",
+      "portfolio.c2.r3": "Star Schema — performance query",
+      "portfolio.c2.r4": "Tabelle Fact + Dimension progettate",
+      "portfolio.c2.link": "Vedi Dashboard",
+      "portfolio.c3.title": "Analytics: Funnel Audit",
+      "portfolio.c3.desc": "Framework di tracking GA4 full-funnel per eliminare gap nei dati, correggere data leakage e allineare i dati di revenue.",
+      "portfolio.c3.chart_label": "Accuratezza Tracking per Stage — Prima e Dopo",
+      "portfolio.c3.leg_before": "Prima dell'audit",
+      "portfolio.c3.leg_after": "Dopo il fix",
+      "portfolio.c3.m1l": "Data Leakage Corretti",
+      "portfolio.c3.m2l": "Accuratezza Attribuzione",
+      "portfolio.c3.link": "Vedi Audit",
+
+      "edu.label": "BASI TECNICHE",
+      "edu.title": "Percorso Accademico e Professionale",
+
+      "cert.label": "CREDENTIALS",
+      "cert.title": "Certificazioni Tecniche",
+      "cert.flip_hint": "gira per il badge",
+      "cert.c1.title": "Google Data Analytics Professional Certificate",
+      "cert.c1.org": "Google / Coursera",
+      "cert.c1.status": "Conseguita",
+      "cert.c1.date": "2025",
+      "cert.c1.back": "Google Data Analytics<br>Professional Certificate",
+      "cert.ga4.title": "Certificazione Google Analytics",
+      "cert.ga4.org": "Google · Skillshop",
+      "cert.ga4.status": "Valida",
+      "cert.ga4.date": "Gen 2026 – Gen 2027",
+      "cert.ga4.back": "Google Analytics<br>Certificazione",
+      "cert.c3.title": "PL-300: Power BI Data Analyst",
+      "cert.c3.org": "Microsoft",
+      "cert.c3.status": "In corso",
+      "cert.c3.date": "2026",
+      "cert.c3.back": "Microsoft PL-300<br>Power BI Data Analyst",
+      "cert.view": "Vedi Certificato",
+      "cert.verify": "Verifica Credenziale",
+
+      "contact.label": "CONTATTI",
+      "contact.title": "Ready to scale?",
+      "contact.full_name": "Nome e Cognome",
+      "contact.business_email": "Email aziendale",
+      "contact.brief": "Brief di progetto",
+      "contact.ph_name": "es. Francesca Monte",
+      "contact.ph_email": "nome@azienda.com",
+      "contact.ph_brief": "Descrivi brevemente la sfida o il collo di bottiglia che vuoi superare...",
+      "contact.send": "Invia Richiesta",
+
+      "edu.chart.title": "Indice di Crescita — Carriera",
+      "edu.chart.hint": "● Clicca un nodo per approfondire ogni fase",
+      "edu.leg1t": "Linguistica & Comunicazione",
+      "edu.leg1s": "Logica strutturale, analisi cross-culturale",
+      "edu.leg2t": "Marketing & Strategia",
+      "edu.leg2s": "Messaging B2B, framework di brand",
+      "edu.leg3t": "Dati & Analytics",
+      "edu.leg3s": "SQL, Power BI, GA4, Python, AI",
+      "edu.leg4t": "Ora — Disponibile",
+      "edu.leg4s": "Marketing analyst full-stack",
+      "edu.yExpert": "Esperto",
+      "edu.yAdvanced": "Avanzato",
+      "edu.yIntermediate": "Intermedio",
+      "edu.yFoundation": "Base",
+      "edu.yAxis": "Livello di Expertise"
+    },
+
+    nl: {
+      // hero stats
+      "hero.stat1.label": "ROAS Behaald",
+      "hero.stat1.ctx":   "GA4 + Google Ads funnel",
+      "hero.stat2.label": "CPA Verlaging",
+      "hero.stat2.ctx":   "Attributie realignment",
+      "hero.stat3.label": "BI Dashboards",
+      "hero.stat3.ctx":   "Power BI · Star Schema",
+      // pillar pills
+      "approach.p1.pill": "Patroonherkenning",
+      "approach.p2.pill": "GA4 · GTM · Attributie",
+      "approach.p3.pill": "DAX · Star Schema · SQL",
+      "nav.approach": "Aanpak",
+      "nav.projects": "Projecten",
+      "nav.education": "Opleiding",
+      "nav.contact": "Contact",
+
+      "sidebar.role": "Marketing & Data Analyst",
+      "sidebar.about_title": "Over mij",
+      "sidebar.availability": "Open voor kansen · Amsterdam & Remote",
+      "sidebar.about_p1": "Elk systeem heeft een interne logica, of het nu een taalkundige structuur is of een SQL-database. Mijn overstap naar data is de evolutie van een behoefte: stoppen met gokken en beginnen met meten.",
+      "sidebar.about_p2": "Ik waardeer data omdat ze, in tegenstelling tot woorden, de feiten laten zien. Ik ben hier om te ontdekken wat de cijfers echt vertellen.",
+      "sidebar.meet_me": "Vind mij op",
+
+      "hero.tagline": "Ik analyseer prestaties op basis van data-integriteit om elke fase van de funnel te optimaliseren met een puur data-gedreven aanpak.",
+      "hero.cta_cases": "Bekijk Case Studies",
+      "hero.cta_cv": "Download CV",
+      "hero.cta_inquiry": "Projectaanvraag",
+
+      "approach.label": "METHODOLOGIE",
+      "approach.title": "Drie Pijlers van Impact",
+      "approach.p1.title": "Linguïstische Logica",
+      "approach.p1.desc": "Ik pas de analytische precisie van de taalkunde toe op marktgedrag. Ik gebruik mijn achtergrond in structurele logica om complexe datasets en consumentenpatronen te decoderen.",
+      "approach.p1.details": "Gebruik van semantische analyse voor wereldwijde engagement en heldere communicatie.",
+      "approach.p2.title": "Performance Engineering",
+      "approach.p2.desc": "Het overbruggen van de kloof tussen strategie en uitvoering. Ik beheer de technische infrastructuur om te garanderen dat tracking en funnel-logica leiden tot meetbare omzet.",
+      "approach.p2.details": "Full-stack tracking implementatie en data-driven marketing optimalisatie.",
+      "approach.p3.title": "Data Architectuur & BI",
+      "approach.p3.desc": "Ruwe data transformeren naar strategische business intelligence. Met SQL en Power BI bouw ik robuuste modellen waarmee stakeholders onderbouwde beslissingen kunnen nemen.",
+      "approach.p3.details": "Relationele modellering, DAX-metingen en high-impact dashboards.",
+
+      "portfolio.label": "GESELECTEERDE CASE STUDIES",
+      "portfolio.title": "Strategische Data Oplossingen",
+      "portfolio.c1.title": "SQL: HVC Segmentatie",
+      "portfolio.c1.desc": "Identificatie van klanten met hoge waarde via Hero Category-aankopen — een high-ROI doelgroep voor retentie- en lookalike-campagnes.",
+      "portfolio.c1.m1l": "Tabellen Samengevoegd",
+      "portfolio.c1.m2l": "Doelgroep Geïdentificeerd",
+      "portfolio.c1.link": "Bekijk op GitHub",
+      "portfolio.c2.title": "BI: KPI Architectuur",
+      "portfolio.c2.desc": "End-to-end Power BI-dashboard met Star Schema en DAX-metingen voor real-time monitoring van bedrijfsresultaten.",
+      "portfolio.c2.r1": "ROAS tracking — dynamische DAX-meting",
+      "portfolio.c2.r2": "CPA-verlaging via attributiefixatie",
+      "portfolio.c2.r3": "Star Schema — queryprestaties",
+      "portfolio.c2.r4": "Fact + Dimensietabellen ontworpen",
+      "portfolio.c2.link": "Bekijk Dashboard",
+      "portfolio.c3.title": "Analytics: Funnel Audit",
+      "portfolio.c3.desc": "Full-funnel GA4 tracking framework om datalekkage te elimineren, attributie te herstellen en omzetdata te aligneren.",
+      "portfolio.c3.chart_label": "Tracking Nauwkeurigheid per Funnelfase — Voor vs Na",
+      "portfolio.c3.leg_before": "Voor audit",
+      "portfolio.c3.leg_after": "Na fix",
+      "portfolio.c3.m1l": "Datalekkages Hersteld",
+      "portfolio.c3.m2l": "Attributienauwkeurigheid",
+      "portfolio.c3.link": "Bekijk Audit",
+
+      "edu.label": "TECHNISCHE BASIS",
+      "edu.title": "Academisch & Professioneel Traject",
+
+      "cert.label": "CERTIFICERINGEN",
+      "cert.title": "Technische Certificeringen",
+      "cert.flip_hint": "draai voor badge",
+      "cert.c1.title": "Google Data Analytics Professional Certificate",
+      "cert.c1.org": "Google / Coursera",
+      "cert.c1.status": "Behaald",
+      "cert.c1.date": "2025",
+      "cert.c1.back": "Google Data Analytics<br>Professional Certificate",
+      "cert.ga4.title": "Google Analytics Certificering",
+      "cert.ga4.org": "Google · Skillshop",
+      "cert.ga4.status": "Geldig",
+      "cert.ga4.date": "Jan 2026 – Jan 2027",
+      "cert.ga4.back": "Google Analytics<br>Certificering",
+      "cert.c3.title": "PL-300: Power BI Data Analyst",
+      "cert.c3.org": "Microsoft",
+      "cert.c3.status": "In uitvoering",
+      "cert.c3.date": "2026",
+      "cert.c3.back": "Microsoft PL-300<br>Power BI Data Analyst",
+      "cert.view": "Bekijk Certificaat",
+      "cert.verify": "Verifieer Certificaat",
+
+      "contact.label": "CONTACT",
+      "contact.title": "Heb je een technisch probleem op te lossen?",
+      "contact.full_name": "Volledige naam",
+      "contact.business_email": "Zakelijk e-mailadres",
+      "contact.brief": "Projectomschrijving",
+      "contact.ph_name": "bijv. Francesca Monte",
+      "contact.ph_email": "naam@bedrijf.com",
+      "contact.ph_brief": "Beschrijf de bottleneck die je ervaart...",
+      "contact.send": "Verstuur Aanvraag",
+
+      "edu.chart.title": "Carrière Groei Index",
+      "edu.chart.hint": "● Klik op een punt om elke fase te verkennen",
+      "edu.leg1t": "Taalkunde & Communicatie",
+      "edu.leg1s": "Structurele logica, cross-culturele analyse",
+      "edu.leg2t": "Marketing & Strategie",
+      "edu.leg2s": "B2B messaging, merkframeworks",
+      "edu.leg3t": "Data & Analytics",
+      "edu.leg3s": "SQL, Power BI, GA4, Python, AI",
+      "edu.leg4t": "Nu — Beschikbaar",
+      "edu.leg4s": "Full-stack marketing analist",
+      "edu.yExpert": "Expert",
+      "edu.yAdvanced": "Gevorderd",
+      "edu.yIntermediate": "Gemiddeld",
+      "edu.yFoundation": "Basis",
+      "edu.yAxis": "Niveau van Expertise"
+    }
+  };
+
+  // Node panel data per lingua
+  const eduNodeData = {
+    en: {
+      '1': { tag:'Bachelor · Linguistics', title:'Linguistic & Cultural Mediation', period:'2020 – 2023', inst:'UniOr Naples',
+        body:`<div class="ep-spec"><h4>Structural Analysis</h4><p>Deep-dive into linguistic logic and syntax patterns. Mental framework to decode complex information structures — the same logic later applied to datasets.</p></div>
+              <div class="ep-spec"><h4>Market Localization</h4><p>Analysis of international datasets through a cultural lens to identify consumer nuances that purely technical analysts often miss.</p></div>
+              <div class="ep-tags"><span>Linguistics</span><span>Logic</span><span>Structural Analysis</span></div>` },
+      '2': { tag:'Master · Communication', title:'Intercultural & International Communication', period:'2023 – 2024', inst:'University of Pisa',
+        body:`<div class="ep-spec"><h4>B2B Strategic Messaging</h4><p>Managed communication for a leader in Northern Italian precision industry, translating technical specs into market-ready value propositions.</p></div>
+              <div class="ep-spec"><h4>Cross-Border Frameworks</h4><p>Communication architectures for multi-market enterprises. Brand consistency across global touchpoints — skills directly applicable to international marketing.</p></div>
+              <div class="ep-tags"><span>Crisis Mgt</span><span>B2B</span><span>Cross-Border</span></div>` },
+      '3': { tag:'Certificate · Data', title:'Digital Marketing & Data Analytics', period:'2025', inst:'Certificate Program',
+        body:`<div class="ep-spec"><h4>The Pivot</h4><p>The turning point. First structured contact with SQL, GA4, GTM and tracking. Linguistic logic — already developed — applied to data systems.</p></div>
+              <div class="ep-spec"><h4>Full-Funnel Thinking</h4><p>End-to-end approach from data collection to campaign optimisation. First real experience of data-driven decision making.</p></div>
+              <div class="ep-tags"><span>SQL</span><span>GA4</span><span>GTM</span><span>Data Analytics</span></div>` },
+      '4': { tag:'University · AI & Marketing', title:'Digital Marketing & AI Agents', period:'2025', inst:'Start2Impact University',
+        body:`<div class="ep-spec"><h4>Technical Tracking & Analytics</h4><p>Full-stack implementation of GA4 & GTM. Full-funnel measurement orchestration to ensure data integrity and attribution logic.</p></div>
+              <div class="ep-spec"><h4>AI Agentic Workflows</h4><p>Advanced deployment of custom AI Agents to automate marketing operations and data-driven tasks via Prompt Engineering.</p></div>
+              <div class="ep-tags"><span>AI Engineering</span><span>GA4 Stack</span><span>Prompt Engineering</span></div>` },
+      '5': { tag:'Certifications · 2026', title:'Technical Certifications', period:'2026', inst:'Microsoft · Google',
+        body:`<div class="ep-spec"><h4>Microsoft PL-300: Power BI Data Analyst</h4><p>Official Microsoft certification. Advanced DAX, Star Schema, relational modelling and high-impact executive dashboards.</p></div>
+              <div class="ep-spec"><h4>Google Analytics · Google Data Analytics</h4><p>Google Analytics Certification valid Jan 2026 – Jan 2027. Google Data Analytics Professional Certificate (Coursera).</p></div>
+              <div class="ep-tags"><span>Power BI</span><span>DAX</span><span>GA4</span><span>Microsoft</span></div>` },
+      '6': { tag:'Present · Available', title:'Marketing & Data Analyst', period:'2026 — now', inst:'Open to opportunities',
+        body:`<div class="ep-spec"><h4>Full Stack</h4><p>SQL · Power BI · Python · GA4 · GTM · AI Agents · Google Ads · SEO. Skills covering the entire pipeline: from data collection to strategic decision.</p></div>
+              <div class="ep-spec"><h4>Available</h4><p>Open to Marketing Analyst, Data Analyst, Marketing Operations roles. Markets: IT, NL, EN.</p></div>
+              <div class="ep-tags"><span>SQL</span><span>Power BI</span><span>Python</span><span>Available</span></div>` }
+    },
+    it: {
+      '1': { tag:'Laurea · Linguistica', title:'Mediazione Linguistica e Culturale', period:'2020 – 2023', inst:'UniOr Napoli',
+        body:`<div class="ep-spec"><h4>Analisi Strutturale</h4><p>Studio approfondito della logica linguistica e dei pattern sintattici. Framework mentale per decodificare strutture informative complesse — la stessa logica poi applicata ai dataset.</p></div>
+              <div class="ep-spec"><h4>Localizzazione di Mercato</h4><p>Analisi di dataset internazionali attraverso una lente culturale per identificare sfumature di consumo che analisi puramente tecniche non colgono.</p></div>
+              <div class="ep-tags"><span>Linguistica</span><span>Logica</span><span>Analisi Strutturale</span></div>` },
+      '2': { tag:'Master · Comunicazione', title:'Comunicazione Interculturale e Internazionale', period:'2023 – 2024', inst:'Università di Pisa',
+        body:`<div class="ep-spec"><h4>Messaging Strategico B2B</h4><p>Gestione della comunicazione per un leader nell'industria di precisione del Nord Italia, traducendo specifiche tecniche in proposte di valore per il mercato.</p></div>
+              <div class="ep-spec"><h4>Framework Cross-Border</h4><p>Architetture comunicative per imprese multi-mercato. Brand consistency su touchpoint globali — competenze direttamente applicabili al marketing internazionale.</p></div>
+              <div class="ep-tags"><span>Crisis Mgt</span><span>B2B</span><span>Cross-Border</span></div>` },
+      '3': { tag:'Certificato · Dati', title:'Digital Marketing & Data Analytics', period:'2025', inst:'Certificate Program',
+        body:`<div class="ep-spec"><h4>Il Pivot</h4><p>Il punto di svolta. Primo contatto strutturato con SQL, GA4, GTM e tracking. La logica linguistica — già sviluppata — applicata ai sistemi di dati.</p></div>
+              <div class="ep-spec"><h4>Full-Funnel Thinking</h4><p>Approccio end-to-end dalla raccolta dati all'ottimizzazione delle campagne. Prima vera esperienza di decision making data-driven.</p></div>
+              <div class="ep-tags"><span>SQL</span><span>GA4</span><span>GTM</span><span>Data Analytics</span></div>` },
+      '4': { tag:'Università · AI & Marketing', title:'Digital Marketing & AI Agents', period:'2025', inst:'Start2Impact University',
+        body:`<div class="ep-spec"><h4>Technical Tracking & Analytics</h4><p>Implementazione full-stack di GA4 & GTM. Orchestrazione dei sistemi di misurazione full-funnel per garantire data integrity e logica di attribuzione.</p></div>
+              <div class="ep-spec"><h4>AI Agentic Workflows</h4><p>Sviluppo avanzato di AI Agents personalizzati per automatizzare operazioni marketing e task data-driven tramite Prompt Engineering.</p></div>
+              <div class="ep-tags"><span>AI Engineering</span><span>GA4 Stack</span><span>Prompt Engineering</span></div>` },
+      '5': { tag:'Certificazioni · 2026', title:'Certificazioni Tecniche', period:'2026', inst:'Microsoft · Google',
+        body:`<div class="ep-spec"><h4>Microsoft PL-300: Power BI Data Analyst</h4><p>Certificazione ufficiale Microsoft. DAX avanzato, Star Schema, modellazione relazionale e dashboard direzionali ad alto impatto.</p></div>
+              <div class="ep-spec"><h4>Google Analytics · Google Data Analytics</h4><p>Certificazione Google Analytics valida Gen 2026 – Gen 2027. Google Data Analytics Professional Certificate (Coursera).</p></div>
+              <div class="ep-tags"><span>Power BI</span><span>DAX</span><span>GA4</span><span>Microsoft</span></div>` },
+      '6': { tag:'Presente · Disponibile', title:'Marketing & Data Analyst', period:'2026 — oggi', inst:'Aperta a opportunità',
+        body:`<div class="ep-spec"><h4>Full Stack</h4><p>SQL · Power BI · Python · GA4 · GTM · AI Agents · Google Ads · SEO. Competenze che coprono l'intera pipeline: dalla raccolta dati alla decisione strategica.</p></div>
+              <div class="ep-spec"><h4>Disponibile</h4><p>Aperta a ruoli di Marketing Analyst, Data Analyst, Marketing Operations. Mercati: IT, NL, EN.</p></div>
+              <div class="ep-tags"><span>SQL</span><span>Power BI</span><span>Python</span><span>Disponibile</span></div>` }
+    },
+    nl: {
+      '1': { tag:'Bachelor · Taalkunde', title:'Linguïstische & Culturele Bemiddeling', period:'2020 – 2023', inst:'UniOr Napels',
+        body:`<div class="ep-spec"><h4>Structurele Analyse</h4><p>Diepgaande studie van linguïstische logica en syntaxispatronen. Mentaal framework om complexe informatiestructuren te ontleden — dezelfde logica later toegepast op datasets.</p></div>
+              <div class="ep-spec"><h4>Marktlokalisatie</h4><p>Analyse van internationale datasets vanuit een cultureel perspectief om consumentennuances te identificeren die puur technische analyses missen.</p></div>
+              <div class="ep-tags"><span>Taalkunde</span><span>Logica</span><span>Structurele Analyse</span></div>` },
+      '2': { tag:'Master · Communicatie', title:'Interculturele & Internationale Communicatie', period:'2023 – 2024', inst:'Universiteit van Pisa',
+        body:`<div class="ep-spec"><h4>B2B Strategische Messaging</h4><p>Communicatiebeheer voor een marktleider in de precisie-industrie in Noord-Italië, waarbij technische specs werden vertaald naar strategische marktwaarde.</p></div>
+              <div class="ep-spec"><h4>Cross-Border Frameworks</h4><p>Communicatie-architecturen voor internationale ondernemingen. Merkconsistentie over alle touchpoints — vaardigheden direct toepasbaar in internationale marketing.</p></div>
+              <div class="ep-tags"><span>Crisis Mgt</span><span>B2B</span><span>Cross-Border</span></div>` },
+      '3': { tag:'Certificaat · Data', title:'Digital Marketing & Data Analytics', period:'2025', inst:'Certificate Program',
+        body:`<div class="ep-spec"><h4>Het Keerpunt</h4><p>Het omslagpunt. Eerste gestructureerd contact met SQL, GA4, GTM en tracking. De linguïstische logica — al ontwikkeld — toegepast op datasystemen.</p></div>
+              <div class="ep-spec"><h4>Full-Funnel Denken</h4><p>End-to-end aanpak van dataverzameling tot campagneoptimalisatie. Eerste echte ervaring met data-gedreven besluitvorming.</p></div>
+              <div class="ep-tags"><span>SQL</span><span>GA4</span><span>GTM</span><span>Data Analytics</span></div>` },
+      '4': { tag:'Universiteit · AI & Marketing', title:'Digital Marketing & AI Agents', period:'2025', inst:'Start2Impact University',
+        body:`<div class="ep-spec"><h4>Technical Tracking & Analytics</h4><p>Full-stack implementatie van GA4 & GTM. Orkestratie van full-funnel meetoplossingen om data-integriteit en attributielogica te waarborgen.</p></div>
+              <div class="ep-spec"><h4>AI Agentic Workflows</h4><p>Geavanceerde inzet van custom AI Agents om marketingoperaties en data-driven taken te automatiseren met Prompt Engineering.</p></div>
+              <div class="ep-tags"><span>AI Engineering</span><span>GA4 Stack</span><span>Prompt Engineering</span></div>` },
+      '5': { tag:'Certificeringen · 2026', title:'Technische Certificeringen', period:'2026', inst:'Microsoft · Google',
+        body:`<div class="ep-spec"><h4>Microsoft PL-300: Power BI Data Analyst</h4><p>Officiële Microsoft-certificering. Geavanceerde DAX, Star Schema, relationele modellering en high-impact dashboards.</p></div>
+              <div class="ep-spec"><h4>Google Analytics · Google Data Analytics</h4><p>Google Analytics Certificering geldig jan 2026 – jan 2027. Google Data Analytics Professional Certificate (Coursera).</p></div>
+              <div class="ep-tags"><span>Power BI</span><span>DAX</span><span>GA4</span><span>Microsoft</span></div>` },
+      '6': { tag:'Heden · Beschikbaar', title:'Marketing & Data Analist', period:'2026 — nu', inst:'Open voor kansen',
+        body:`<div class="ep-spec"><h4>Full Stack</h4><p>SQL · Power BI · Python · GA4 · GTM · AI Agents · Google Ads · SEO. Vaardigheden die de volledige pipeline dekken: van dataverzameling tot strategische beslissing.</p></div>
+              <div class="ep-spec"><h4>Beschikbaar</h4><p>Open voor Marketing Analyst, Data Analyst, Marketing Operations. Markten: IT, NL, EN.</p></div>
+              <div class="ep-tags"><span>SQL</span><span>Power BI</span><span>Python</span><span>Beschikbaar</span></div>` }
+    }
+  };
+
+  let currentLang = 'en';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    const dict = translations[lang];
+    if (!dict) return;
+
+    // plain text
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.textContent = dict[key];
+    });
+
+    // html (keeps <strong> etc.)
+    document.querySelectorAll("[data-i18n-html]").forEach(el => {
+      const key = el.getAttribute("data-i18n-html");
+      if (dict[key]) el.innerHTML = dict[key];
+    });
+
+    // placeholders
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (dict[key]) el.setAttribute("placeholder", dict[key]);
+    });
+
+    // edu timeline elements (SVG text + legend + hint)
+    const map = {
+      chartTitle:      dict["edu.chart.title"],
+      nodeHint:        dict["edu.chart.hint"],
+      yExpert:         dict["edu.yExpert"],
+      yAdvanced:       dict["edu.yAdvanced"],
+      yIntermediate:   dict["edu.yIntermediate"],
+      yFoundation:     dict["edu.yFoundation"],
+      yAxisLabel:      dict["edu.yAxis"],
+      leg1t:           dict["edu.leg1t"],
+      leg1s:           dict["edu.leg1s"],
+      leg2t:           dict["edu.leg2t"],
+      leg2s:           dict["edu.leg2s"],
+      leg3t:           dict["edu.leg3t"],
+      leg3s:           dict["edu.leg3s"],
+      leg4t:           dict["edu.leg4t"],
+      leg4s:           dict["edu.leg4s"],
+    };
+    Object.entries(map).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el && val) el.textContent = val;
+    });
+
+    // active state buttons
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.setAttribute("aria-pressed", btn.dataset.lang === lang ? "true" : "false");
+    });
+
+    localStorage.setItem("lang", lang);
   }
-  .hero-btns a { width: auto; }
-}
 
-.tech-ticker {
-  padding: 1.2rem 0;
-  width: 100%;
-  margin: 3rem 0;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  overflow: hidden;
-  background: #080808;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
-.ticker-wrapper { width: 100%; overflow: hidden; }
-.ticker-content {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 3rem;
-  width: max-content;
-  will-change: transform;
-  animation: scrollTicker 28s linear infinite;
-}
-@media (min-width: 768px) { .ticker-content { gap: 5rem; } }
-.ticker-content span {
-  font-weight: 800;
-  font-size: 0.85rem;
-  color: #475569;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  white-space: nowrap;
-}
-.ticker-content i { color: var(--primary-purple); font-size: 1.1rem; }
-@keyframes scrollTicker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+  // Lang button click — stopPropagation prevents sidebar opening
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      applyLanguage(btn.dataset.lang);
+    });
+  });
 
-.section-label {
-  color: var(--primary-purple);
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 0.8rem;
-  text-align: center;
-}
+  // Init with saved lang
+  applyLanguage(localStorage.getItem("lang") || "en");
 
-h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  font-weight: 800;
-}
+  // =========================
+  // 6. EDU SLIDE-IN PANEL
+  // =========================
+  const eduPanel        = document.getElementById('eduPanel');
+  const eduPanelOverlay = document.getElementById('eduPanelOverlay');
+  const eduPanelClose   = document.getElementById('eduPanelClose');
 
-@media (min-width: 768px) {
-  section { padding: 7rem 8%; }
-  h2 { font-size: 2.5rem; margin-bottom: 4rem; }
-}
-@media (min-width: 1024px) { section { padding: 8rem 10%; } }
+  function openEduPanel(nodeId) {
+    const data = eduNodeData[currentLang] && eduNodeData[currentLang][nodeId];
+    if (!data || !eduPanel) return;
+    document.getElementById('eduPanelTag').textContent    = data.tag;
+    document.getElementById('eduPanelTitle').textContent  = data.title;
+    document.getElementById('eduPanelPeriod').textContent = data.period;
+    document.getElementById('eduPanelInst').textContent   = data.inst;
+    document.getElementById('eduPanelBody').innerHTML     = data.body;
+    eduPanel.classList.add('active');
+    eduPanelOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1024px) { .grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); } }
+  function closeEduPanel() {
+    if (!eduPanel) return;
+    eduPanel.classList.remove('active');
+    eduPanelOverlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
 
-.card {
-  background: var(--card-bg);
-  padding: 1.8rem;
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  transition: 0.3s;
-}
-@media (min-width: 768px) { .card { padding: 2.5rem; } }
-.card:hover { border-color: var(--primary-purple); }
+  if (eduPanelClose)   eduPanelClose.addEventListener('click', closeEduPanel);
+  if (eduPanelOverlay) eduPanelOverlay.addEventListener('click', closeEduPanel);
 
-.pillars-grid,
-.projects-grid,
-.edu-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-@media (min-width: 768px) {
-  .pillars-grid, .projects-grid, .edu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (min-width: 1024px) {
-  .pillars-grid, .projects-grid, .edu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
+  document.querySelectorAll('.edu-hit').forEach(el => {
+    el.addEventListener('click', () => openEduPanel(el.dataset.node));
+  });
 
-.pillar-icon { margin-bottom: 1.5rem; display: block; }
-.pillar-icon i { font-size: 2.5rem; color: var(--primary-purple); background: none; border: none; box-shadow: none; }
+  // =========================
+  // 7. EDU TIMELINE ANIMATION
+  // =========================
+  const eduNodes = [
+    { o:'eno1', i:'eni1', l:'enl1', s:'ens1', delay: 200  },
+    { o:'eno2', i:'eni2', l:'enl2', s:'ens2', delay: 600  },
+    { o:'eno3', i:'eni3', l:'enl3', s:'ens3', delay: 1000 },
+    { o:'eno4', i:'eni4', l:'enl4', s:'ens4', delay: 1400 },
+    { o:'eno5', i:'eni5', l:'enl5', s:'ens5', delay: 1800 },
+    { o:'eno6', i:'eni6', l:'enl6', s:'ens6', delay: 2100 },
+  ];
 
-.pillar-card .icon-wrapper {
-  background: transparent; border: none; box-shadow: none;
-  padding: 0; margin-bottom: 1.5rem; display: flex; align-items: center;
-}
-.pillar-card .icon-wrapper i { font-size: 2.2rem; color: var(--primary-purple); transition: 0.3s; }
-.pillar-card:hover .icon-wrapper i { transform: scale(1.1); filter: drop-shadow(0 0 8px var(--primary-purple)); }
+  function showEduNode(n) {
+    ['o','i','l','s'].forEach(k => {
+      const el = document.getElementById(n[k]);
+      if (el) el.style.opacity = '1';
+    });
+  }
 
-.card-details { max-height: 0; opacity: 0; overflow: hidden; transition: 0.5s ease; }
-.card.expanded .card-details { max-height: 500px; opacity: 1; margin-top: 1.5rem; }
-.expand-icon { text-align: center; margin-top: 1.5rem; color: var(--text-dim); transition: 0.3s; }
-.card.expanded .expand-icon { transform: rotate(45deg); color: var(--primary-purple); }
+  function runEduTimeline() {
+    const line      = document.getElementById('eduLine');
+    const area      = document.getElementById('eduArea');
+    const pivotLine = document.getElementById('eduPivotLine');
+    const pivotT1   = document.getElementById('eduPivotT1');
+    const pivotT2   = document.getElementById('eduPivotT2');
+    if (!line) return;
 
-.tags { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
-.tags span { font-size: 0.7rem; background: #1e293b; padding: 4px 10px; border-radius: 4px; color: var(--primary-purple); font-weight: 700; }
+    setTimeout(() => { line.style.strokeDashoffset = '0'; }, 100);
+    setTimeout(() => {
+      if (pivotLine) pivotLine.style.opacity = '1';
+      if (pivotT1)   pivotT1.style.opacity   = '1';
+      if (pivotT2)   pivotT2.style.opacity   = '1';
+    }, 1200);
+    setTimeout(() => { if (area) area.style.opacity = '1'; }, 1800);
+    eduNodes.forEach(n => setTimeout(() => showEduNode(n), n.delay));
+    ['tli1','tli2','tli3','tli4'].forEach((id, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('show');
+      }, 2300 + i * 150);
+    });
+  }
 
-.certifications-section { padding-top: 5rem; padding-bottom: 5rem; }
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
-  width: 100%;
-}
-@media (max-width: 1024px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px)  { .cert-grid { grid-template-columns: 1fr; } }
+  const eduSection = document.getElementById('education');
+  if (eduSection) {
+    const eduObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { runEduTimeline(); eduObserver.disconnect(); }
+      });
+    }, { threshold: 0.25 });
+    eduObserver.observe(eduSection);
+  }
 
-.cert-card { display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; }
-.cert-card.primary-cert { border-color: var(--primary-purple); background: rgba(167, 139, 250, 0.05); }
-.cert-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main); }
-.cert-card p { color: var(--text-dim); font-size: 0.9rem; }
-.cert-card .link-btn { margin-top: auto; width: fit-content; }
+  // =========================
+  // 8. HERO COUNTER ANIMATION
+  // =========================
+  function animateCounter(block) {
+    const target   = parseFloat(block.dataset.target);
+    const suffix   = block.dataset.suffix;
+    const decimals = parseInt(block.dataset.decimals);
+    const valueEl  = block.querySelector('.stat-value');
+    const duration = 1800;
+    const start    = performance.now();
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased    = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      valueEl.innerHTML = (eased * target).toFixed(decimals) + `<span class="stat-suffix">${suffix}</span>`;
+      if (progress < 1) requestAnimationFrame(update);
+      else block.classList.add('counted');
+    }
+    requestAnimationFrame(update);
+  }
 
-.contact-section { max-width: 700px; margin: 0 auto; padding: 6rem 5%; }
-.contact-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 2rem 1.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-@media (min-width: 768px) { .contact-card { padding: 2.5rem 3rem; } }
-.contact-header { text-align: center; margin-bottom: 2rem; }
-.contact-header h2 {
-  font-size: 2rem;
-  margin-bottom: 0;
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-@media (min-width: 768px) { .contact-header h2 { font-size: 2.2rem; } }
-#contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
-.input-group { display: flex; flex-direction: column; gap: 0.5rem; text-align: left; }
-.input-group label {
-  font-size: 0.65rem; text-transform: uppercase;
-  color: var(--primary-purple); font-weight: 800; letter-spacing: 1.5px;
-}
-input, textarea {
-  background: #050505; border: 1px solid var(--border-color);
-  padding: 14px; color: #fff; border-radius: 8px;
-  font-family: inherit; font-size: 0.95rem; width: 100%; transition: 0.3s ease;
-}
-input:focus, textarea:focus { outline: none; border-color: var(--primary-purple); background: #080808; }
-.form-footer { display: flex; justify-content: flex-start; margin-top: 0.5rem; }
+  const statBlocks = document.querySelectorAll('.stat-block');
+  let countersRun  = false;
+  const heroEl     = document.querySelector('.hero');
+  if (heroEl && statBlocks.length) {
+    const heroObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !countersRun) {
+        countersRun = true;
+        statBlocks.forEach((b, idx) => setTimeout(() => animateCounter(b), idx * 220));
+        heroObs.disconnect();
+      }
+    }, { threshold: 0.4 });
+    heroObs.observe(heroEl);
+  }
 
-.glow-blob {
-  position: absolute; width: 500px; height: 500px;
-  filter: blur(150px); opacity: 0.1; z-index: -1; pointer-events: none;
-}
-.blob-1 { background: #6d28d9; top: -10%; left: -5%; }
-.blob-2 { background: #1e40af; bottom: -10%; right: 10%; }
+  // =========================
+  // 9. PILLAR SCROLL ANIMATION
+  // =========================
+  const pillarCards = document.querySelectorAll('.pillar-card');
+  if (pillarCards.length) {
+    const pillarObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    pillarCards.forEach(p => pillarObs.observe(p));
+  }
 
-.project-links { margin-top: 1.5rem; }
-.link-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--primary-purple); text-decoration: none;
-  font-size: 0.85rem; font-weight: 700;
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  padding: 8px 16px; border-radius: 6px; transition: 0.3s;
-}
-.link-btn:hover { background: rgba(167, 139, 250, 0.1); border-color: var(--primary-purple); }
+  // =========================
+  // 10. CONTACT FORM
+  // =========================
+  const contactForm = document.getElementById("contact-form");
+  const submitBtn   = document.getElementById("submit-btn");
 
-@media (max-width: 420px) { :root { --sidebar-width: 300px; } }
+  if (contactForm) {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          submitBtn.textContent = "Sent!";
+          submitBtn.style.background = "#10b981";
+          contactForm.reset();
+          setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = "";
+            submitBtn.disabled = false;
+          }, 5000);
+        } else {
+          throw new Error();
+        }
+      } catch {
+        submitBtn.textContent = "Error!";
+        submitBtn.style.background = "#ef4444";
+        submitBtn.disabled = false;
+      }
+    });
+  }
 
-.lang-switch { display: inline-flex; gap: 0.4rem; margin-left: -0.2rem; align-items: center; }
-.lang-btn {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border-color);
-  color: var(--text-dim);
-  padding: 0.35rem 0.55rem;
-  border-radius: 8px;
-  font-weight: 800; font-size: 0.7rem; letter-spacing: 0.8px;
-  cursor: pointer; transition: 0.2s ease;
-}
-.lang-btn:hover { border-color: var(--primary-purple); color: #fff; transform: translateY(-1px); }
-.lang-btn[aria-pressed="true"] { color: #fff; border-color: rgba(167,139,250,0.6); background: rgba(167,139,250,0.08); }
-@media (max-width: 420px) {
-  .lang-switch { margin-left: 0.5rem; }
-  .lang-btn { padding: 0.3rem 0.45rem; font-size: 0.65rem; }
-}
+  // =========================
+  // 11. FUNNEL BAR CHART
+  // =========================
+  const funnelData = [
+    { label: 'Landing', before: 45, after: 98 },
+    { label: 'PDP',     before: 38, after: 95 },
+    { label: 'Cart',    before: 22, after: 91 },
+    { label: 'Check',   before: 18, after: 94 },
+    { label: 'Confirm', before: 12, after: 96 },
+  ];
+  const funnelEl = document.getElementById('funnelBars');
+  if (funnelEl) {
+    funnelData.forEach(d => {
+      const wrap = document.createElement('div');
+      wrap.className = 'bar-wrap';
+      wrap.innerHTML = `
+        <div class="bar-group">
+          <div class="bar-bg" style="height:${d.before}%"><div class="bar-fill before"></div></div>
+          <div class="bar-bg" style="height:${d.after}%"><div class="bar-fill after"></div></div>
+        </div>
+        <span class="bar-xlbl">${d.label}</span>`;
+      funnelEl.appendChild(wrap);
+    });
+    let barsAnimated = false;
+    const barsObs = new IntersectionObserver(e => {
+      if (e[0].isIntersecting && !barsAnimated) {
+        barsAnimated = true;
+        setTimeout(() => {
+          document.querySelectorAll('#funnelBars .bar-fill').forEach(b => b.style.height = '100%');
+        }, 300);
+        barsObs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    barsObs.observe(funnelEl);
+  }
 
-/* =========================
-   EDUCATION TIMELINE CHART
-   ========================= */
-.timeline-chart-wrap {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 2rem 1.5rem 1.5rem;
-  position: relative;
-  overflow: hidden;
-  margin-top: 3rem;
-}
-.timeline-chart-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 60px; left: 60px; right: 40px; height: 120px;
-  background: radial-gradient(ellipse at 80% 100%, rgba(124,58,237,0.08), transparent 70%);
-  pointer-events: none;
-}
-.timeline-chart-header {
-  display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;
-}
-.timeline-chart-title { font-size: 0.85rem; font-weight: 700; color: var(--text-main); }
-.timeline-chart-subtitle { font-size: 0.65rem; color: var(--text-dim); margin-top: 0.2rem; }
-.timeline-badge {
-  font-size: 0.6rem; background: rgba(124,58,237,0.1);
-  border: 1px solid rgba(124,58,237,0.3); color: var(--primary-purple);
-  padding: 0.3rem 0.7rem; border-radius: 4px; letter-spacing: 0.1em;
-  text-transform: uppercase; font-weight: 700;
-}
-.timeline-svg { width: 100%; overflow: visible; display: block; }
-
-.edu-node-hint { font-size: 0.65rem; color: var(--text-dim); text-align: center; margin-top: 0.8rem; letter-spacing: 0.05em; }
-
-.timeline-legend {
-  display: flex; gap: 1.5rem; flex-wrap: wrap;
-  margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);
-}
-.tl-item { display: flex; align-items: center; gap: 0.5rem; opacity: 0; transform: translateY(6px); transition: all 0.4s ease; }
-.tl-item.show { opacity: 1; transform: translateY(0); }
-.tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary-purple); box-shadow: 0 0 6px rgba(124,58,237,0.5); flex-shrink: 0; }
-.tl-dot.current { box-shadow: 0 0 8px rgba(167,139,250,0.8); }
-.tl-text { font-size: 0.65rem; color: var(--text-dim); line-height: 1.4; }
-.tl-text strong { color: var(--text-main); display: block; font-size: 0.7rem; }
-
-/* =========================
-   EDU SLIDE-IN PANEL
-   ========================= */
-#eduPanel {
-  position: fixed;
-  top: 0; right: -420px;
-  width: 400px; max-width: 95vw;
-  height: 100%;
-  background: #0a0a0a;
-  border-left: 1px solid var(--border-color);
-  z-index: 2000;
-  transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-  padding: 2rem;
-  overflow-y: auto;
-  display: flex; flex-direction: column; gap: 1.5rem;
-}
-#eduPanel.active { right: 0; box-shadow: -20px 0 50px rgba(0,0,0,0.8); }
-
-#eduPanelOverlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 1500; display: none;
-}
-#eduPanelOverlay.active { display: block; }
-
-.ep-header { display: flex; justify-content: space-between; align-items: flex-start; }
-#eduPanelClose {
-  background: none; border: none; color: var(--text-dim);
-  font-size: 1.4rem; cursor: pointer; transition: color 0.2s; line-height: 1; padding: 0;
-}
-#eduPanelClose:hover { color: var(--text-main); }
-.ep-tag {
-  font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.2em; color: var(--primary-purple);
-  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25);
-  padding: 0.3rem 0.7rem; border-radius: 4px;
-}
-.ep-title { font-size: 1.3rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin: 0; }
-.ep-meta { display: flex; flex-direction: column; gap: 0.3rem; }
-.ep-period { font-size: 0.75rem; color: var(--primary-purple); font-weight: 700; }
-.ep-inst { font-size: 0.75rem; color: var(--text-dim); }
-.ep-divider { height: 1px; background: var(--border-color); }
-.ep-body { display: flex; flex-direction: column; gap: 1.2rem; }
-.ep-spec h4 { font-size: 0.8rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; }
-.ep-spec p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
-.ep-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
-.ep-tags span { font-size: 0.65rem; background: #1e293b; padding: 3px 10px; border-radius: 4px; color: var(--primary-purple); font-weight: 700; }
-
-@media (max-width: 600px) {
-  .timeline-chart-wrap { padding: 1.2rem 0.8rem 1rem; }
-  .timeline-legend { gap: 1rem; }
-  #eduPanel { width: 100%; right: -100%; }
-  #eduPanel.active { right: 0; }
-}
-
-/* =========================
-   HERO COUNTER STRIP
-   ========================= */
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border-color);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 2.5rem auto;
-  max-width: 580px;
-}
-
-.stat-block {
-  background: var(--card-bg);
-  padding: 1.4rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  position: relative;
-}
-
-.stat-block::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 40px; height: 2px;
-  background: var(--primary-gradient);
-  border-radius: 0 0 4px 4px;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
-.stat-block.counted::before { opacity: 1; }
-
-.stat-value {
-  font-size: 1.9rem;
-  font-weight: 800;
-  color: var(--text-main);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -1px;
-}
-.stat-suffix { color: var(--primary-purple); font-weight: 800; }
-.stat-label {
-  font-size: 0.6rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
-  margin-top: 0.1rem;
-}
-.stat-context {
-  font-size: 0.57rem;
-  color: #475569;
-  font-style: italic;
-}
-
-@media (max-width: 480px) {
-  .hero-stats { grid-template-columns: 1fr; max-width: 260px; }
-  .stat-value { font-size: 1.6rem; }
-}
-
-/* =========================
-   PILLAR CARD — upgrades
-   ========================= */
-
-/* Icona con box invece di flat */
-.pillar-card .pillar-icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: rgba(124,58,237,0.1);
-  border: 1px solid rgba(124,58,237,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  transition: 0.3s;
-}
-.pillar-card:hover .pillar-icon {
-  background: rgba(124,58,237,0.2);
-  box-shadow: 0 0 16px rgba(124,58,237,0.3);
-}
-.pillar-card .pillar-icon i { font-size: 1.3rem; }
-
-/* Barra superiore on hover / highlight */
-.pillar-card {
-  position: relative;
-  overflow: hidden;
-}
-.pillar-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--primary-gradient);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-.pillar-card:hover::before,
-.pillar-card.highlight::before { transform: scaleX(1); }
-
-/* Pill tag */
-.pillar-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 1.2rem;
-  font-size: 0.62rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--primary-purple);
-  background: rgba(124,58,237,0.08);
-  border: 1px solid rgba(124,58,237,0.2);
-  padding: 5px 10px;
-  border-radius: 20px;
-  transition: 0.3s;
-}
-.pillar-card:hover .pillar-pill {
-  background: rgba(124,58,237,0.15);
-  border-color: rgba(124,58,237,0.4);
-}
-
-/* Scroll-in animation */
-.pillar-card {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.55s ease, transform 0.55s ease,
-              border-color 0.3s, background 0.3s;
-}
-.pillar-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.pillar-card:nth-child(1) { transition-delay: 0s; }
-.pillar-card:nth-child(2) { transition-delay: 0.12s; }
-.pillar-card:nth-child(3) { transition-delay: 0.24s; }
-
-/* =========================
-   CASE STUDY CARDS — new
-   ========================= */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
-
-.cs-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-@media (min-width: 768px)  { .cs-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .cs-grid { grid-template-columns: repeat(3, 1fr); } }
-
-.cs-card {
-  position: relative;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-}
-.cs-card::before {
-  content: '';
-  position: absolute; inset: 0;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #6d28d9, #4c1d95, #6d28d9);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  z-index: 0;
-  filter: blur(1px);
-}
-.cs-card::after {
-  content: '';
-  position: absolute; inset: 1px;
-  border-radius: 15px;
-  background: var(--card-bg);
-  z-index: 1;
-}
-.cs-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(124,58,237,0.6);
-  box-shadow: 0 20px 40px rgba(109,40,217,0.2);
-}
-.cs-card:hover::before { opacity: 0.25; }
-
-.cs-inner { position: relative; z-index: 2; padding: 1.6rem; display: flex; flex-direction: column; height: 100%; }
-
-.cs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.cs-icon-title { display: flex; align-items: center; gap: 0.7rem; }
-.cs-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, #6d28d9, #4c1d95);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.cs-icon i { font-size: 0.9rem; color: #fff; }
-.cs-title { font-size: 0.88rem; font-weight: 800; color: var(--text-main); }
-
-.cs-badge {
-  font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.1em; padding: 3px 9px; border-radius: 20px;
-  border: 1px solid; white-space: nowrap;
-}
-.badge-sql  { color: #60a5fa; border-color: rgba(96,165,250,0.3);  background: rgba(96,165,250,0.08); }
-.badge-bi   { color: var(--primary-purple); border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
-.badge-ga4  { color: #10b981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
-
-.cs-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 1.1rem; }
-
-/* mac window */
-.mac-window {
-  background: #0a0a0a; border: 1px solid #1e293b;
-  border-radius: 10px; overflow: hidden; margin-bottom: 1.1rem;
-}
-.mac-bar {
-  background: #111827; padding: 0.5rem 0.8rem;
-  display: flex; align-items: center; gap: 0.4rem;
-}
-.mac-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.mac-dot.red    { background: #ef4444; }
-.mac-dot.yellow { background: #f59e0b; }
-.mac-dot.green  { background: #10b981; }
-.mac-tabs { display: flex; gap: 0.4rem; margin-left: 0.6rem; }
-.mac-tab {
-  font-size: 0.58rem; font-weight: 700;
-  background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2);
-  color: var(--primary-purple); padding: 2px 8px; border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-}
-.mac-code {
-  padding: 0.8rem 1rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem; line-height: 1.7;
-  color: #94a3b8; max-height: 130px;
-  overflow: hidden; position: relative;
-}
-.mac-code::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px;
-  background: linear-gradient(transparent, #0a0a0a);
-}
-.kw  { color: #c084fc; }
-.fn  { color: #60a5fa; }
-.str { color: #86efac; }
-.cmt { color: #475569; }
-.num { color: #fb923c; }
-
-/* results list */
-.results-list { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.1rem; }
-.result-item {
-  display: flex; align-items: center; gap: 0.7rem;
-  background: rgba(15,23,42,0.6); border: 1px solid var(--border-color);
-  border-radius: 8px; padding: 0.55rem 0.8rem;
-  font-size: 0.76rem; color: var(--text-dim);
-  transition: border-color 0.3s, background 0.3s;
-}
-.cs-card:hover .result-item { border-color: rgba(124,58,237,0.2); background: rgba(124,58,237,0.04); }
-.result-icon { color: var(--primary-purple); font-size: 0.75rem; flex-shrink: 0; }
-.result-text { flex: 1; }
-.result-value { font-weight: 800; color: var(--text-main); margin-left: auto; white-space: nowrap; font-size: 0.82rem; }
-
-/* bar chart */
-.mini-chart {
-  background: rgba(15,23,42,0.6); border: 1px solid var(--border-color);
-  border-radius: 10px; padding: 0.8rem 1rem; margin-bottom: 1.1rem;
-}
-.chart-label { font-size: 0.58rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; font-weight: 700; }
-.bars { display: flex; align-items: flex-end; gap: 5px; height: 60px; }
-.bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; height: 100%; justify-content: flex-end; }
-.bar-group { position: relative; width: 100%; height: 100%; display: flex; gap: 2px; align-items: flex-end; }
-.bar-bg { border-radius: 3px 3px 0 0; background: rgba(96,165,250,0.08); position: relative; overflow: hidden; flex: 1; }
-.bar-fill { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 3px 3px 0 0; transition: height 1s cubic-bezier(0.4,0,0.2,1); height: 0%; }
-.bar-fill.before { background: rgba(16,185,129,0.4); }
-.bar-fill.after  { background: linear-gradient(to top, #6d28d9, #a78bfa); }
-.bar-xlbl { font-size: 0.5rem; color: #475569; }
-.chart-legend { display: flex; gap: 1rem; margin-top: 0.5rem; }
-.legend-item { display: flex; align-items: center; gap: 4px; font-size: 0.58rem; color: var(--text-dim); }
-.legend-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-
-/* metrics row */
-.cs-metrics-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-bottom: 1.1rem; }
-.cs-metric {
-  background: rgba(15,23,42,0.6); border: 1px solid var(--border-color);
-  border-radius: 8px; padding: 0.6rem 0.7rem;
-}
-.cs-metric-label { font-size: 0.56rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
-.cs-metric-value { font-size: 1.05rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin: 0.12rem 0; }
-.cs-metric-delta { font-size: 0.6rem; font-weight: 700; }
-.delta-pos { color: #10b981; }
-.delta-neg { color: #ef4444; }
-
-/* footer */
-.cs-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 0.8rem; border-top: 1px solid var(--border-color);
-  margin-top: auto;
-}
-.cs-tags { display: flex; gap: 0.35rem; flex-wrap: wrap; }
-.cs-tag { font-size: 0.58rem; font-weight: 700; background: #1e293b; color: var(--primary-purple); padding: 3px 8px; border-radius: 4px; }
-.cs-link {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 0.68rem; font-weight: 800; color: #fff;
-  background: linear-gradient(135deg, #6d28d9, #4c1d95);
-  padding: 6px 12px; border-radius: 6px; text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s; white-space: nowrap;
-}
-.cs-link:hover { opacity: 0.85; transform: translateY(-1px); }
-.cs-link i { font-size: 0.62rem; }
-
-/* =========================
-   CERT FLIP CARDS
-   ========================= */
-.cert-flip-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-.flip-card {
-  height: 220px;
-  perspective: 1000px;
-  cursor: default;
-}
-.flip-inner {
-  position: relative;
-  width: 100%; height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.flip-card:hover .flip-inner { transform: rotateY(180deg); }
-
-.flip-front, .flip-back {
-  position: absolute; inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-}
-
-/* FRONT */
-.flip-front {
-  background: var(--card-bg);
-  padding: 1.8rem;
-  display: flex; flex-direction: column; justify-content: space-between;
-  transition: border-color 0.3s;
-}
-.flip-card:hover .flip-front { border-color: rgba(124,58,237,0.5); }
-.flip-front::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: var(--primary-gradient);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.4s ease;
-}
-.flip-card:hover .flip-front::before { transform: scaleX(1); }
-.flip-front.primary {
-  border-color: rgba(124,58,237,0.35);
-  background: linear-gradient(135deg, #0d0d0d, rgba(109,40,217,0.06));
-}
-
-.cert-front-top { display: flex; align-items: flex-start; justify-content: space-between; }
-.cert-org {
-  font-size: 0.58rem; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.15em; color: var(--primary-purple);
-  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
-  padding: 3px 9px; border-radius: 4px;
-}
-.cert-status {
-  font-size: 0.58rem; font-weight: 700;
-  display: flex; align-items: center; gap: 4px; color: #10b981;
-}
-.cert-status-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: #10b981;
-  animation: certpulse 2s infinite;
-}
-@keyframes certpulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-.cert-front-title { font-size: 1rem; font-weight: 800; color: var(--text-main); line-height: 1.3; }
-.cert-front-bottom { display: flex; align-items: center; justify-content: space-between; }
-.cert-date { font-size: 0.62rem; color: var(--text-dim); }
-.cert-flip-hint { font-size: 0.55rem; color: #475569; display: flex; align-items: center; gap: 4px; }
-.cert-flip-hint i { font-size: 0.6rem; }
-
-/* BACK */
-.flip-back {
-  transform: rotateY(180deg);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 0.9rem; padding: 1.5rem;
-  background: #080808;
-  border-color: rgba(124,58,237,0.4);
-}
-.flip-back::after {
-  content: ''; position: absolute; inset: -1px; border-radius: 16px;
-  background: linear-gradient(135deg, #7c3aed, #4c1d95, #7c3aed);
-  z-index: -1; opacity: 0.5;
-}
-.logo-glow {
-  position: absolute; width: 130px; height: 130px;
-  border-radius: 50%; filter: blur(40px); opacity: 0.25; pointer-events: none;
-}
-
-/* Microsoft logo */
-.logo-microsoft {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
-  width: 64px; height: 64px;
-  filter: drop-shadow(0 0 10px rgba(124,58,237,0.7));
-  position: relative; z-index: 1;
-}
-.ms-square { border-radius: 2px; }
-.ms-1 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
-.ms-2 { background: linear-gradient(135deg, #818cf8, #6d28d9); }
-.ms-3 { background: linear-gradient(135deg, #c4b5fd, #a78bfa); }
-.ms-4 { background: linear-gradient(135deg, #7c3aed, #4c1d95); }
-
-/* Google logo */
-.logo-google { width: 72px; height: 72px; position: relative; z-index: 1; filter: drop-shadow(0 0 10px rgba(124,58,237,0.7)); }
-.logo-google svg { width: 100%; height: 100%; }
-
-.back-cert-name {
-  font-size: 0.72rem; font-weight: 800; color: var(--text-main);
-  text-align: center; line-height: 1.4; position: relative; z-index: 1;
-}
-.back-verify {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.65rem; font-weight: 800; color: #fff;
-  background: var(--primary-gradient);
-  padding: 7px 14px; border-radius: 6px; text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s;
-  position: relative; z-index: 1;
-}
-.back-verify:hover { opacity: 0.85; transform: translateY(-1px); }
-.back-verify i { font-size: 0.6rem; }
+});
