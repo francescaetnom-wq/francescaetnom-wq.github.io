@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Italo Treno — GA4 Architecture | Francesca Monte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-color: #030303;
+      --card-bg: #0d0d0d;
+      --primary-purple: #C8102E;
+      --primary-gradient: linear-gradient(135deg, #C8102E 0%, #8B000A 100%);
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --border-color: #1e293b;
+      --green: #10b981;
+      --cyan: #06b6d4;
+      --orange: #f97316;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(3,3,3,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 1.1rem; color: #fff;
+      text-decoration: none; display: flex; align-items: center; gap: 0.7rem;
+    }
+    .nav-logo .dot {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--primary-gradient);
+    }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--text-dim); text-decoration: none;
+      font-size: 0.78rem; font-weight: 600;
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 1rem; border-radius: 6px;
+      transition: 0.2s;
+    }
+    .nav-back:hover { border-color: var(--primary-purple); color: var(--text-main); }
+    .hero {
+      background: linear-gradient(180deg, rgba(200,16,46,0.04) 0%, transparent 100%);
+      padding: 4rem 8% 3rem;
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: start;
+    }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .eyebrow-label {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--primary-purple);
+    }
+    .real-badge {
+      padding: 0.2rem 0.7rem;
+      background: rgba(200,16,46,0.1);
+      border: 1px solid rgba(200,16,46,0.3);
+      border-radius: 4px;
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--primary-purple);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 0.8rem;
+    }
+    .hero h1 span {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      color: var(--text-dim); font-size: 0.95rem;
+      max-width: 580px; line-height: 1.7; margin-bottom: 2rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      padding: 0.3rem 0.8rem; border-radius: 4px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tag-purple { background: rgba(200,16,46,0.1); color: var(--primary-purple); border: 1px solid rgba(200,16,46,0.25); }
+    .tag-cyan   { background: rgba(6,182,212,0.08);  color: var(--cyan);           border: 1px solid rgba(6,182,212,0.2); }
+    .tag-green  { background: rgba(16,185,129,0.08); color: var(--green);          border: 1px solid rgba(16,185,129,0.2); }
+    .tag-orange { background: rgba(249,115,22,0.08); color: var(--orange);         border: 1px solid rgba(249,115,22,0.2); }
+    .context-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 1.5rem;
+      min-width: 240px;
+    }
+    .context-box-label {
+      font-size: 0.6rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: #475569; margin-bottom: 1rem;
+    }
+    .context-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .context-row:last-child { border-bottom: none; }
+    .context-key { font-size: 0.72rem; color: #475569; }
+    .context-val { font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-align: right; max-width: 140px; }
+    .stats-wrap { padding: 0 8%; max-width: 1400px; margin: 0 auto 3rem; }
+    .stats-strip-inner {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1px; background: var(--border-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; overflow: hidden;
+    }
+    .stat-block {
+      background: var(--card-bg);
+      padding: 1.4rem 1rem; text-align: center;
+      position: relative;
+    }
+    .stat-block::before {
+      content: ''; position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 40px; height: 2px;
+      background: var(--primary-gradient);
+      border-radius: 0 0 4px 4px;
+    }
+    .stat-value {
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--text-main); display: block; line-height: 1;
+    }
+    .stat-value span { color: var(--primary-purple); }
+    .stat-label {
+      font-size: 0.6rem; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      font-weight: 700; margin-top: 0.3rem;
+    }
+    .section { max-width: 1400px; margin: 0 auto; padding: 0 8% 3.5rem; }
+    .section-header { margin-bottom: 1.5rem; }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--primary-purple); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--text-main);
+    }
+    .section-desc {
+      color: var(--text-dim); font-size: 0.88rem;
+      margin-top: 0.4rem; max-width: 620px; line-height: 1.65;
+    }
+    .divider {
+      border: none; border-top: 1px solid var(--border-color);
+      max-width: 1400px; margin: 0 8% 3.5rem;
+    }
+    .obj-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    @media (max-width: 900px) { .obj-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { .obj-grid { grid-template-columns: 1fr; } }
+    .obj-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 1.3rem;
+      transition: border-color 0.2s;
+    }
+    .obj-card:hover { border-color: rgba(200,16,46,0.4); }
+    .obj-num {
+      font-size: 0.6rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #475569; margin-bottom: 0.5rem;
+    }
+    .obj-title {
+      font-size: 0.88rem; font-weight: 800;
+      color: var(--text-main); margin-bottom: 0.4rem; line-height: 1.3;
+    }
+    .obj-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+    .obj-events { margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .param-tag {
+      display: inline-block;
+      padding: 0.12rem 0.5rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      font-size: 0.65rem; color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .arch-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 2rem; margin-bottom: 1rem;
+    }
+    .arch-row {
+      display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;
+    }
+    .arch-cell {
+      background: #0a0a0a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 1rem 1.2rem; flex: 1;
+    }
+    .arch-level {
+      font-size: 0.58rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #475569; margin-bottom: 0.3rem;
+    }
+    .arch-name { font-size: 0.88rem; font-weight: 700; color: var(--text-main); }
+    .arch-note { font-size: 0.74rem; color: var(--text-dim); margin-top: 0.2rem; }
+    .arch-arrow { color: #475569; font-size: 0.8rem; flex-shrink: 0; }
+    .arch-streams {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem;
+    }
+    .stream-card {
+      background: #0a0a0a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 0.9rem 1rem;
+    }
+    .stream-label {
+      font-size: 0.58rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #475569; margin-bottom: 0.25rem;
+    }
+    .stream-name { font-size: 0.82rem; font-weight: 600; color: var(--text-main); }
+    .stream-note { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.2rem; }
+    .userid-note {
+      margin-top: 1rem; padding: 0.8rem 1rem;
+      background: rgba(200,16,46,0.06);
+      border-left: 2px solid rgba(200,16,46,0.5);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;
+    }
+    .userid-note strong { color: var(--primary-purple); }
+    .arch-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .arch-info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px; padding: 1.3rem;
+    }
+    .arch-info-label {
+      font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #475569; margin-bottom: 0.4rem;
+    }
+    .arch-info-title {
+      font-size: 0.88rem; font-weight: 800;
+      color: var(--text-main); margin-bottom: 0.4rem;
+    }
+    .arch-info-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.65; }
+    .events-filter { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 0.35rem 1rem; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 700;
+      border: 1px solid var(--border-color);
+      background: transparent; color: var(--text-dim);
+      cursor: pointer; transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .filter-btn:hover { border-color: var(--primary-purple); color: var(--text-main); }
+    .filter-btn.active {
+      background: rgba(200,16,46,0.1);
+      border-color: rgba(200,16,46,0.4);
+      color: var(--primary-purple);
+    }
+    .table-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; overflow: hidden;
+    }
+    .events-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .events-table thead tr { border-bottom: 1px solid var(--border-color); }
+    .events-table th {
+      text-align: left; padding: 0.7rem 1rem;
+      font-size: 0.62rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #475569; font-weight: 700;
+    }
+    .events-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      vertical-align: top;
+    }
+    .events-table tr:last-child td { border-bottom: none; }
+    .events-table tbody tr:hover td { background: rgba(200,16,46,0.03); }
+    .event-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600; color: var(--text-main);
+      font-size: 0.75rem; white-space: nowrap;
+    }
+    .type-badge {
+      display: inline-block; padding: 0.15rem 0.55rem;
+      border-radius: 3px; font-size: 0.6rem;
+      font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .type-auto   { background: rgba(6,182,212,0.08);  color: var(--cyan);           border: 1px solid rgba(6,182,212,0.2); }
+    .type-rec    { background: rgba(200,16,46,0.08); color: var(--primary-purple); border: 1px solid rgba(200,16,46,0.2); }
+    .type-custom { background: rgba(249,115,22,0.08); color: var(--orange);         border: 1px solid rgba(249,115,22,0.2); }
+    .conv-badge  {
+      display: inline-block; padding: 0.15rem 0.55rem;
+      border-radius: 3px; font-size: 0.6rem; font-weight: 700;
+      background: rgba(200,16,46,0.08); color: var(--primary-purple);
+      border: 1px solid rgba(200,16,46,0.2);
+    }
+    .event-desc { color: var(--text-dim); font-size: 0.76rem; line-height: 1.5; }
+    tr.hidden-row { display: none; }
+    .accordion { display: flex; flex-direction: column; gap: 0.6rem; }
+    .acc-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .acc-item.open { border-color: rgba(200,16,46,0.35); }
+    .acc-trigger {
+      width: 100%; padding: 1.2rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-main); font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+    .acc-trigger-left { display: flex; align-items: center; gap: 1rem; }
+    .acc-num {
+      font-size: 0.6rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--primary-purple);
+      background: rgba(200,16,46,0.08);
+      border: 1px solid rgba(200,16,46,0.2);
+      padding: 0.2rem 0.6rem; border-radius: 3px;
+      white-space: nowrap;
+    }
+    .acc-title { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
+    .acc-chevron {
+      color: #475569; font-size: 0.75rem;
+      transition: transform 0.25s; flex-shrink: 0;
+    }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); }
+    .acc-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 1.5rem;
+    }
+    .acc-item.open .acc-body { max-height: 600px; padding: 0 1.5rem 1.5rem; }
+    .acc-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+    @media (max-width: 700px) { .acc-inner { grid-template-columns: 1fr; } }
+    .acc-col-label {
+      font-size: 0.6rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #475569; margin-bottom: 0.5rem;
+      padding-top: 1rem;
+    }
+    .acc-col h4 {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--text-main); margin-bottom: 0.5rem;
+    }
+    .acc-col p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+    .acc-col ul { padding-left: 1rem; }
+    .acc-col ul li { font-size: 0.8rem; color: var(--text-dim); line-height: 1.9; }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; color: var(--text-dim);
+    }
+    .bq-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; overflow: hidden;
+    }
+    .bq-header {
+      padding: 1.8rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(135deg, rgba(6,182,212,0.05) 0%, transparent 60%);
+    }
+    .bq-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.25rem 0.8rem;
+      background: rgba(6,182,212,0.08);
+      border: 1px solid rgba(6,182,212,0.2);
+      border-radius: 4px;
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 0.8rem;
+    }
+    .bq-title { font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.4rem; }
+    .bq-sub { font-size: 0.84rem; color: var(--text-dim); max-width: 580px; line-height: 1.65; }
+    .bq-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    @media (max-width: 700px) { .bq-grid { grid-template-columns: 1fr; } }
+    .bq-uc {
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+    }
+    .bq-uc:nth-child(2n) { border-right: none; }
+    .bq-uc:nth-last-child(-n+2) { border-bottom: none; }
+    .bq-uc-label {
+      font-size: 0.58rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--cyan);
+      margin-bottom: 0.3rem; opacity: 0.8;
+    }
+    .bq-uc-title {
+      font-size: 0.85rem; font-weight: 800;
+      color: var(--text-main); margin-bottom: 0.4rem;
+    }
+    .bq-uc-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.6; }
+    .bq-footer {
+      padding: 1.2rem 1.8rem;
+      background: rgba(6,182,212,0.04);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.82rem; color: var(--text-dim); line-height: 1.65;
+    }
+    .bq-footer strong { color: var(--text-main); }
+    .conclusion-wrap { padding: 0 8% 5rem; max-width: 1400px; margin: 0 auto; }
+    .conclusion {
+      background: linear-gradient(135deg, rgba(200,16,46,0.06) 0%, rgba(6,182,212,0.04) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px; padding: 3rem;
+      text-align: center;
+    }
+    .conclusion h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.8rem; }
+    .conclusion p { color: var(--text-dim); max-width: 520px; margin: 0 auto 2rem; font-size: 0.9rem; }
+    .btn-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: #fff; padding: 0.75rem 1.8rem;
+      border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200,16,46,0.3); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      color: var(--text-dim); padding: 0.75rem 1.8rem;
+      border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--primary-purple); color: var(--text-main); }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .hint { font-size: 0.72rem; color: #475569; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="dot"></div>
+    Francesca Monte
+  </a>
+  <a href="index.html#portfolio" class="nav-back">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </a>
+</nav>
+
+<div class="hero fade-in">
+  <div>
+    <div class="hero-eyebrow">
+      <span class="eyebrow-label">GA4 Measurement Audit</span>
+      <span class="real-badge">↗ Real Brand</span>
+    </div>
+    <h1>Italo Treno<br/><span>GA4 Architecture</span></h1>
+    <p class="hero-sub">External audit of Italy's second-largest rail operator. Reverse-engineered the existing digital funnel across web and app, identified tracking gaps, and designed a full GA4 measurement architecture — account structure, event taxonomy, conversion framework, and BigQuery integration rationale.</p>
+    <div class="tags">
+      <span class="tag tag-purple">Google Analytics 4</span>
+      <span class="tag tag-cyan">Measurement Strategy</span>
+      <span class="tag tag-green">Event Taxonomy</span>
+      <span class="tag tag-orange">Funnel Analysis</span>
+      <span class="tag tag-purple">BigQuery</span>
+      <span class="tag tag-cyan">E-commerce Tracking</span>
+    </div>
+  </div>
+  <div class="context-box">
+    <div class="context-box-label">Audit Context</div>
+    <div class="context-row"><span class="context-key">Subject</span><span class="context-val">Italo Treno (NTV S.p.A.)</span></div>
+    <div class="context-row"><span class="context-key">Type</span><span class="context-val">External — public funnel</span></div>
+    <div class="context-row"><span class="context-key">Scope</span><span class="context-val">Web + Android + iOS</span></div>
+    <div class="context-row"><span class="context-key">GA4 Property</span><span class="context-val">1 property · 3 streams</span></div>
+    <div class="context-row"><span class="context-key">Events defined</span><span class="context-val">28</span></div>
+    <div class="context-row"><span class="context-key">Conversions</span><span class="context-val">5</span></div>
+    <div class="context-row"><span class="context-key">Custom dimensions</span><span class="context-val">6</span></div>
+  </div>
+</div>
+
+<div class="stats-wrap fade-in">
+  <div class="stats-strip-inner">
+    <div class="stat-block"><span class="stat-value">1</span><div class="stat-label">GA4 Property</div></div>
+    <div class="stat-block"><span class="stat-value">3</span><div class="stat-label">Data Streams</div></div>
+    <div class="stat-block"><span class="stat-value">28</span><div class="stat-label">Events Defined</div></div>
+    <div class="stat-block"><span class="stat-value">6</span><div class="stat-label">Business Objectives</div></div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">01 — Scope</div>
+    <div class="section-title">Business Objectives</div>
+    <p class="section-desc">Every tracking decision maps back to a measurable business objective. No event was defined without a clear owner in the funnel.</p>
+  </div>
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="obj-num">OBJ 01</div>
+      <div class="obj-title">Increase ticket sales</div>
+      <div class="obj-desc">Monitor the full booking funnel from search to purchase confirmation across web and app.</div>
+      <div class="obj-events"><span class="param-tag">view_item_list</span><span class="param-tag">begin_checkout</span><span class="param-tag">purchase</span></div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">OBJ 02</div>
+      <div class="obj-title">Upselling &amp; cross-selling</div>
+      <div class="obj-desc">Track upgrade and add-on interactions to increase average order value per transaction.</div>
+      <div class="obj-events"><span class="param-tag">select_upgrade</span><span class="param-tag">upsell_purchase</span><span class="param-tag">add_lounge_access</span></div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">OBJ 03</div>
+      <div class="obj-title">Lead acquisition via email</div>
+      <div class="obj-desc">Capture high-intent contacts who abandon the funnel before purchase via pop-up reminder flow.</div>
+      <div class="obj-events"><span class="param-tag">generate_lead</span><span class="param-tag">abandoned_checkout_email_submit</span></div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">OBJ 04</div>
+      <div class="obj-title">Loyalty programme retention</div>
+      <div class="obj-desc">Monitor account creation, points activity and benefit engagement to increase purchase frequency and LTV.</div>
+      <div class="obj-events"><span class="param-tag">sign_up</span><span class="param-tag">loyalty_points_earned</span><span class="param-tag">redeem_loyalty_points</span></div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">OBJ 05</div>
+      <div class="obj-title">Editorial → conversion attribution</div>
+      <div class="obj-desc">Measure whether Italo Blog content drives booking intent — not just organic traffic volume.</div>
+      <div class="obj-events"><span class="param-tag">blog_to_booking_click</span><span class="param-tag">scroll</span></div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">OBJ 06</div>
+      <div class="obj-title">Cart abandonment recovery</div>
+      <div class="obj-desc">Intercept undecided users via pop-up to reduce funnel drop-off and feed remarketing audiences.</div>
+      <div class="obj-events"><span class="param-tag">abandoned_checkout_popup_view</span><span class="param-tag">abandoned_checkout_email_submit</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">02 — Architecture</div>
+    <div class="section-title">Account Structure</div>
+    <p class="section-desc">Single account → single property → three data streams. Standard multi-platform architecture for unified cross-device tracking without data fragmentation.</p>
+  </div>
+  <div class="arch-box">
+    <div class="arch-row">
+      <div class="arch-cell" style="flex:0.35">
+        <div class="arch-level">Account</div>
+        <div class="arch-name">Italo Treno</div>
+        <div class="arch-note">NTV S.p.A.</div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-cell">
+        <div class="arch-level">GA4 Property</div>
+        <div class="arch-name">GA4 — Italo Treno Web &amp; App</div>
+        <div class="arch-note">Single source of truth across all platforms</div>
+      </div>
+    </div>
+    <div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:#475569;margin-bottom:0.6rem;">Data Streams</div>
+    <div class="arch-streams">
+      <div class="stream-card">
+        <div class="stream-label">Web</div>
+        <div class="stream-name">italotreno.com</div>
+        <div class="stream-note">Includes blog.italotreno.com — same stream, differentiated via event params</div>
+      </div>
+      <div class="stream-card">
+        <div class="stream-label">Mobile</div>
+        <div class="stream-name">Android App</div>
+        <div class="stream-note">Italo Treno — Google Play</div>
+      </div>
+      <div class="stream-card">
+        <div class="stream-label">Mobile</div>
+        <div class="stream-name">iOS App</div>
+        <div class="stream-note">Italo Treno — App Store</div>
+      </div>
+    </div>
+    <div class="userid-note">
+      <strong>User-ID implementation</strong> — Authenticated users assigned a persistent User-ID, enabling cross-device journey stitching between web and app. Eliminates duplicate user counts and enables accurate attribution across multi-device sessions.
+    </div>
+  </div>
+  <div class="arch-cards">
+    <div class="arch-info-card">
+      <div class="arch-info-label">Why one property</div>
+      <div class="arch-info-title">Unified view, no fragmentation</div>
+      <p>Splitting web and app into separate properties breaks cross-platform conversion paths. A user searching on mobile and completing checkout on desktop would appear as two non-converting users. One property preserves the full journey.</p>
+    </div>
+    <div class="arch-info-card">
+      <div class="arch-info-label">Scalability</div>
+      <div class="arch-info-title">GA360-compatible by design</div>
+      <p>The property and stream configuration is fully compatible with a GA4 360 upgrade. Advanced governance, enterprise SLAs, and higher hit limits can be added without touching the base architecture.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">03 — Event Taxonomy</div>
+    <div class="section-title">Events &amp; Conversions</div>
+    <p class="section-desc">28 events across automatic measurement, GA4 recommended, and custom — each mapped to a business objective. Filter by type.</p>
+  </div>
+  <div class="events-filter">
+    <button class="filter-btn active" onclick="filterEvents('all',this)">All (28)</button>
+    <button class="filter-btn" onclick="filterEvents('auto',this)">Automatic (3)</button>
+    <button class="filter-btn" onclick="filterEvents('rec',this)">Recommended (12)</button>
+    <button class="filter-btn" onclick="filterEvents('custom',this)">Custom (13)</button>
+    <button class="filter-btn" onclick="filterEvents('conv',this)">Conversions (5)</button>
+  </div>
+  <div class="table-wrap">
+    <table class="events-table">
+      <thead>
+        <tr>
+          <th>Event Name</th><th>Type</th><th>Description</th><th>Custom Params</th><th>Conv.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-type="auto"><td><span class="event-name">view_search_results</span></td><td><span class="type-badge type-auto">Automatic</span></td><td class="event-desc">Internal site search — fires with term and results_count. Zero-result searches derived via results_count=0, no separate event needed.</td><td><span class="param-tag">search_term</span><span class="param-tag">results_count</span></td><td>—</td></tr>
+        <tr data-type="auto"><td><span class="event-name">scroll</span></td><td><span class="type-badge type-auto">Automatic</span></td><td class="event-desc">90% scroll depth — used on blog/editorial pages to measure content consumption quality.</td><td>—</td><td>—</td></tr>
+        <tr data-type="auto"><td><span class="event-name">click</span></td><td><span class="type-badge type-auto">Automatic</span></td><td class="event-desc">Outbound clicks to external domains (e.g. MSC, GNV, SNAV). Native enhanced measurement event.</td><td><span class="param-tag">link_url</span><span class="param-tag">link_domain</span></td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">view_item_list</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User views a list of available travel solutions — routes, departure times, classes.</td><td><span class="param-tag">item_list_name</span></td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">view_item</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User views details of a specific travel option — route, class, price, availability.</td><td><span class="param-tag">items</span></td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">add_to_cart</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User adds a ticket or service to cart. Key drop-off measurement point before checkout.</td><td><span class="param-tag">items</span><span class="param-tag">value</span></td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">begin_checkout</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User initiates the ticket purchase process.</td><td><span class="param-tag">items</span><span class="param-tag">value</span></td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">add_payment_info</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User enters payment details — last measurable step before confirmed purchase.</td><td>—</td><td>—</td></tr>
+        <tr data-type="rec conv"><td><span class="event-name">purchase</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">Ticket purchase confirmed. Primary revenue conversion event.</td><td><span class="param-tag">travel_class</span><span class="param-tag">transaction_id</span><span class="param-tag">value</span></td><td><span class="conv-badge">✓ Revenue</span></td></tr>
+        <tr data-type="rec"><td><span class="event-name">view_promotion</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User views a promotional offer or additional service during checkout flow.</td><td>—</td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">select_promotion</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User interacts with a promotional offer or upgrade proposal.</td><td>—</td><td>—</td></tr>
+        <tr data-type="rec conv"><td><span class="event-name">generate_lead</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">High-intent contact captured — email from pop-up or newsletter. Feeds CRM and remarketing audiences.</td><td><span class="param-tag">lead_source</span></td><td><span class="conv-badge">✓ Lead gen</span></td></tr>
+        <tr data-type="rec conv"><td><span class="event-name">sign_up</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User creates an Italo account — entry point to loyalty programme tracking.</td><td>—</td><td><span class="conv-badge">✓ Lead gen</span></td></tr>
+        <tr data-type="rec"><td><span class="event-name">login</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">User authenticates — triggers User-ID assignment for cross-device stitching.</td><td><span class="param-tag">loyalty_tier</span></td><td>—</td></tr>
+        <tr data-type="rec"><td><span class="event-name">exception</span></td><td><span class="type-badge type-rec">Recommended</span></td><td class="event-desc">Technical errors — checkout failures, payment errors, app crashes. GA4 native error tracking.</td><td><span class="param-tag">description</span><span class="param-tag">fatal</span></td><td>—</td></tr>
+        <tr data-type="custom conv"><td><span class="event-name">upsell_purchase</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">Purchase of additional services that increase order value — upgrade, lounge, premium extras.</td><td><span class="param-tag">upsell_type</span><span class="param-tag">value</span></td><td><span class="conv-badge">✓ Revenue</span></td></tr>
+        <tr data-type="custom conv"><td><span class="event-name">newsletter_subscription</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">Newsletter opt-in — differentiated by type (promotional, blog, travel alerts).</td><td><span class="param-tag">newsletter_type</span></td><td><span class="conv-badge">✓ Lead gen</span></td></tr>
+        <tr data-type="custom"><td><span class="event-name">select_upgrade</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User selects a class or service upgrade during booking flow.</td><td><span class="param-tag">upgrade_type</span></td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">add_lounge_access</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User adds lounge access to cart — high-value add-on signal.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">remove_upgrade</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User removes a previously selected add-on — friction signal for upsell flow optimisation.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">abandoned_checkout_popup_view</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User sees the cart recovery pop-up — exposure measurement for abandonment flow.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">abandoned_checkout_email_submit</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User submits email via recovery pop-up — high-intent lead, feeds remarketing audiences.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">price_alert_subscription</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User activates a price drop alert — declared purchase intent, valuable for segmentation.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">blog_to_booking_click</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">Click from blog article toward booking area — measures editorial content's contribution to funnel entry.</td><td><span class="param-tag">article_title</span><span class="param-tag">destination</span></td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">loyalty_points_earned</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">Points credited after qualifying purchase — loyalty programme engagement signal.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">spend_virtual_currency</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User spends loyalty points — programme utilisation metric.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">redeem_loyalty_points</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User redeems a reward or benefit — highest loyalty engagement signal.</td><td>—</td><td>—</td></tr>
+        <tr data-type="custom"><td><span class="event-name">view_loyalty_benefits</span></td><td><span class="type-badge type-custom">Custom</span></td><td class="event-desc">User consults loyalty programme benefit page — consideration signal before sign-up or redemption.</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">04 — Strategic Logic</div>
+    <div class="section-title">Three Measurement Pillars</div>
+    <p class="section-desc">The event taxonomy is structured around three strategic priorities — not a flat list of trackable actions.</p>
+  </div>
+  <p class="hint">Click to expand ↓</p>
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)">
+        <div class="acc-trigger-left">
+          <span class="acc-num">Pillar 01</span>
+          <span class="acc-title">Core conversion maximisation</span>
+        </div>
+        <i class="fas fa-chevron-down acc-chevron"></i>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-col">
+            <div class="acc-col-label">Objective</div>
+            <h4>Track every step of the purchase funnel</h4>
+            <p>The full e-commerce sequence — <code>view_item_list → view_item → add_to_cart → begin_checkout → add_payment_info → purchase</code> — is measured end to end. Every drop-off point is visible and actionable.</p>
+          </div>
+          <div class="acc-col">
+            <div class="acc-col-label">Upsell layer</div>
+            <h4>AOV optimisation independent of volume</h4>
+            <p>Upsell events (<code>upsell_purchase</code>, <code>select_upgrade</code>, <code>add_lounge_access</code>) sit alongside the core funnel. This allows the team to optimise average order value separately from acquisition volume — two different levers, both measurable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)">
+        <div class="acc-trigger-left">
+          <span class="acc-num">Pillar 02</span>
+          <span class="acc-title">Editorial → transactional attribution</span>
+        </div>
+        <i class="fas fa-chevron-down acc-chevron"></i>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-col">
+            <div class="acc-col-label">The problem</div>
+            <h4>Traffic volume ≠ editorial value</h4>
+            <p>Italo Blog generates organic traffic — but traffic alone doesn't justify editorial investment. Standard GA4 reports can't connect a blog session to a booking made days later without a dedicated event.</p>
+          </div>
+          <div class="acc-col">
+            <div class="acc-col-label">The solution</div>
+            <h4>blog_to_booking_click as attribution bridge</h4>
+            <p>This custom event fires when a user clicks toward the booking area from an article. Combined with scroll depth, it creates a measurable link between content consumption and funnel entry — making editorial ROI quantifiable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)">
+        <div class="acc-trigger-left">
+          <span class="acc-num">Pillar 03</span>
+          <span class="acc-title">Remarketing audience construction</span>
+        </div>
+        <i class="fas fa-chevron-down acc-chevron"></i>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-col">
+            <div class="acc-col-label">High-intent signals</div>
+            <h4>Abandon ≠ disinterest</h4>
+            <p>Users who abandon the funnel but submit their email via pop-up are among the highest-intent users on the platform. <code>abandoned_checkout_email_submit</code> + <code>generate_lead</code> feed directly into CRM segmentation and Google Ads remarketing lists.</p>
+          </div>
+          <div class="acc-col">
+            <div class="acc-col-label">Declared intent</div>
+            <h4>Price alert as purchase timing signal</h4>
+            <p><code>price_alert_subscription</code> identifies users with declared purchase intent and a specific price threshold. This is a high-value audience segment for remarketing automation — they've told you exactly when they want to buy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">05 — Beyond the UI</div>
+    <div class="section-title">BigQuery Integration</div>
+    <p class="section-desc">GA4's standard interface has hard limits: sampled data above thresholds, 14-month retention, no raw event-level querying. At Italo's scale, these constraints limit the depth of analysis that's actually possible.</p>
+  </div>
+  <div class="bq-box">
+    <div class="bq-header">
+      <div class="bq-badge"><i class="fas fa-cloud"></i> BigQuery Export</div>
+      <div class="bq-title">Why the GA4 UI is not enough at Italo's scale</div>
+      <p class="bq-sub">The architecture was designed with BigQuery export in mind from the start. Custom dimensions exist precisely because they need to be queryable at row level — not just aggregated in the GA4 interface.</p>
+    </div>
+    <div class="bq-grid">
+      <div class="bq-uc">
+        <div class="bq-uc-label">Use Case 01</div>
+        <div class="bq-uc-title">Full funnel drop-off at event level</div>
+        <p class="bq-uc-desc">Query raw event sequences per user session — identify exactly where users exit between <code>add_to_cart</code> and <code>begin_checkout</code> without sampling distortion.</p>
+      </div>
+      <div class="bq-uc">
+        <div class="bq-uc-label">Use Case 02</div>
+        <div class="bq-uc-title">Loyalty tier × conversion rate</div>
+        <p class="bq-uc-desc">Cross-join <code>login</code> (loyalty_tier param) with <code>purchase</code> events to measure whether higher-tier members convert at different rates or AOVs — not possible in the standard UI.</p>
+      </div>
+      <div class="bq-uc">
+        <div class="bq-uc-label">Use Case 03</div>
+        <div class="bq-uc-title">Blog multi-touch attribution</div>
+        <p class="bq-uc-desc">Reconstruct paths where a blog session precedes a booking session across different days — quantifying editorial content's true contribution to revenue beyond last-click.</p>
+      </div>
+      <div class="bq-uc">
+        <div class="bq-uc-label">Use Case 04</div>
+        <div class="bq-uc-title">Upsell sequence analysis</div>
+        <p class="bq-uc-desc">Map the event sequence around <code>select_upgrade → remove_upgrade → upsell_purchase</code> to identify friction points in the add-on flow at session granularity.</p>
+      </div>
+    </div>
+    <div class="bq-footer">
+      <strong>The architectural implication:</strong> custom dimensions (<code>travel_class</code>, <code>upsell_type</code>, <code>loyalty_tier</code>, <code>lead_source</code>) were defined because they need to be queryable at row level in BigQuery — not just visible as aggregated dimensions in the GA4 UI. The schema was built for analysis, not just reporting.
+    </div>
+  </div>
+</div>
+
+<div class="conclusion-wrap fade-in">
+  <div class="conclusion">
+    <h2>Measurement that drives decisions</h2>
+    <p>This architecture transforms GA4 from a traffic counter into a decision tool — connecting content, acquisition, conversion, loyalty, and recovery into a single measurable system.</p>
+    <div class="btn-row">
+      <a href="index.html#portfolio" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <a href="yoyo-case-study.html" class="btn-ghost">View YoYo — Funnel Strategy <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</div>
+
+<div style="height:2rem;"></div>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function filterEvents(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.events-table tbody tr').forEach(row => {
+      if (type === 'all') { row.classList.remove('hidden-row'); return; }
+      const types = row.getAttribute('data-type') || '';
+      types.includes(type) ? row.classList.remove('hidden-row') : row.classList.add('hidden-row');
+    });
+  }
+
+  function toggleAcc(trigger) {
+    const item = trigger.closest('.acc-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>

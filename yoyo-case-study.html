@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YoYo — Full-Funnel Marketing Strategy | Francesca Monte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg-color: #030303;
+      --card-bg: #0d0d0d;
+      --primary-purple: #059669;
+      --pink: #ec4899;
+      --primary-gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+      --border-color: #1e293b;
+      --green: #10b981;
+      --cyan: #06b6d4;
+      --orange: #f97316;
+      --pink: #ec4899;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(3,3,3,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 1.1rem; color: #fff;
+      text-decoration: none; display: flex; align-items: center; gap: 0.7rem;
+    }
+    .nav-logo .dot {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--primary-gradient);
+    }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--text-dim); text-decoration: none;
+      font-size: 0.78rem; font-weight: 600;
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 1rem; border-radius: 6px;
+      transition: 0.2s;
+    }
+    .nav-back:hover { border-color: var(--primary-purple); color: var(--text-main); }
+    .hero {
+      background: linear-gradient(180deg, rgba(5,150,105,0.04) 0%, transparent 100%);
+      padding: 4rem 8% 3rem;
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: start;
+    }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; flex-wrap: wrap;
+    }
+    .eyebrow-label {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--primary-purple);
+    }
+    .fiction-badge {
+      padding: 0.2rem 0.7rem;
+      background: rgba(249,115,22,0.08);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 4px;
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--orange);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.1; margin-bottom: 0.8rem;
+    }
+    .hero h1 span {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      color: var(--text-dim); font-size: 0.95rem;
+      max-width: 580px; line-height: 1.7; margin-bottom: 2rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      padding: 0.3rem 0.8rem; border-radius: 4px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tag-purple { background: rgba(5,150,105,0.12); color: var(--primary-purple); border: 1px solid rgba(5,150,105,0.25); }
+    .tag-cyan   { background: rgba(6,182,212,0.08);  color: var(--cyan);           border: 1px solid rgba(6,182,212,0.2); }
+    .tag-green  { background: rgba(16,185,129,0.08); color: var(--green);          border: 1px solid rgba(16,185,129,0.2); }
+    .tag-orange { background: rgba(249,115,22,0.08); color: var(--orange);         border: 1px solid rgba(249,115,22,0.2); }
+    .tag-pink   { background: rgba(236,72,153,0.08); color: var(--pink);           border: 1px solid rgba(236,72,153,0.2); }
+    .context-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; padding: 1.5rem; min-width: 240px;
+    }
+    .context-box-label {
+      font-size: 0.6rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: #475569; margin-bottom: 1rem;
+    }
+    .context-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .context-row:last-child { border-bottom: none; }
+    .context-key { font-size: 0.72rem; color: #475569; }
+    .context-val { font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-align: right; max-width: 140px; }
+    .stats-wrap { padding: 0 8%; max-width: 1400px; margin: 0 auto 3rem; }
+    .stats-strip-inner {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1px; background: var(--border-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px; overflow: hidden;
+    }
+    @media (max-width: 600px) { .stats-strip-inner { grid-template-columns: repeat(2,1fr); } }
+    .stat-block {
+      background: var(--card-bg); padding: 1.4rem 1rem;
+      text-align: center; position: relative;
+    }
+    .stat-block::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 40px; height: 2px; background: var(--primary-gradient);
+      border-radius: 0 0 4px 4px;
+    }
+    .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--text-main); display: block; line-height: 1; }
+    .stat-value span { color: var(--primary-purple); }
+    .stat-label { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-top: 0.3rem; }
+    .section { max-width: 1400px; margin: 0 auto; padding: 0 8% 3.5rem; }
+    .section-header { margin-bottom: 1.5rem; }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--primary-purple); margin-bottom: 0.5rem;
+    }
+    .section-title { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+    .section-desc { color: var(--text-dim); font-size: 0.88rem; margin-top: 0.4rem; max-width: 620px; line-height: 1.65; }
+    .divider { border: none; border-top: 1px solid var(--border-color); max-width: 1400px; margin: 0 8% 3.5rem; }
+    .hint { font-size: 0.72rem; color: #475569; margin-bottom: 1rem; }
+    .funnel-tabs { display: flex; gap: 0; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .funnel-tab {
+      flex: 1; min-width: 80px; padding: 0.75rem 0.5rem;
+      text-align: center; cursor: pointer; background: none; border: none;
+      color: var(--text-dim); font-family: 'Inter', sans-serif;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      border-right: 1px solid var(--border-color); transition: 0.2s; position: relative;
+    }
+    .funnel-tab:last-child { border-right: none; }
+    .funnel-tab.active { background: rgba(5,150,105,0.08); color: var(--primary-purple); }
+    .funnel-tab.active::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: var(--primary-gradient);
+    }
+    .funnel-panel { display: none; }
+    .funnel-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .funnel-panel.active { grid-template-columns: 1fr; } }
+    .funnel-col-title {
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: #475569; margin-bottom: 0.8rem;
+    }
+    .funnel-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.3rem; }
+    .funnel-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; }
+    .funnel-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.65; }
+    .funnel-card ul { padding-left: 1rem; margin-top: 0.5rem; }
+    .funnel-card ul li { font-size: 0.8rem; color: var(--text-dim); line-height: 2; }
+    .funnel-card .metric-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.8rem;
+    }
+    .funnel-card .metric-row:last-child { border-bottom: none; }
+    .funnel-card .metric-key { color: var(--text-dim); }
+    .funnel-card .metric-val { font-weight: 700; color: var(--text-main); font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; }
+    .channel-tag {
+      display: inline-block; padding: 0.15rem 0.5rem; margin: 0.15rem 0.1rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border-color);
+      border-radius: 3px; font-size: 0.66rem; color: var(--text-dim);
+    }
+    .persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+    @media (max-width: 900px) { .persona-grid { grid-template-columns: 1fr; } }
+    .persona-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color 0.2s;
+    }
+    .persona-card:hover { border-color: rgba(5,150,105,0.4); }
+    .persona-card.open { border-color: rgba(5,150,105,0.4); }
+    .persona-header { padding: 1.2rem 1.4rem; }
+    .persona-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 0.8rem;
+    }
+    .persona-name { font-size: 1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem; }
+    .persona-role { font-size: 0.76rem; color: var(--text-dim); }
+    .persona-expand {
+      padding: 0 1.4rem 1.2rem;
+      display: none; border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+    .persona-card.open .persona-expand { display: block; }
+    .persona-row { padding: 0.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.8rem; display: flex; gap: 0.5rem; }
+    .persona-row:last-child { border-bottom: none; }
+    .persona-row-key { color: #475569; min-width: 70px; font-size: 0.72rem; }
+    .persona-row-val { color: var(--text-dim); line-height: 1.5; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr; } }
+    .kpi-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 10px; padding: 1.2rem;
+    }
+    .kpi-card-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: #475569; margin-bottom: 0.3rem; }
+    .kpi-card h4 { font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.4rem; }
+    .kpi-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; }
+    .kpi-ratio {
+      margin-top: 1rem; padding: 1rem 1.4rem;
+      background: rgba(5,150,105,0.06);
+      border: 1px solid rgba(5,150,105,0.2);
+      border-radius: 8px; text-align: center;
+    }
+    .kpi-ratio-val { font-size: 1.6rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 0.2rem; }
+    .kpi-ratio-label { font-size: 0.78rem; color: var(--text-dim); }
+    .ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1rem; }
+    @media (max-width: 700px) { .ab-grid { grid-template-columns: 1fr; } }
+    .ab-card {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 10px; padding: 1.3rem; position: relative;
+    }
+    .ab-label {
+      font-size: 0.62rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; padding: 0.2rem 0.6rem; border-radius: 3px;
+      display: inline-block; margin-bottom: 0.7rem;
+    }
+    .ab-a { background: rgba(236,72,153,0.1); color: #ec4899; border: 1px solid rgba(236,72,153,0.25); }
+    .ab-b { background: rgba(6,182,212,0.08);  color: var(--cyan);           border: 1px solid rgba(6,182,212,0.2); }
+    .ab-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.4rem; }
+    .ab-card p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.65; }
+    .ab-winner {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 0.58rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem; border-radius: 3px;
+      background: rgba(16,185,129,0.1); color: var(--green);
+      border: 1px solid rgba(16,185,129,0.25);
+    }
+    .sig-note {
+      padding: 0.8rem 1rem;
+      background: rgba(249,115,22,0.04);
+      border-left: 2px solid rgba(249,115,22,0.4);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.8rem; color: var(--text-dim); line-height: 1.65;
+    }
+    .sig-note strong { color: var(--orange); }
+    .accordion { display: flex; flex-direction: column; gap: 0.6rem; }
+    .acc-item {
+      background: var(--card-bg); border: 1px solid var(--border-color);
+      border-radius: 10px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .acc-item.open { border-color: rgba(5,150,105,0.35); }
+    .acc-trigger {
+      width: 100%; padding: 1.2rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-main); font-family: 'Inter', sans-serif; text-align: left;
+    }
+    .acc-trigger-left { display: flex; align-items: center; gap: 1rem; }
+    .acc-num {
+      font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--primary-purple);
+      background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.2);
+      padding: 0.2rem 0.6rem; border-radius: 3px; white-space: nowrap;
+    }
+    .acc-title { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
+    .acc-chevron { color: #475569; font-size: 0.75rem; transition: transform 0.25s; flex-shrink: 0; }
+    .acc-item.open .acc-chevron { transform: rotate(180deg); }
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 1.5rem; }
+    .acc-item.open .acc-body { max-height: 800px; padding: 0 1.5rem 1.5rem; }
+    .acc-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-color); }
+    @media (max-width: 700px) { .acc-inner { grid-template-columns: 1fr; } }
+    .acc-col-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: #475569; margin-bottom: 0.5rem; padding-top: 1rem; }
+    .acc-col h4 { font-size: 0.88rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem; }
+    .acc-col p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+    .acc-col ul { padding-left: 1rem; }
+    .acc-col ul li { font-size: 0.8rem; color: var(--text-dim); line-height: 1.9; }
+    .conclusion-wrap { padding: 0 8% 5rem; max-width: 1400px; margin: 0 auto; }
+    .conclusion {
+      background: linear-gradient(135deg, rgba(5,150,105,0.06) 0%, rgba(6,182,212,0.04) 100%);
+      border: 1px solid var(--border-color); border-radius: 16px;
+      padding: 3rem; text-align: center;
+    }
+    .conclusion h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.8rem; }
+    .conclusion p { color: var(--text-dim); max-width: 520px; margin: 0 auto 2rem; font-size: 0.9rem; line-height: 1.65; }
+    .btn-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary-gradient); color: #fff;
+      padding: 0.75rem 1.8rem; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.5rem; transition: 0.3s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(5,150,105,0.3); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+      color: var(--text-dim); padding: 0.75rem 1.8rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.5rem; transition: 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--primary-purple); color: var(--text-main); }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    code { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="dot"></div>
+    Francesca Monte
+  </a>
+  <a href="index.html#portfolio" class="nav-back">
+    <i class="fas fa-arrow-left"></i> Back to Projects
+  </a>
+</nav>
+
+<div class="hero fade-in">
+  <div>
+    <div class="hero-eyebrow">
+      <span class="eyebrow-label">Full-Funnel Marketing Strategy</span>
+      <span class="fiction-badge">Strategic Framework</span>
+    </div>
+    <h1>YoYo<br/><span>Funnel Strategy</span></h1>
+    <p class="hero-sub">End-to-end growth strategy for YoYo — a fictional inclusive digital yoga platform. Built from market positioning and persona segmentation through AAARRR funnel design, competitor analysis, KPI framework, and A/B test design. Demonstrates strategic thinking across the full acquisition-to-retention arc.</p>
+    <div class="tags">
+      <span class="tag tag-purple">Growth Strategy</span>
+      <span class="tag tag-cyan">Funnel Design</span>
+      <span class="tag tag-green">Persona Segmentation</span>
+      <span class="tag tag-orange">Competitor Analysis</span>
+      <span class="tag tag-pink">A/B Testing</span>
+      <span class="tag tag-purple">KPI Framework</span>
+    </div>
+  </div>
+  <div class="context-box">
+    <div class="context-box-label">Project Context</div>
+    <div class="context-row"><span class="context-key">Brand</span><span class="context-val">YoYo (fictional)</span></div>
+    <div class="context-row"><span class="context-key">Category</span><span class="context-val">Digital wellness / yoga</span></div>
+    <div class="context-row"><span class="context-key">Positioning</span><span class="context-val">Inclusive · accessible · adaptive</span></div>
+    <div class="context-row"><span class="context-key">Funnel model</span><span class="context-val">AAARRR</span></div>
+    <div class="context-row"><span class="context-key">Personas</span><span class="context-val">3 (Anna, Marco, Laura)</span></div>
+    <div class="context-row"><span class="context-key">KPIs defined</span><span class="context-val">12+</span></div>
+    <div class="context-row"><span class="context-key">A/B Test</span><span class="context-val">Trial duration hypothesis</span></div>
+  </div>
+</div>
+
+<div class="stats-wrap fade-in">
+  <div class="stats-strip-inner">
+    <div class="stat-block"><span class="stat-value">6</span><div class="stat-label">Funnel Stages</div></div>
+    <div class="stat-block"><span class="stat-value">3</span><div class="stat-label">Personas</div></div>
+    <div class="stat-block"><span class="stat-value">12<span>+</span></span><div class="stat-label">KPIs Defined</div></div>
+    <div class="stat-block"><span class="stat-value">1</span><div class="stat-label">A/B Test Design</div></div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">01 — Growth Model</div>
+    <div class="section-title">AAARRR Funnel</div>
+    <p class="section-desc">Six stages, each with a distinct objective, primary channel mix, and measurable success signal. Click each stage to explore.</p>
+  </div>
+  <div class="funnel-tabs">
+    <button class="funnel-tab active" onclick="showTab('awareness',this)">Awareness</button>
+    <button class="funnel-tab" onclick="showTab('acquisition',this)">Acquisition</button>
+    <button class="funnel-tab" onclick="showTab('activation',this)">Activation</button>
+    <button class="funnel-tab" onclick="showTab('retention',this)">Retention</button>
+    <button class="funnel-tab" onclick="showTab('revenue',this)">Revenue</button>
+    <button class="funnel-tab" onclick="showTab('referral',this)">Referral</button>
+  </div>
+
+  <div class="funnel-panel active" id="tab-awareness">
+    <div class="funnel-card">
+      <div class="funnel-col-title">Objective</div>
+      <h4>Build brand salience in a fragmented market</h4>
+      <p>YoYo enters a market dominated by well-funded competitors (Asana Rebel, Calm, Headspace). Awareness strategy focuses on under-served positioning: inclusive yoga for people who don't look like typical yoga practitioners.</p>
+      <ul>
+        <li>TikTok &amp; Instagram organic — body-neutral, diverse creative</li>
+        <li>SEO content hub — long-tail: "yoga for beginners at home"</li>
+        <li>Micro-influencer partnerships (5K–50K, high engagement)</li>
+        <li>YouTube pre-roll targeting wellness-adjacent audiences</li>
+      </ul>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-col-title">KPIs</div>
+      <div class="metric-row"><span class="metric-key">Primary metric</span><span class="metric-val">Brand search volume ↑</span></div>
+      <div class="metric-row"><span class="metric-key">Organic reach</span><span class="metric-val">Impressions by channel</span></div>
+      <div class="metric-row"><span class="metric-key">Content quality</span><span class="metric-val">Engagement rate > 3%</span></div>
+      <div class="metric-row"><span class="metric-key">SEO</span><span class="metric-val">Ranking positions (top 10)</span></div>
+      <div class="metric-row"><span class="metric-key">Influencer</span><span class="metric-val">EMV &amp; reach vs. cost</span></div>
+    </div>
+  </div>
+
+  <div class="funnel-panel" id="tab-acquisition">
+    <div class="funnel-card">
+      <div class="funnel-col-title">Objective</div>
+      <h4>Convert interest into trial sign-ups</h4>
+      <p>Acquisition is the bridge between brand awareness and product experience. The landing page is the primary conversion mechanism — tested with a goal-framing headline and a short onboarding flow to set user expectations before the free trial begins.</p>
+      <ul>
+        <li>Meta Ads — retargeting website visitors + lookalike from email list</li>
+        <li>Google Search — brand + competitor terms</li>
+        <li>Landing page: goal-framing headline ("Start your practice, however you move")</li>
+        <li>Quiz-first LP variant — segment users before trial to personalise onboarding</li>
+      </ul>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-col-title">KPIs</div>
+      <div class="metric-row"><span class="metric-key">Primary</span><span class="metric-val">Trial sign-up rate</span></div>
+      <div class="metric-row"><span class="metric-key">Paid efficiency</span><span class="metric-val">CPA per trial sign-up</span></div>
+      <div class="metric-row"><span class="metric-key">Landing page</span><span class="metric-val">CVR (traffic → sign-up)</span></div>
+      <div class="metric-row"><span class="metric-key">Email</span><span class="metric-val">Open rate, CTR</span></div>
+      <div class="metric-row"><span class="metric-key">SEO</span><span class="metric-val">Organic CTR from SERPs</span></div>
+    </div>
+  </div>
+
+  <div class="funnel-panel" id="tab-activation">
+    <div class="funnel-card">
+      <div class="funnel-col-title">Objective</div>
+      <h4>Deliver the "aha moment" within 72 hours</h4>
+      <p>Activation is where most freemium products lose users. The goal is to get users to a meaningful first experience before interest decays. Benchmark from Asana Rebel: push a goal-framed first session within 24 hours of sign-up, triggered by in-app notification or email.</p>
+      <ul>
+        <li>Day 0: Personalised onboarding flow (3-question quiz → recommended class)</li>
+        <li>Day 1: Push/email — "Your first class is waiting" (goal-framed, not generic)</li>
+        <li>Day 3: Progress nudge — "You've completed X. Here's your next step."</li>
+        <li>In-app: first session completion = activation event</li>
+      </ul>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-col-title">KPIs</div>
+      <div class="metric-row"><span class="metric-key">Activation rate</span><span class="metric-val">% completing first session</span></div>
+      <div class="metric-row"><span class="metric-key">Time to activate</span><span class="metric-val">Median hours to session 1</span></div>
+      <div class="metric-row"><span class="metric-key">Onboarding CVR</span><span class="metric-val">Quiz completion rate</span></div>
+      <div class="metric-row"><span class="metric-key">Day 3 retention</span><span class="metric-val">% active after 72h</span></div>
+    </div>
+  </div>
+
+  <div class="funnel-panel" id="tab-retention">
+    <div class="funnel-card">
+      <div class="funnel-col-title">Objective</div>
+      <h4>Build habit loops that survive trial end</h4>
+      <p>Retention is the proof of product-market fit. For a subscription product, Day 7 and Day 30 retention rates are the most predictive signals of LTV. Strategy focuses on social accountability, streaks, and content variety to sustain engagement beyond novelty.</p>
+      <ul>
+        <li>Weekly streak system with visual progress tracker</li>
+        <li>Community challenges — time-boxed group goals</li>
+        <li>Personalised content recommendations (based on quiz + session history)</li>
+        <li>Re-engagement flow at Day 7 inactivity — not a generic nudge</li>
+      </ul>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-col-title">KPIs</div>
+      <div class="metric-row"><span class="metric-key">D7 retention</span><span class="metric-val">Target: > 40%</span></div>
+      <div class="metric-row"><span class="metric-key">D30 retention</span><span class="metric-val">Target: > 20%</span></div>
+      <div class="metric-row"><span class="metric-key">Sessions / week</span><span class="metric-val">Avg per active user</span></div>
+      <div class="metric-row"><span class="metric-key">Churn rate</span><span class="metric-val">Monthly involuntary vs. voluntary</span></div>
+    </div>
+  </div>
+
+  <div class="funnel-panel" id="tab-revenue">
+    <div class="funnel-card">
+      <div class="funnel-col-title">Objective</div>
+      <h4>Convert retained users to paying subscribers</h4>
+      <p>Revenue conversion happens at trial end — the most critical moment in the funnel. Strategy: reduce friction at paywall, surface value delivered during trial ("You've done 8 classes. Keep going."), and offer a discounted annual plan as the primary CTA.</p>
+      <ul>
+        <li>Trial end: value summary email ("Your progress this week")</li>
+        <li>Annual plan anchor pricing — discount framed as savings, not discount</li>
+        <li>Monthly option as fallback — lower commitment barrier</li>
+        <li>Cancellation flow: pause option before cancel to reduce voluntary churn</li>
+      </ul>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-col-title">KPIs</div>
+      <div class="metric-row"><span class="metric-key">Trial → paid CVR</span><span class="metric-val">Primary revenue metric</span></div>
+      <div class="metric-row"><span class="metric-key">MRR</span><span class="metric-val">Monthly Recurring Revenue</span></div>
+      <div class="metric-row"><span class="metric-key">ARPU</span><span class="metric-val">Monthly vs. annual split</span></div>
+      <div class="metric-row"><span class="metric-key">LTV</span><span class="metric-val">Cohort-based, 12-month view</span></div>
+    </div>
+  </div>
+
+  <div class="funnel-panel" id="tab-referral">
+    <div class="funnel-card">
+      <div class="funnel-col-title">Objective</div>
+      <h4>Turn satisfied users into acquisition channel</h4>
+      <p>Referral for a wellness product is most effective when it's tied to social proof and shared identity — not just incentives. YoYo's inclusive positioning creates natural word-of-mouth potential. The referral programme rewards both referrer and referee, triggered at peak satisfaction moments.</p>
+      <ul>
+        <li>Trigger: referral invite appears after first completed streak (not at sign-up)</li>
+        <li>Incentive: 1 free month for referrer + 7-day extended trial for referee</li>
+        <li>Shareable "practice card" — social-first, not a promo code</li>
+        <li>NPS survey at Day 30 to identify promoters before outreach</li>
+      </ul>
+    </div>
+    <div class="funnel-card">
+      <div class="funnel-col-title">KPIs</div>
+      <div class="metric-row"><span class="metric-key">Referral rate</span><span class="metric-val">% of users who refer</span></div>
+      <div class="metric-row"><span class="metric-key">Viral coefficient</span><span class="metric-val">K-factor (target ≥ 0.2)</span></div>
+      <div class="metric-row"><span class="metric-key">Referred CPA</span><span class="metric-val">vs. paid acquisition CPA</span></div>
+      <div class="metric-row"><span class="metric-key">NPS</span><span class="metric-val">Net Promoter Score — monthly</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">02 — Audience</div>
+    <div class="section-title">Buyer Personas</div>
+    <p class="section-desc">Three distinct user archetypes with different motivations, barriers, and preferred channels. Click each card to expand.</p>
+  </div>
+  <div class="persona-grid">
+    <div class="persona-card" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-avatar" style="background:rgba(5,150,105,0.08)">🧘</div>
+        <div class="persona-name">Anna, 34</div>
+        <div class="persona-role">Working mother, flexibility-seeker</div>
+      </div>
+      <div class="persona-expand">
+        <div class="persona-row"><span class="persona-row-key">Goal</span><span class="persona-row-val">Reduce stress without a gym schedule</span></div>
+        <div class="persona-row"><span class="persona-row-key">Barrier</span><span class="persona-row-val">Time constraints, intimidated by "fitness influencer" aesthetics</span></div>
+        <div class="persona-row"><span class="persona-row-key">Trigger</span><span class="persona-row-val">Inclusive messaging: "No experience needed"</span></div>
+        <div class="persona-row"><span class="persona-row-key">Channels</span><span class="persona-row-val"><span class="channel-tag">Facebook</span><span class="channel-tag">Email</span><span class="channel-tag">YouTube</span></span></div>
+        <div class="persona-row"><span class="persona-row-key">Format</span><span class="persona-row-val">Short sessions (15–20 min), morning routines</span></div>
+      </div>
+    </div>
+    <div class="persona-card" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-avatar" style="background:rgba(6,182,212,0.1)">🏃</div>
+        <div class="persona-name">Marco, 28</div>
+        <div class="persona-role">Active professional, recovery-focused</div>
+      </div>
+      <div class="persona-expand">
+        <div class="persona-row"><span class="persona-row-key">Goal</span><span class="persona-row-val">Mobility &amp; recovery alongside existing training</span></div>
+        <div class="persona-row"><span class="persona-row-key">Barrier</span><span class="persona-row-val">Perceives yoga as "not for him" — needs performance framing</span></div>
+        <div class="persona-row"><span class="persona-row-key">Trigger</span><span class="persona-row-val">"Yoga for athletes" angle, data-backed benefits</span></div>
+        <div class="persona-row"><span class="persona-row-key">Channels</span><span class="persona-row-val"><span class="channel-tag">Instagram</span><span class="channel-tag">TikTok</span><span class="channel-tag">Push</span></span></div>
+        <div class="persona-row"><span class="persona-row-key">Format</span><span class="persona-row-val">Post-workout stretching, 10–15 min sessions</span></div>
+      </div>
+    </div>
+    <div class="persona-card" onclick="togglePersona(this)">
+      <div class="persona-header">
+        <div class="persona-avatar" style="background:rgba(236,72,153,0.1)">🌸</div>
+        <div class="persona-name">Laura, 52</div>
+        <div class="persona-role">Empty-nester, wellbeing reinvestment</div>
+      </div>
+      <div class="persona-expand">
+        <div class="persona-row"><span class="persona-row-key">Goal</span><span class="persona-row-val">Reconnect with her body after years of sedentary work</span></div>
+        <div class="persona-row"><span class="persona-row-key">Barrier</span><span class="persona-row-val">Physical limitations, self-consciousness about age</span></div>
+        <div class="persona-row"><span class="persona-row-key">Trigger</span><span class="persona-row-val">Representation: teachers who look like her</span></div>
+        <div class="persona-row"><span class="persona-row-key">Channels</span><span class="persona-row-val"><span class="channel-tag">WhatsApp</span><span class="channel-tag">Facebook</span><span class="channel-tag">SMS</span></span></div>
+        <div class="persona-row"><span class="persona-row-key">Format</span><span class="persona-row-val">Chair yoga, gentle flows, adaptive modifications</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">03 — Market Context</div>
+    <div class="section-title">Competitor Analysis</div>
+    <p class="section-desc">Asana Rebel is the closest comparable in the digital yoga space. Deep-dive on their acquisition and activation funnel reveals a structural gap YoYo can exploit.</p>
+  </div>
+  <p class="hint">Click to expand ↓</p>
+  <div class="accordion">
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)">
+        <div class="acc-trigger-left">
+          <span class="acc-num">Asana Rebel</span>
+          <span class="acc-title">Acquisition &amp; Activation funnel deep-dive</span>
+        </div>
+        <i class="fas fa-chevron-down acc-chevron"></i>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-col">
+            <div class="acc-col-label">Acquisition</div>
+            <h4>Quiz-first landing page</h4>
+            <p>Asana Rebel's LP leads with a short quiz ("What's your yoga goal?") before showing pricing or content. This serves two functions: it creates perceived personalisation, and it increases time-on-page and micro-commitment before the conversion ask.</p>
+          </div>
+          <div class="acc-col">
+            <div class="acc-col-label">Activation</div>
+            <h4>24-hour goal-framed push</h4>
+            <p>Within 24h of sign-up, Asana Rebel sends a push notification framed around the user's stated goal — not a generic "start your practice" message. This is directly tied to quiz completion at acquisition. The activation rate for goal-framed messages is measurably higher than generic onboarding flows.</p>
+          </div>
+        </div>
+        <div style="padding-top:1rem;border-top:1px solid var(--border-color);margin-top:0.5rem;">
+          <p style="font-size:0.82rem;color:var(--text-dim);line-height:1.7;">
+            <strong style="color:#ec4899">YoYo's gap to exploit:</strong> Asana Rebel's creative still skews toward the "aspirational fitness" aesthetic — lean, young, advanced poses. YoYo's positioning on genuine inclusivity (age, body type, mobility level) is an uncontested space. The quiz-first LP and goal-framed activation are worth replicating — but the creative and messaging differentiation is where YoYo wins.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)">
+        <div class="acc-trigger-left">
+          <span class="acc-num">Market Map</span>
+          <span class="acc-title">Positioning landscape — where competitors sit</span>
+        </div>
+        <i class="fas fa-chevron-down acc-chevron"></i>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <div class="acc-col">
+            <div class="acc-col-label">Performance axis</div>
+            <h4>Fitness-first vs. Wellness-first</h4>
+            <p>Asana Rebel, Nike Training Club, and Daily Yoga sit on the fitness-first end — metrics, progress tracking, achievement framing. Calm and Headspace occupy the mindfulness end. Neither cluster owns the "accessible movement for everyone" space that YoYo targets.</p>
+          </div>
+          <div class="acc-col">
+            <div class="acc-col-label">Access axis</div>
+            <h4>Elitist vs. Inclusive</h4>
+            <p>Most premium wellness apps have a tacit "aspiration gap" — the product is inclusive in name but the creative, teacher selection, and default UX assumes a specific user. YoYo's differentiation is removing that assumption from every touchpoint: imagery, teacher diversity, adaptive content, and pricing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">04 — Measurement</div>
+    <div class="section-title">KPI Framework</div>
+    <p class="section-desc">Organised into four quadrants — Growth, Engagement, Revenue, and Loyalty. The ratio that sits above all others is LTV:CAC.</p>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-card-label">Quadrant 01</div>
+      <h4>Growth</h4>
+      <p>Trial sign-up rate, CPA per trial, organic vs. paid split, K-factor (viral coefficient). These measure how efficiently YoYo expands its user base — both paid and organic.</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Quadrant 02</div>
+      <h4>Engagement</h4>
+      <p>Activation rate, D7/D30 retention, sessions per week per active user, feature adoption rate. Engagement KPIs predict revenue before it materialises — low D7 retention is an early warning signal for CAC waste.</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Quadrant 03</div>
+      <h4>Revenue</h4>
+      <p>Trial → paid CVR, MRR, ARPU (monthly vs. annual split), voluntary churn rate. Revenue KPIs answer "are we building a business?" — not just an audience.</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">Quadrant 04</div>
+      <h4>Loyalty</h4>
+      <p>NPS at Day 30, referral rate, LTV by cohort and persona, feature-specific retention. Loyalty KPIs measure whether retained users are satisfied or just inert — there's a meaningful difference.</p>
+    </div>
+  </div>
+  <div class="kpi-ratio">
+    <div class="kpi-ratio-val">LTV : CAC ≥ 3×</div>
+    <div class="kpi-ratio-label">The ratio that tells you if the business model actually works. Below 3×, acquisition is destroying value even if revenue is growing. Both metrics in isolation are misleading — the ratio is the signal.</div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section fade-in">
+  <div class="section-header">
+    <div class="section-eyebrow">05 — Experimentation</div>
+    <div class="section-title">A/B Test Design: Trial Duration</div>
+    <p class="section-desc">One of the highest-leverage decisions in a freemium model: how long should the free trial be? The hypothesis tested is whether longer trials drive higher paid conversion — or whether they simply delay and normalise non-payment.</p>
+  </div>
+  <div class="ab-grid">
+    <div class="ab-card">
+      <span class="ab-label ab-a">Variant A</span>
+      <h4>7-day trial</h4>
+      <p>Short window creates urgency. Users must decide within the first week — when they're most engaged. Risk: not enough time to build habit. Expected to produce lower activation but higher urgency-driven conversion.</p>
+    </div>
+    <div class="ab-card">
+      <span class="ab-label ab-b">Variant B</span>
+      <span class="ab-winner">Hypothesis: Winner</span>
+      <h4>30-day trial</h4>
+      <p>Long enough to build a habit loop (the product's core value proposition). Users who reach D30 have materially higher LTV. Expected to produce higher activation, higher D30 retention, and higher paid CVR — despite lower urgency signal.</p>
+    </div>
+  </div>
+  <div class="sig-note">
+    <strong>Statistical significance note:</strong> Trial duration tests are slow-moving by design. A 30-day trial requires at minimum 60–90 days to collect a full conversion cycle for Variant B. The test requires adequate sample size (Bayesian power analysis recommended) and must not be called before significance threshold is reached — early reads on this metric are highly misleading. In a live context, I would validate this hypothesis against cohort retention data before committing to a single variant.
+  </div>
+</div>
+
+<div class="conclusion-wrap fade-in">
+  <div class="conclusion">
+    <h2>Strategy built to be tested, not just presented</h2>
+    <p>Every decision in this framework is hypothetical by design — each one maps to a measurement mechanism that would validate or refute it in a real deployment. Thinking in testable hypotheses is the point.</p>
+    <div class="btn-row">
+      <a href="index.html#portfolio" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+      <a href="italo-ga4-audit.html" class="btn-ghost">View Italo — GA4 Architecture <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</div>
+
+<div style="height:2rem;"></div>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function showTab(id, btn) {
+    document.querySelectorAll('.funnel-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.funnel-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  function togglePersona(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.persona-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  function toggleAcc(trigger) {
+    const item = trigger.closest('.acc-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
