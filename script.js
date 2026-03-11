@@ -121,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c3.m1l": "Data Leakage Fixed",
       "portfolio.c3.m2l": "Attribution Accuracy",
       "portfolio.c3.link": "View Audit",
+      "portfolio.c3.link_italo": "Italo — GA4 Audit",
+      "portfolio.c3.link_yoyo": "YoYo — Funnel",
 
       "edu.label": "TECHNICAL FOUNDATIONS",
       "edu.title": "Academic & Professional Journey",
@@ -237,6 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c3.m1l": "Data Leakage Corretti",
       "portfolio.c3.m2l": "Accuratezza Attribuzione",
       "portfolio.c3.link": "Vedi Audit",
+      "portfolio.c3.link_italo": "Italo — GA4 Audit",
+      "portfolio.c3.link_yoyo": "YoYo — Funnel",
 
       "edu.label": "BASI TECNICHE",
       "edu.title": "Percorso Accademico e Professionale",
@@ -352,6 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c3.m1l": "Datalekkages Hersteld",
       "portfolio.c3.m2l": "Attributienauwkeurigheid",
       "portfolio.c3.link": "Bekijk Audit",
+      "portfolio.c3.link_italo": "Italo — GA4 Audit",
+      "portfolio.c3.link_yoyo": "YoYo — Funnel",
 
       "edu.label": "TECHNISCHE BASIS",
       "edu.title": "Academisch & Professioneel Traject",
