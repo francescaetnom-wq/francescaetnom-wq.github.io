@@ -19,13 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (overlay)  overlay.addEventListener('click', toggleSidebar);
 
   // =========================
-  // 2. TICKER
+  // 2. MARQUEE — no JS needed, CSS-only loop
   // =========================
-  const ticker = document.querySelector('.ticker-content');
-  if (ticker && !ticker.dataset.cloned) {
-    ticker.dataset.cloned = "true";
-    ticker.innerHTML += ticker.innerHTML;
-  }
 
   // =========================
   // 3. TYPEWRITER
@@ -106,8 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c1.m1l": "Tables Joined",
       "portfolio.c1.m2l": "Audience Identified",
       "portfolio.c1.link": "View on GitHub",
-      "portfolio.c2.title": "BI: KPI Architecture",
-      "portfolio.c2.desc": "End-to-end Power BI dashboard with Star Schema and DAX measures for real-time business performance monitoring.",
+      "portfolio.c2.title": "BI: Churn Analysis",
+      "portfolio.c2.desc": "3-page interactive dashboard analyzing telecom churn drivers for 7K customers — KPI overview, behavioral deep dive, financial impact.",
+      "portfolio.c2.chart_label": "Churn by Tenure & Monthly Charges",
+      "portfolio.c2.leg_active": "Active",
+      "portfolio.c2.leg_churn": "Churned",
+      "portfolio.c2.m1l": "Churn Rate",
+      "portfolio.c2.m2l": "Revenue at Risk",
       "portfolio.c2.r1": "ROAS tracking — dynamic DAX measure",
       "portfolio.c2.r2": "CPA reduction via attribution fix",
       "portfolio.c2.r3": "Star Schema — query performance",
@@ -123,6 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c3.link": "View Audit",
       "portfolio.c3.link_italo": "Italo — GA4 Audit",
       "portfolio.c3.link_yoyo": "YoYo — Funnel",
+
+      "portfolio.c4.title": "Python: Causal Inference",
+      "portfolio.c4.desc": "Measured the true incremental lift of ad exposure using Inverse Probability Weighting — isolating causal effect from selection bias.",
+      "portfolio.c4.r1": "Propensity score via Logistic Regression",
+      "portfolio.c4.r2": "Selection bias removed — SMD < 0.1",
+      "portfolio.c4.r3": "Raw lift vs causal lift delta",
+      "portfolio.c4.r4": "True incremental ad lift",
+      "portfolio.c4.link": "View on GitHub",
 
       "edu.label": "TECHNICAL FOUNDATIONS",
       "edu.title": "Academic & Professional Journey",
@@ -224,8 +232,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c1.m1l": "Tabelle Unite",
       "portfolio.c1.m2l": "Audience Identificata",
       "portfolio.c1.link": "Vedi su GitHub",
-      "portfolio.c2.title": "BI: Architettura KPI",
-      "portfolio.c2.desc": "Dashboard Power BI end-to-end con Star Schema e misure DAX per il monitoraggio in tempo reale delle performance aziendali.",
+      "portfolio.c2.title": "BI: Churn Analysis",
+      "portfolio.c2.desc": "Dashboard interattiva a 3 pagine — analisi dei driver di churn per 7K clienti telco: KPI, analisi comportamentale, impatto finanziario.",
+      "portfolio.c2.chart_label": "Churn per Tenure & Canone Mensile",
+      "portfolio.c2.leg_active": "Attivi",
+      "portfolio.c2.leg_churn": "Churned",
+      "portfolio.c2.m1l": "Tasso di Churn",
+      "portfolio.c2.m2l": "Revenue a Rischio",
       "portfolio.c2.r1": "ROAS tracking — misura DAX dinamica",
       "portfolio.c2.r2": "Riduzione CPA tramite fix attribuzione",
       "portfolio.c2.r3": "Star Schema — performance query",
@@ -241,6 +254,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c3.link": "Vedi Audit",
       "portfolio.c3.link_italo": "Italo — GA4 Audit",
       "portfolio.c3.link_yoyo": "YoYo — Funnel",
+
+      "portfolio.c4.title": "Python: Causal Inference",
+      "portfolio.c4.desc": "Misurazione del vero lift incrementale dell'esposizione pubblicitaria tramite Inverse Probability Weighting — isolando l'effetto causale dal selection bias.",
+      "portfolio.c4.r1": "Propensity score via Regressione Logistica",
+      "portfolio.c4.r2": "Bias rimosso — SMD < 0.1",
+      "portfolio.c4.r3": "Delta raw lift vs causal lift",
+      "portfolio.c4.r4": "Vero lift incrementale dell'ads",
+      "portfolio.c4.link": "Vedi su GitHub",
 
       "edu.label": "BASI TECNICHE",
       "edu.title": "Percorso Accademico e Professionale",
@@ -341,8 +362,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c1.m1l": "Tabellen Samengevoegd",
       "portfolio.c1.m2l": "Doelgroep Geïdentificeerd",
       "portfolio.c1.link": "Bekijk op GitHub",
-      "portfolio.c2.title": "BI: KPI Architectuur",
-      "portfolio.c2.desc": "End-to-end Power BI-dashboard met Star Schema en DAX-metingen voor real-time monitoring van bedrijfsresultaten.",
+      "portfolio.c2.title": "BI: Churn Analyse",
+      "portfolio.c2.desc": "Interactief 3-pagina dashboard — churn-drivers geanalyseerd voor 7K telecomklanten: KPI's, gedragsanalyse, financiële impact.",
+      "portfolio.c2.chart_label": "Churn naar Tenure & Maandelijkse Kosten",
+      "portfolio.c2.leg_active": "Actief",
+      "portfolio.c2.leg_churn": "Churned",
+      "portfolio.c2.m1l": "Churnpercentage",
+      "portfolio.c2.m2l": "Omzet in Gevaar",
       "portfolio.c2.r1": "ROAS tracking — dynamische DAX-meting",
       "portfolio.c2.r2": "CPA-verlaging via attributiefixatie",
       "portfolio.c2.r3": "Star Schema — queryprestaties",
@@ -358,6 +384,14 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c3.link": "Bekijk Audit",
       "portfolio.c3.link_italo": "Italo — GA4 Audit",
       "portfolio.c3.link_yoyo": "YoYo — Funnel",
+
+      "portfolio.c4.title": "Python: Causale Inferentie",
+      "portfolio.c4.desc": "Meet de werkelijke incrementele lift van advertentieblootstelling met Inverse Probability Weighting — causaal effect geïsoleerd van selectiebias.",
+      "portfolio.c4.r1": "Propensity score via Logistische Regressie",
+      "portfolio.c4.r2": "Selectiebias verwijderd — SMD < 0.1",
+      "portfolio.c4.r3": "Verschil raw lift vs causale lift",
+      "portfolio.c4.r4": "Werkelijke incrementele advertentielift",
+      "portfolio.c4.link": "Bekijk op GitHub",
 
       "edu.label": "TECHNISCHE BASIS",
       "edu.title": "Academisch & Professioneel Traject",
@@ -766,6 +800,76 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { threshold: 0.3 });
     barsObs.observe(funnelEl);
+  }
+
+  // =========================
+  // 12. SCATTER PLOT — Churn by Tenure & Monthly Charges
+  // =========================
+  const scatterCanvas = document.getElementById('scatterCanvas');
+  if (scatterCanvas) {
+    const ctx = scatterCanvas.getContext('2d');
+    const W = scatterCanvas.offsetWidth || 260;
+    const H = scatterCanvas.offsetHeight || 90;
+    scatterCanvas.width  = W * window.devicePixelRatio;
+    scatterCanvas.height = H * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+    // Synthetic data representative of real churn pattern:
+    // Active: spread across all tenure, lower-mid charges
+    // Churned: concentrated low tenure (0-25mo), mid-high charges
+    const seed = (n) => { let x = Math.sin(n) * 10000; return x - Math.floor(x); };
+    const pts = [];
+    for (let i = 0; i < 180; i++) {
+      // Active customers — longer tenure, lower charges
+      const tenure = seed(i * 3.7) * 72 + 2;
+      const charge = seed(i * 1.3) * 80 + 18;
+      pts.push({ x: tenure, y: charge, churn: false });
+    }
+    for (let i = 0; i < 80; i++) {
+      // Churned — concentrated in first 25 months, mid-high charges
+      const tenure = seed(i * 2.1) * 30 + 1;
+      const charge = seed(i * 4.9) * 60 + 35;
+      pts.push({ x: tenure, y: charge, churn: true });
+    }
+    // Also scatter some churned across longer tenure (outliers)
+    for (let i = 0; i < 20; i++) {
+      pts.push({ x: seed(i * 6.3) * 72, y: seed(i * 8.1) * 90 + 15, churn: true });
+    }
+
+    const pad = { l: 6, r: 6, t: 4, b: 4 };
+    const mapX = x => pad.l + (x / 74) * (W - pad.l - pad.r);
+    const mapY = y => H - pad.b - (y / 120) * (H - pad.t - pad.b);
+
+    // Grid lines
+    ctx.strokeStyle = 'rgba(30,41,59,0.8)';
+    ctx.lineWidth = 0.5;
+    [20, 40, 60, 80, 100].forEach(v => {
+      const y = mapY(v);
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+    });
+    [0, 20, 40, 60].forEach(v => {
+      const x = mapX(v);
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, H - pad.b); ctx.stroke();
+    });
+
+    // Draw dots with staggered animation
+    let drawn = 0;
+    const total = pts.length;
+    function drawNext() {
+      if (drawn >= total) return;
+      const p = pts[drawn];
+      ctx.beginPath();
+      ctx.arc(mapX(p.x), mapY(p.y), 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = p.churn ? 'rgba(244,63,94,0.75)' : 'rgba(96,165,250,0.45)';
+      ctx.fill();
+      drawn++;
+      if (drawn < total) requestAnimationFrame(drawNext);
+    }
+
+    const scatterObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { drawNext(); scatterObs.disconnect(); }
+    }, { threshold: 0.3 });
+    scatterObs.observe(scatterCanvas);
   }
 
 });
