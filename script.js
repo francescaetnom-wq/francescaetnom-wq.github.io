@@ -131,6 +131,22 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c4.r3": "Raw lift vs causal lift delta",
       "portfolio.c4.r4": "True incremental ad lift",
       "portfolio.c4.link": "View on GitHub",
+      "portfolio.c5.title": "SENTRY.mark",
+      "portfolio.c5.desc": "Automated anomaly detection engine for marketing data — Z-Score statistical modeling on GA4 + BigQuery pipelines, with real-time Slack alerts and Kill-Switch logic.",
+      "portfolio.c5.r1": "GA4 events analyzed via BigQuery",
+      "portfolio.c5.r2": "Anomalies detected (5.8% rate)",
+      "portfolio.c5.r3": "Rolling Z-Score window per channel",
+      "portfolio.c5.r4": "Real-time Slack alert + Kill-Switch",
+      "portfolio.c5.m1l": "Anomaly Types",
+      "portfolio.c5.m2l": "Detection Rate",
+      "portfolio.c5.link": "View on GitHub",
+      "portfolio.c6.title": "Amsterdam Airbnb Pipeline",
+      "portfolio.c6.desc": "End-to-end data pipeline on 10K listings — Python ETL, BigQuery cloud storage, Power BI dashboard. Uncovers Amsterdam's short-term rental market dynamics.",
+      "portfolio.c6.r1": "Raw CSVs → BigQuery (3 tables)",
+      "portfolio.c6.r2": "Top revenue neighbourhood",
+      "portfolio.c6.r3": "Price vs review score above €500",
+      "portfolio.c6.r4": "Review trend: Covid → full rebound",
+      "portfolio.c6.link": "View on GitHub",
 
       "edu.label": "TECHNICAL FOUNDATIONS",
       "edu.title": "Academic & Professional Journey",
@@ -262,6 +278,22 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c4.r3": "Delta raw lift vs causal lift",
       "portfolio.c4.r4": "Vero lift incrementale dell'ads",
       "portfolio.c4.link": "Vedi su GitHub",
+      "portfolio.c5.title": "SENTRY.mark",
+      "portfolio.c5.desc": "Engine automatizzato per il rilevamento di anomalie nei dati di marketing — modello Z-Score statistico su pipeline GA4 + BigQuery, con alert Slack in tempo reale e logica Kill-Switch.",
+      "portfolio.c5.r1": "Eventi GA4 analizzati via BigQuery",
+      "portfolio.c5.r2": "Anomalie rilevate (tasso 5.8%)",
+      "portfolio.c5.r3": "Finestra Z-Score rolling per canale",
+      "portfolio.c5.r4": "Alert Slack in tempo reale + Kill-Switch",
+      "portfolio.c5.m1l": "Tipi di Anomalia",
+      "portfolio.c5.m2l": "Tasso di Rilevamento",
+      "portfolio.c5.link": "Vedi su GitHub",
+      "portfolio.c6.title": "Amsterdam Airbnb Pipeline",
+      "portfolio.c6.desc": "Pipeline dati end-to-end su 10K annunci — ETL Python, BigQuery, dashboard Power BI. Analisi del mercato degli affitti brevi ad Amsterdam.",
+      "portfolio.c6.r1": "CSV grezzi → BigQuery (3 tabelle)",
+      "portfolio.c6.r2": "Quartiere con maggior revenue",
+      "portfolio.c6.r3": "Prezzo vs recensioni sopra €500",
+      "portfolio.c6.r4": "Trend recensioni: Covid → rimbalzo",
+      "portfolio.c6.link": "Vedi su GitHub",
 
       "edu.label": "BASI TECNICHE",
       "edu.title": "Percorso Accademico e Professionale",
@@ -392,6 +424,22 @@ document.addEventListener('DOMContentLoaded', () => {
       "portfolio.c4.r3": "Verschil raw lift vs causale lift",
       "portfolio.c4.r4": "Werkelijke incrementele advertentielift",
       "portfolio.c4.link": "Bekijk op GitHub",
+      "portfolio.c5.title": "SENTRY.mark",
+      "portfolio.c5.desc": "Geautomatiseerde anomaliedetectie-engine voor marketingdata — statistisch Z-Score model op GA4 + BigQuery pipelines, met realtime Slack-alerts en Kill-Switch logica.",
+      "portfolio.c5.r1": "GA4-events geanalyseerd via BigQuery",
+      "portfolio.c5.r2": "Anomalieën gedetecteerd (5.8% rate)",
+      "portfolio.c5.r3": "Rollend Z-Score venster per kanaal",
+      "portfolio.c5.r4": "Realtime Slack-alert + Kill-Switch",
+      "portfolio.c5.m1l": "Anomalietypes",
+      "portfolio.c5.m2l": "Detectiepercentage",
+      "portfolio.c5.link": "Bekijk op GitHub",
+      "portfolio.c6.title": "Amsterdam Airbnb Pipeline",
+      "portfolio.c6.desc": "End-to-end datapipeline op 10K listings — Python ETL, BigQuery opslag, Power BI dashboard. Inzicht in de Amsterdamse kortetermijnverhuurmarkt.",
+      "portfolio.c6.r1": "Ruwe CSV's → BigQuery (3 tabellen)",
+      "portfolio.c6.r2": "Buurt met hoogste omzet",
+      "portfolio.c6.r3": "Prijs vs recensiescore boven €500",
+      "portfolio.c6.r4": "Recensietrend: Covid → volledig herstel",
+      "portfolio.c6.link": "Bekijk op GitHub",
 
       "edu.label": "TECHNISCHE BASIS",
       "edu.title": "Academisch & Professioneel Traject",
@@ -800,6 +848,67 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { threshold: 0.3 });
     barsObs.observe(funnelEl);
+  }
+
+  // =========================
+  // 13. CAROUSEL
+  // =========================
+  const carousel    = document.getElementById('csCarousel');
+  const prevBtn     = document.getElementById('carouselPrev');
+  const nextBtn     = document.getElementById('carouselNext');
+  const dotsEl      = document.getElementById('carouselDots');
+
+  if (carousel && prevBtn && nextBtn) {
+    const cards     = carousel.querySelectorAll('.cs-card');
+    const total     = cards.length;
+    let current     = 0;
+
+    // Build dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Project ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function getCardWidth() {
+      if (!cards[0]) return 0;
+      const style = getComputedStyle(carousel);
+      const gap = parseFloat(style.gap) || 24;
+      return cards[0].getBoundingClientRect().width + gap;
+    }
+
+    function goTo(idx) {
+      current = Math.max(0, Math.min(idx, total - 1));
+      const offset = getCardWidth() * current;
+      carousel.style.transform = `translateX(-${offset}px)`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+      dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+    });
+
+    goTo(0);
+    window.addEventListener('resize', () => goTo(current));
   }
 
   // =========================
