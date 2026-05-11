@@ -1,16 +1,7 @@
 /**
  * GA4 Custom Events — francescaetnom.com
  * Measurement ID: G-1M28K8V49L
- *
- * INSTALLAZIONE:
- * Incolla questo script in FONDO a ogni pagina HTML, PRIMA del </body>
- * e DOPO lo snippet gtag.js già presente.
- *
- * FILE DA AGGIORNARE:
- *   - index.html          → Sezione A + B + C + D + E + F
- *   - italo-ga4-audit.html → Sezione G
- *   - yoyo-case-study.html → Sezione H
- */
+
 
 /* ─────────────────────────────────────────────
    UTILITY
