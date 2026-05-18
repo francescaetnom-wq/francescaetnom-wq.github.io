@@ -59,7 +59,7 @@
 
         <div class="availability">
           <div class="avail-dot"></div>
-          <div class="avail-text" data-i18n="sidebar.availability">Open to opportunities · Amsterdam & Remote</div>
+          <div class="avail-text" data-i18n="sidebar.availability">Open to opportunities · Amsterdam/Europe & Remote</div>
         </div>
 
         <div class="sidebar-divider"></div>
@@ -93,7 +93,7 @@
     </div>
   </div>
   <ul class="nav-links">
-    <li><a href="#approach" data-i18n="nav.approach">Approach</a></li>
+    <li><a href="#" id="scrollTopBtn" aria-label="Back to top" style="font-size:1rem;">↑</a></li>
     <li><a href="#portfolio" data-i18n="nav.projects">Projects</a></li>
     <li><a href="#education" data-i18n="nav.education">Education</a></li>
     <li><a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact</a></li>
@@ -158,80 +158,52 @@
 </div>
 </div><!-- /.site-header -->
 
-<header class="hero">
+<header class="hero hero-split">
   <div class="glow-blob blob-1"></div>
   <div class="glow-blob blob-2"></div>
-  <div class="hero-content">
-    <p class="subtitle" id="typewriter-text"></p>
-    <h1 class="text-gradient">Francesca Monte</h1>
-    <p class="tagline" data-i18n="hero.tagline">I analyze marketing performance to find the truth behind the numbers. Focused on full-funnel optimization and data-driven execution.</p>
-    <div class="hero-stats">
-      <div class="stat-block" data-target="4.2" data-suffix="x" data-decimals="1">
-        <div class="stat-value">0<span class="stat-suffix">x</span></div>
-        <div class="stat-label" data-i18n="hero.stat1.label">ROAS Achieved</div>
-        <div class="stat-context" data-i18n="hero.stat1.ctx">GA4 + Google Ads funnel</div>
-      </div>
-      <div class="stat-block" data-target="38" data-suffix="%" data-decimals="0">
-        <div class="stat-value">0<span class="stat-suffix">%</span></div>
-        <div class="stat-label" data-i18n="hero.stat2.label">CPA Reduction</div>
-        <div class="stat-context" data-i18n="hero.stat2.ctx">Attribution realignment</div>
-      </div>
-      <div class="stat-block" data-target="3" data-suffix="+" data-decimals="0">
-        <div class="stat-value">0<span class="stat-suffix">+</span></div>
-        <div class="stat-label" data-i18n="hero.stat3.label">BI Dashboards</div>
-        <div class="stat-context" data-i18n="hero.stat3.ctx">Power BI · Star Schema</div>
-      </div>
+  <div class="hero-left">
+    <h1 class="hero-name">Francesca<br>Monte</h1>
+    <div class="hero-role-line">
+      <span class="hero-prompt">~/portfolio $</span>
+      <span class="hero-role-text" id="heroRoleText"></span>
+      <span class="hero-cursor"></span>
     </div>
-    <div class="hero-btns">
-      <a href="#portfolio" class="btn-primary" data-i18n="hero.cta_cases">View Case Studies</a>
-      <a href="francesca_monte_cv.pdf" download="Francesca_Monte_CV.pdf" class="btn-card">
-        <i class="fas fa-download"></i> <span data-i18n="hero.cta_cv">Download CV</span>
-      </a>
-      <a href="#contact" class="btn-card">
-        <i class="fas fa-envelope"></i> <span data-i18n="hero.cta_inquiry">Get in Touch</span>
-      </a>
+  </div>
+  <div class="hero-right">
+    <a href="#portfolio" class="t-btn t-btn-primary">
+      <span class="t-prefix">$</span>
+      <span class="t-cmd">run</span>
+      <span class="t-arg">case-studies</span>
+    </a>
+    <a href="francesca_monte_cv.pdf" download="Francesca_Monte_CV.pdf" class="t-btn">
+      <span class="t-prefix">$</span>
+      <span class="t-cmd">get</span>
+      <span class="t-arg">cv.pdf</span>
+    </a>
+    <a href="https://github.com/francescaetnom-wq" target="_blank" class="t-btn">
+      <span class="t-prefix">$</span>
+      <span class="t-cmd">open</span>
+      <span class="t-arg">github</span>
+    </a>
+    <a href="#contact" class="t-btn">
+      <span class="t-prefix">$</span>
+      <span class="t-cmd">contact</span>
+      <span class="t-arg">--hire-me</span>
+    </a>
+  </div>
+  <div class="hero-terminal" id="heroTerminal">
+    <div class="terminal-bar">
+      <div class="t-dot t-red"></div>
+      <div class="t-dot t-yellow"></div>
+      <div class="t-dot t-green"></div>
+      <span class="terminal-title">francesca@portfolio ~ interactive</span>
     </div>
+    <div class="terminal-body" id="heroTermBody" onclick="document.getElementById('heroTermInput').focus()"></div>
+    <div class="terminal-hint-bar">type <span>help</span> · <span>↑↓</span> history · <span>tab</span> autocomplete · ask naturally</div>
   </div>
 </header>
 
 
-
-<section id="approach" class="pillars container">
-  <p class="section-label" data-i18n="approach.label">METHODOLOGY</p>
-  <h2 data-i18n="approach.title">Three Pillars of Impact</h2>
-  <div class="pillars-grid">
-    <div class="card pillar-card">
-      <div class="pillar-icon"><i class="fas fa-language"></i></div>
-      <h3 data-i18n="approach.p1.title">Linguistic Logic</h3>
-      <p data-i18n="approach.p1.desc">Applying the analytical rigor of linguistics to market behaviors. I leverage my background in structural logic to decode complex datasets and consumer patterns.</p>
-      <div class="card-details">
-        <p data-i18n="approach.p1.details">Utilizing semantic analysis to drive global engagement and communication clarity.</p>
-      </div>
-      <span class="pillar-pill"><i class="fas fa-arrow-right"></i> <span data-i18n="approach.p1.pill">Pattern Recognition</span></span>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
-    </div>
-    <div class="card pillar-card highlight">
-      <div class="pillar-icon"><i class="fas fa-rocket"></i></div>
-      <h3 data-i18n="approach.p2.title">Performance Engineering</h3>
-      <p data-i18n="approach.p2.desc">Bridging the gap between strategy and execution. I manage the technical infrastructure to ensure that tracking and funnel logic translate into measurable revenue.</p>
-      <div class="card-details">
-        <p data-i18n="approach.p2.details">Full-stack tracking implementation and data-backed marketing optimization.</p>
-      </div>
-      <span class="pillar-pill"><i class="fas fa-arrow-right"></i> <span data-i18n="approach.p2.pill">GA4 · GTM · Attribution</span></span>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
-    </div>
-    <div class="card pillar-card">
-      <div class="pillar-icon"><i class="fas fa-chart-line"></i></div>
-      <h3 data-i18n="approach.p3.title">Data Architecture & BI</h3>
-      <p data-i18n="approach.p3.desc">Transforming raw data into strategic business intelligence. Using SQL and Power BI to build robust models that empower stakeholders to make informed decisions.</p>
-      <div class="card-details">
-        <p data-i18n="approach.p3.details">Relational modeling, DAX measures, and high-impact executive dashboards.</p>
-      </div>
-      <span class="pillar-pill"><i class="fas fa-arrow-right"></i> <span data-i18n="approach.p3.pill">DAX · Star Schema · SQL</span></span>
-      <div class="expand-icon"><i class="fas fa-plus"></i></div>
-    </div>
-  </div>
-</section>
 
 <section id="portfolio" class="work">
   <div class="container">
@@ -383,7 +355,7 @@
             </div>
             <div class="cs-footer">
               <div class="cs-tags"><span class="cs-tag">Power BI</span><span class="cs-tag">DAX</span><span class="cs-tag">Churn</span></div>
-              <a href="powerbi-churn.html" class="cs-link" style="background:linear-gradient(135deg,#b45309,#92400e);">
+              <a href="powerbichurn.html" class="cs-link" style="background:linear-gradient(135deg,#b45309,#92400e);">
                 <i class="fas fa-chart-bar"></i> <span data-i18n="portfolio.c2.link">View Dashboard</span>
               </a>
             </div>
@@ -592,29 +564,29 @@
         opacity="0" style="transition: opacity 0.4s ease 1.8s">← Pivot point</text>
       <text id="eduPivotT2" x="395" y="50" font-family="Inter,sans-serif" font-size="8" fill="#a78bfa"
         opacity="0" style="transition: opacity 0.4s ease 1.9s">Start2Impact</text>
-      <circle id="eno1" cx="100" cy="210" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
-      <circle id="eni1" cx="100" cy="210" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eno1" cx="100" cy="210" r="8" fill="none" stroke="#818cf8" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni1" cx="100" cy="210" r="4" fill="#818cf8" opacity="0" style="transition:opacity .3s ease"/>
       <text x="100" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl1" style="transition:opacity .4s ease">2023</text>
       <text x="100" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens1" style="transition:opacity .4s ease">UniOr · Lingue</text>
-      <circle id="eno2" cx="260" cy="185" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
-      <circle id="eni2" cx="260" cy="185" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eno2" cx="260" cy="185" r="8" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni2" cx="260" cy="185" r="4" fill="#f59e0b" opacity="0" style="transition:opacity .3s ease"/>
       <text x="260" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl2" style="transition:opacity .4s ease">2024</text>
       <text x="260" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens2" style="transition:opacity .4s ease">Master · Pisa</text>
-      <circle id="eno3" cx="390" cy="145" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
-      <circle id="eni3" cx="390" cy="145" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eno3" cx="390" cy="145" r="8" fill="none" stroke="#06b6d4" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni3" cx="390" cy="145" r="4" fill="#06b6d4" opacity="0" style="transition:opacity .3s ease"/>
       <text x="390" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl3" style="transition:opacity .4s ease">2025</text>
       <text x="390" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens3" style="transition:opacity .4s ease">Data · Mktg</text>
-      <circle id="eno4" cx="510" cy="65" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
-      <circle id="eni4" cx="510" cy="65" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eno4" cx="510" cy="65" r="8" fill="none" stroke="#06b6d4" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni4" cx="510" cy="65" r="4" fill="#06b6d4" opacity="0" style="transition:opacity .3s ease"/>
       <text x="510" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl4" style="transition:opacity .4s ease">2025</text>
       <text x="510" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens4" style="transition:opacity .4s ease">Start2Impact</text>
-      <circle id="eno5" cx="650" cy="22" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
-      <circle id="eni5" cx="650" cy="22" r="4" fill="#7c3aed" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eno5" cx="650" cy="22" r="8" fill="none" stroke="#06b6d4" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni5" cx="650" cy="22" r="4" fill="#06b6d4" opacity="0" style="transition:opacity .3s ease"/>
       <text x="650" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#f8fafc" text-anchor="middle" opacity="0" id="enl5" style="transition:opacity .4s ease">2026</text>
       <text x="650" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens5" style="transition:opacity .4s ease">PL-300 · GA4</text>
-      <circle id="eno6" cx="780" cy="18" r="8" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
-      <circle id="eni6" cx="780" cy="18" r="4" fill="#a78bfa" opacity="0" style="transition:opacity .3s ease"/>
-      <text x="780" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#a78bfa" text-anchor="middle" opacity="0" id="enl6" style="transition:opacity .4s ease">Now</text>
+      <circle id="eno6" cx="780" cy="18" r="8" fill="none" stroke="#10b981" stroke-width="1.5" opacity="0" style="transition:opacity .3s ease"/>
+      <circle id="eni6" cx="780" cy="18" r="4" fill="#10b981" opacity="0" style="transition:opacity .3s ease"/>
+      <text x="780" y="248" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#10b981" text-anchor="middle" opacity="0" id="enl6" style="transition:opacity .4s ease">Now</text>
       <text x="780" y="260" font-family="Inter,sans-serif" font-size="8" fill="#475569" text-anchor="middle" opacity="0" id="ens6" style="transition:opacity .4s ease">Available</text>
       <circle class="edu-hit" cx="100"  cy="210" r="18" fill="transparent" data-node="1" style="cursor:pointer"/>
       <circle class="edu-hit" cx="260"  cy="185" r="18" fill="transparent" data-node="2" style="cursor:pointer"/>
@@ -625,10 +597,10 @@
     </svg>
     <p class="edu-node-hint" id="nodeHint">● Click a node to explore each phase</p>
     <div class="timeline-legend">
-      <div class="tl-item" id="tli1"><div class="tl-dot"></div><div class="tl-text"><strong id="leg1t">Linguistics & Communication</strong><span id="leg1s">Structural logic, cross-cultural analysis</span></div></div>
-      <div class="tl-item" id="tli2"><div class="tl-dot"></div><div class="tl-text"><strong id="leg2t">Marketing & Strategy</strong><span id="leg2s">B2B messaging, brand frameworks</span></div></div>
-      <div class="tl-item" id="tli3"><div class="tl-dot"></div><div class="tl-text"><strong id="leg3t">Data & Analytics</strong><span id="leg3s">SQL, Power BI, GA4, Python, AI</span></div></div>
-      <div class="tl-item" id="tli4"><div class="tl-dot current"></div><div class="tl-text"><strong id="leg4t">Now — Available</strong><span id="leg4s">Full-stack marketing analyst</span></div></div>
+      <div class="tl-item" id="tli1"><div class="tl-dot" style="background:#818cf8;box-shadow:0 0 6px rgba(129,140,248,0.5)"></div><div class="tl-text"><strong id="leg1t">Linguistics & Communication</strong><span id="leg1s">Structural logic, cross-cultural analysis</span></div></div>
+      <div class="tl-item" id="tli2"><div class="tl-dot" style="background:#f59e0b;box-shadow:0 0 6px rgba(245,158,11,0.5)"></div><div class="tl-text"><strong id="leg2t">Marketing & Strategy</strong><span id="leg2s">B2B messaging, brand frameworks</span></div></div>
+      <div class="tl-item" id="tli3"><div class="tl-dot" style="background:#06b6d4;box-shadow:0 0 6px rgba(6,182,212,0.5)"></div><div class="tl-text"><strong id="leg3t">Data & Analytics</strong><span id="leg3s">SQL, Power BI, GA4, Python, AI</span></div></div>
+      <div class="tl-item" id="tli4"><div class="tl-dot" style="background:#10b981;box-shadow:0 0 8px rgba(16,185,129,0.6)"></div><div class="tl-text"><strong id="leg4t">Now — Available</strong><span id="leg4s">Full-stack marketing analyst</span></div></div>
     </div>
   </div>
 </section>
