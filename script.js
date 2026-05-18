@@ -23,18 +23,35 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================
 
   // =========================
-  // 3. TYPEWRITER
+  // 3. HERO ROLE TYPEWRITER
   // =========================
-  const text = "MARKETING & DATA ANALYST";
-  let i = 0;
-  const typeElement = document.getElementById("typewriter-text");
-  function typeEffect() {
-    if (typeElement && i < text.length) {
-      typeElement.innerHTML += text.charAt(i++);
-      setTimeout(typeEffect, 90);
+  const heroRoles = ["Marketing Data Analyst", "Analytics Engineer", "Full-Funnel Strategist"];
+  let hri = 0, hci = 0, hDeleting = false;
+  const heroRoleEl = document.getElementById('heroRoleText');
+  function heroTypeEffect() {
+    if (!heroRoleEl) return;
+    const word = heroRoles[hri];
+    if (!hDeleting) {
+      heroRoleEl.textContent = word.slice(0, ++hci);
+      if (hci === word.length) { hDeleting = true; setTimeout(heroTypeEffect, 1800); return; }
+    } else {
+      heroRoleEl.textContent = word.slice(0, --hci);
+      if (hci === 0) { hDeleting = false; hri = (hri + 1) % heroRoles.length; }
     }
+    setTimeout(heroTypeEffect, hDeleting ? 45 : 80);
   }
-  typeEffect();
+  heroTypeEffect();
+
+  // =========================
+  // 3b. SCROLL TO TOP
+  // =========================
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   // =========================
   // 4. CARD EXPANSION
@@ -65,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "approach.p1.pill": "Pattern Recognition",
       "approach.p2.pill": "GA4 · GTM · Attribution",
       "approach.p3.pill": "DAX · Star Schema · SQL",
-      "nav.approach": "Approach",
+      "nav.approach": "↑",
       "nav.projects": "Projects",
       "nav.education": "Education",
       "nav.contact": "Contact",
@@ -81,6 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "hero.cta_cases": "View Case Studies",
       "hero.cta_cv": "Download CV",
       "hero.cta_inquiry": "Get in Touch",
+      "hero.terminal_hint": "ask about Francesca's career · background · personality",
+      "hero.terminal_line1": "I analyze marketing performance to find the truth behind the numbers.",
+      "hero.terminal_pre2": "Focused on",
+      "hero.terminal_green1": "full-funnel optimization",
+      "hero.terminal_and": "and",
+      "hero.terminal_green2": "data-driven execution.",
+      "hero.terminal_status": "open to opportunities",
 
       "approach.label": "METHODOLOGY",
       "approach.title": "Three Pillars of Impact",
@@ -212,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "approach.p1.pill": "Riconoscimento Pattern",
       "approach.p2.pill": "GA4 · GTM · Attribuzione",
       "approach.p3.pill": "DAX · Star Schema · SQL",
-      "nav.approach": "Approccio",
+      "nav.approach": "↑",
       "nav.projects": "Progetti",
       "nav.education": "Formazione",
       "nav.contact": "Contatti",
@@ -228,6 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "hero.cta_cases": "Vedi Case Studies",
       "hero.cta_cv": "Scarica CV",
       "hero.cta_inquiry": "Invia una richiesta",
+      "hero.terminal_hint": "chiedi della carriera di Francesca · formazione · personalità",
+      "hero.terminal_line1": "Analizzo le performance di marketing per trovare la verità dietro i numeri.",
+      "hero.terminal_pre2": "Focalizzata su",
+      "hero.terminal_green1": "ottimizzazione full-funnel",
+      "hero.terminal_and": "e",
+      "hero.terminal_green2": "esecuzione data-driven.",
+      "hero.terminal_status": "aperta a opportunità",
 
       "approach.label": "METODOLOGIA",
       "approach.title": "I tre pilastri del mio impatto",
@@ -358,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "approach.p1.pill": "Patroonherkenning",
       "approach.p2.pill": "GA4 · GTM · Attributie",
       "approach.p3.pill": "DAX · Star Schema · SQL",
-      "nav.approach": "Aanpak",
+      "nav.approach": "↑",
       "nav.projects": "Projecten",
       "nav.education": "Opleiding",
       "nav.contact": "Contact",
@@ -374,6 +405,13 @@ document.addEventListener('DOMContentLoaded', () => {
       "hero.cta_cases": "Bekijk Case Studies",
       "hero.cta_cv": "Download CV",
       "hero.cta_inquiry": "Projectaanvraag",
+      "hero.terminal_hint": "vraag naar Francesca's carrière · achtergrond · persoonlijkheid",
+      "hero.terminal_line1": "Ik analyseer marketingprestaties om de waarheid achter de cijfers te vinden.",
+      "hero.terminal_pre2": "Gericht op",
+      "hero.terminal_green1": "full-funnel optimalisatie",
+      "hero.terminal_and": "en",
+      "hero.terminal_green2": "data-gedreven uitvoering.",
+      "hero.terminal_status": "open voor kansen",
 
       "approach.label": "METHODOLOGIE",
       "approach.title": "Drie Pijlers van Impact",
@@ -979,6 +1017,288 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entries[0].isIntersecting) { drawNext(); scatterObs.disconnect(); }
     }, { threshold: 0.3 });
     scatterObs.observe(scatterCanvas);
+  }
+
+  // =========================
+  // 14. INTERACTIVE TERMINAL
+  // =========================
+  const termBody = document.getElementById('heroTermBody');
+  if (termBody) {
+    const TCMD = {
+      help: ()=>[
+        {c:'t-od',v:'─── available commands ───────────────────────────────'},
+        {c:'t-og',v:'  whoami / about / francesca   → who she is'},
+        {c:'t-og',v:'  personality / character      → who she is beyond the data'},
+        {c:'t-og',v:'  experience / work            → work history'},
+        {c:'t-og',v:'  projects                     → portfolio projects'},
+        {c:'t-og',v:'  skills / stack               → technical skills'},
+        {c:'t-og',v:'  education / background       → academic path'},
+        {c:'t-og',v:'  certifications / certs       → credentials'},
+        {c:'t-og',v:'  languages                    → spoken languages'},
+        {c:'t-og',v:'  contact                      → get in touch'},
+        {c:'t-og',v:'  github                       → her GitHub'},
+        {c:'t-og',v:'  cv / resume                  → download CV'},
+        {c:'t-og',v:'  status                       → availability'},
+        {c:'t-og',v:'  clear                        → clear terminal'},
+        {c:'t-od',v:'─────────────────────────────────────────────────────'},
+        {c:'t-od',v:'tip: natural questions work — try "her personality"'},
+      ],
+      about: ()=>[
+        {c:'t-ow',v:'Francesca Monte — Marketing & Data Analyst'},
+        {c:'t-od',v:''},
+        {c:'',v:'Originally trained in linguistics and cross-cultural communication,'},
+        {c:'',v:'Francesca made a deliberate pivot into data analytics in 2024–2025.'},
+        {c:'t-od',v:''},
+        {c:'',v:'Her linguistic background gives her something most analysts lack:'},
+        {c:'',v:'the ability to interpret, narrate, and communicate findings'},
+        {c:'',v:'with precision — not just build the models.'},
+        {c:'t-od',v:''},
+        {c:'t-og',v:'→ analyzes marketing performance to find the truth behind the numbers'},
+        {c:'t-oc',v:'Based in Naples · relocating to Amsterdam · September 2026'},
+        {c:'t-og',v:'EU citizen · available within 2–3 weeks · no sponsorship needed'},
+      ],
+      personality: ()=>[
+        {c:'t-oa',v:'── PERSONALITY & APPROACH ────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'The pattern hunter.'},
+        {c:'t-od',v:''},
+        {c:'',v:'Long before she worked with datasets, Francesca was obsessed'},
+        {c:'',v:'with finding patterns — in languages. She studied how words'},
+        {c:'',v:'from unrelated cultures share the same roots, why structures'},
+        {c:'',v:'converge across different linguistic families.'},
+        {c:'t-od',v:''},
+        {c:'',v:'Today she does exactly the same thing — with data.'},
+        {c:'',v:'The obsession is identical. Only the medium changed.'},
+        {c:'t-od',v:''},
+        {c:'t-og',v:'→ linguistics → data analytics: same root cause thinking.'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Beyond the technical.'},
+        {c:'t-od',v:''},
+        {c:'',v:'Genuinely charismatic — makes people feel heard. Listens'},
+        {c:'',v:'carefully, gives precise advice, brings warmth to professional'},
+        {c:'',v:'environments without losing analytical sharpness.'},
+        {c:'t-od',v:''},
+        {c:'t-oc',v:'Charisma + analytical rigor + communication precision'},
+        {c:'t-og',v:'= a rare combination in the data world.'},
+      ],
+      experience: ()=>[
+        {c:'t-oa',v:'── WORK EXPERIENCE ───────────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Freelance Marketing & Analytics Consultant'},
+        {c:'t-oc',v:'Independent · Jan 2026 – Present'},
+        {c:'',v:'→ Meta ad audit, performance analysis & budget strategy'},
+        {c:'',v:'→ SENTRY.mark and Causal Inference originated from this work'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Data Quality & AI Content Evaluator'},
+        {c:'t-oc',v:'RWS · Remote · Sep 2025 – Jan 2026'},
+        {c:'',v:'→ AI model outputs evaluation for Meta and Google ad systems'},
+        {c:'',v:'→ GDPR and data classification compliance'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Content Strategist & Media Manager'},
+        {c:'t-oc',v:'Polymed Surgery S.r.l · Naples · Feb–Nov 2025'},
+        {c:'',v:'→ Grew Instagram from ~60K to ~70K (+15%) in 9 months'},
+        {c:'',v:'→ Full ownership of content strategy and paid campaigns'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Marketing & Communications Intern'},
+        {c:'t-oc',v:'Asco Pompe S.r.l · Milan · Oct 2024 – Jan 2025'},
+        {c:'',v:'→ Brand strategy across multiple subsidiaries'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Marketing & Social Media Intern'},
+        {c:'t-oc',v:'Royal Group S.r.l · Naples · Jan 2023 – Jan 2024'},
+        {c:'',v:'→ Digital campaign execution and performance monitoring'},
+      ],
+      projects: ()=>[
+        {c:'t-oa',v:'── PROJECTS ──────────────────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'SENTRY.mark — Anomaly Detection Engine'},
+        {c:'t-oc',v:'Python · BigQuery · Power BI · Slack · May 2025'},
+        {c:'',v:'→ Z-Score rolling baselines (7-day, α=0.05, Z>1.96)'},
+        {c:'t-og',v:'→ 5/5 synthetic anomalies caught via chaos engineering'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Causal Impact of Ad Exposure on Conversion Rate'},
+        {c:'t-oc',v:'Python · IPW · Scikit-learn · Mar 2025'},
+        {c:'t-og',v:'→ Raw lift 6.05% vs true causal lift 5.17% — 0.89pp bias'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Amsterdam Airbnb ETL Pipeline'},
+        {c:'t-oc',v:'Python · BigQuery · Power BI · May 2025'},
+        {c:'t-og',v:'→ 10K listings · 3.8M rows · Centrum-Oost ~€60K/listing/yr'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'BI: Telecom Churn · SQL: HVC Segmentation · GA4 Funnel Audit'},
+        {c:'t-ol',v:'→ github.com/francescaetnom-wq',href:'https://github.com/francescaetnom-wq'},
+      ],
+      skills: ()=>[
+        {c:'t-oa',v:'── TECHNICAL SKILLS ──────────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-oc',v:'[ Analytics & BI ]'},
+        {c:'',v:'  BigQuery · SQL · Python (Pandas, SciPy) · Scikit-learn'},
+        {c:'',v:'  Power BI (DAX · Star Schema) · GA4 · Looker Studio'},
+        {c:'t-oc',v:'[ Methods ]'},
+        {c:'',v:'  Causal Inference (IPW) · Anomaly Detection · ETL Pipeline'},
+        {c:'',v:'  A/B Testing · Statistical Analysis · KPI Reporting'},
+        {c:'t-oc',v:'[ Marketing & Automation ]'},
+        {c:'',v:'  Meta Ads · SEO · GTM · GitHub Actions · Slack API · n8n · AI Agents'},
+        {c:'t-od',v:''},
+        {c:'t-og',v:'+ linguistics → exceptional data storytelling'},
+      ],
+      education: ()=>[
+        {c:'t-oa',v:'── EDUCATION ─────────────────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:"Master's — Strategic & Professional Communication"},
+        {c:'t-oc',v:'University of Pisa · Dec 2024'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:"Bachelor's — Languages & Cultures (Europe & Americas)"},
+        {c:'t-oc',v:'UniOr Naples · Oct 2023'},
+        {c:'t-od',v:''},
+        {c:'t-ow',v:'Digital Marketing & Agentic AI Master'},
+        {c:'t-oc',v:'Start2Impact University · Expected Aug 2026'},
+        {c:'t-od',v:''},
+        {c:'t-og',v:'→ linguistics background = data analyst who can communicate'},
+      ],
+      certifications: ()=>[
+        {c:'t-oa',v:'── CERTIFICATIONS ────────────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-og',v:'✓ Google Data Analytics Professional Certificate · Feb 2026'},
+        {c:'t-og',v:'✓ Google Analytics Certification · Jan 2026'},
+        {c:'t-og',v:'✓ Microsoft PL-300 Power BI Data Analyst · May 2026'},
+      ],
+      languages: ()=>[
+        {c:'t-oa',v:'── LANGUAGES ─────────────────────────────────────────'},
+        {c:'t-od',v:''},
+        {c:'t-og',v:'Italian     Native'},
+        {c:'t-og',v:'English     C2'},
+        {c:'',v:'French      B2'},
+        {c:'',v:'Portuguese  B2'},
+        {c:'t-oc',v:'Dutch       A1 — actively learning 🇳🇱'},
+        {c:'t-od',v:''},
+        {c:'',v:'5 languages + data fluency = rare combination in analytics'},
+      ],
+      contact: ()=>[
+        {c:'t-ow',v:'francescaetnom@gmail.com'},
+        {c:'t-od',v:''},
+        {c:'t-ol',v:'LinkedIn → linkedin.com/in/francesca-monte',href:'https://www.linkedin.com/in/francesca-monte'},
+        {c:'t-ol',v:'GitHub   → github.com/francescaetnom-wq',href:'https://github.com/francescaetnom-wq'},
+        {c:'t-og',v:'→ or scroll down and use the contact form'},
+      ],
+      github: ()=>[
+        {c:'t-ow',v:'github.com/francescaetnom-wq'},
+        {c:'t-ol',v:'→ open GitHub profile',href:'https://github.com/francescaetnom-wq'},
+      ],
+      cv: ()=>[
+        {c:'t-od',v:'Initiating download...'},
+        {c:'t-og',v:'✓ francesca_monte_cv.pdf'},
+        {c:'t-ol',v:'→ click to download',href:'francesca_monte_cv.pdf',dl:'Francesca_Monte_CV.pdf'},
+      ],
+      status: ()=>[
+        {c:'t-og',v:'● AVAILABLE'},
+        {c:'t-od',v:''},
+        {c:'',v:'Roles:      Marketing Analyst · Data Analyst · Marketing Ops'},
+        {c:'',v:'Markets:    Netherlands · Italy · Remote'},
+        {c:'t-oa',v:'Relocation: Amsterdam · September 2026'},
+        {c:'t-og',v:'Notice:     2–3 weeks · EU citizen · no sponsorship needed'},
+      ],
+    };
+
+    const TQA = [
+      {keys:['who is','tell me about','about francesca','chi è','introduce','francesca monte','her story','who she'],cmd:'about'},
+      {keys:['personality','character','vibes','charisma','who she really','soft skills','beyond the data','curiosity','pattern','pivot','why data','how did she','career switch','linguist','switched','transition'],cmd:'personality'},
+      {keys:['experience','work','job','career','worked','roles','professional','polymed','rws','asco','royal','consulting','freelance'],cmd:'experience'},
+      {keys:['project','portfolio','sentry','causal','airbnb','amsterdam','churn','sql','hvc','built','created'],cmd:'projects'},
+      {keys:['skill','stack','tech','tools','python','sql','power bi','bigquery','ga4','gtm','capabilities'],cmd:'skills'},
+      {keys:['education','study','degree','university','master','bachelor','pisa','unior','start2impact','academic','background','formation','studied'],cmd:'education'},
+      {keys:['cert','certif','credential','google','pl-300','microsoft','coursera'],cmd:'certifications'},
+      {keys:['language','speak','italian','english','french','portuguese','dutch','multilingual'],cmd:'languages'},
+      {keys:['contact','email','reach','get in touch','talk to','message','linkedin'],cmd:'contact'},
+      {keys:['github','repo','code','source'],cmd:'github'},
+      {keys:['cv','resume','download','pdf'],cmd:'cv'},
+      {keys:['status','available','availability','open to','relocat','moving'],cmd:'status'},
+      {keys:['help','commands','what can','options','menu'],cmd:'help'},
+    ];
+
+    const TEASTER = {
+      'hire francesca': [{c:'t-og',v:'✓ Excellent choice.'},{c:'t-od',v:''},{c:'t-oa',v:'[██████████] 100% — candidate loaded'},{c:'t-od',v:''},{c:'t-og',v:'→ francescaetnom@gmail.com'}],
+      'coffee': [{c:'t-oa',v:'brewing... ☕'},{c:'t-od',v:'(I run on GA4 data and curiosity)'}],
+      'hello': [{c:'t-og',v:'Hello! Type  help  to explore.'}],
+      'hi': [{c:'t-og',v:'Hi! Type  help  to see what I can do.'}],
+      'pwd': [{c:'',v:'/home/francesca/portfolio'}],
+      'date': [{c:'',v:new Date().toDateString()}],
+    };
+    TEASTER['sudo hire francesca'] = TEASTER['hire francesca'];
+
+    function tFuzzy(input) {
+      const lower = input.toLowerCase();
+      for (const {keys,cmd} of TQA) {
+        if (keys.some(k=>lower.includes(k))) return cmd;
+      }
+      return null;
+    }
+
+    let tHist=[], tHidx=-1;
+    const allTCmds=[...Object.keys(TCMD),...Object.keys(TEASTER)];
+
+    function tPrint(lines) {
+      lines.forEach(l=>{
+        const el=document.createElement('div');
+        el.className='term-line';
+        if(l.c==='t-ol'){
+          const a=document.createElement('a');
+          a.className='t-ol'; a.textContent=l.v; a.href=l.href||'#';
+          if(l.dl) a.download=l.dl; a.target='_blank';
+          el.appendChild(a);
+        } else {
+          if(l.c) el.classList.add(l.c);
+          el.textContent=l.v;
+        }
+        termBody.insertBefore(el,tInputRow);
+      });
+      termBody.scrollTop=termBody.scrollHeight;
+    }
+
+    function tPrintCmd(cmd) {
+      const el=document.createElement('div');
+      el.className='term-line term-line-input';
+      el.innerHTML=`<span class="term-prompt-sym">~/portfolio $</span><span class="term-cmd-text">${cmd}</span>`;
+      termBody.insertBefore(el,tInputRow);
+    }
+
+    function tExecute(raw) {
+      const trimmed=raw.trim(); if(!trimmed) return;
+      tHist.unshift(trimmed); tHidx=-1; tPrintCmd(trimmed);
+      const lower=trimmed.toLowerCase();
+      if(lower==='clear'){Array.from(termBody.children).forEach(c=>{if(c!==tInputRow)c.remove();}); return;}
+      if(TCMD[lower]){tPrint(TCMD[lower]()); return;}
+      if(TEASTER[lower]){tPrint(Array.isArray(TEASTER[lower])?TEASTER[lower]:TEASTER[TEASTER[lower]]); return;}
+      const matched=tFuzzy(lower);
+      if(matched&&TCMD[matched]){tPrint(TCMD[matched]()); return;}
+      tPrint([{c:'t-or',v:`command not found: ${trimmed}`},{c:'t-od',v:'type  help  to see available commands'}]);
+    }
+
+    const tInputRow=document.createElement('div');
+    tInputRow.className='hero-term-input-row';
+    tInputRow.innerHTML=`<span class="hero-term-prompt">~/portfolio $</span>`;
+    const tInp=document.createElement('input');
+    tInp.id='heroTermInput'; tInp.autocomplete='off'; tInp.spellcheck=false;
+    tInp.setAttribute('autocorrect','off'); tInputRow.appendChild(tInp);
+    termBody.appendChild(tInputRow);
+
+    tInp.addEventListener('keydown',e=>{
+      if(e.key==='Enter'){tExecute(tInp.value);tInp.value='';}
+      else if(e.key==='ArrowUp'){e.preventDefault();if(tHidx<tHist.length-1){tHidx++;tInp.value=tHist[tHidx];}}
+      else if(e.key==='ArrowDown'){e.preventDefault();if(tHidx>0){tHidx--;tInp.value=tHist[tHidx];}else{tHidx=-1;tInp.value='';}}
+      else if(e.key==='Tab'){
+        e.preventDefault();
+        const v=tInp.value.trim().toLowerCase();
+        const m=allTCmds.find(k=>k.startsWith(v)&&k!==v);
+        if(m) tInp.value=m;
+      }
+    });
+
+    tPrint([
+      {c:'t-od',v:'francesca@portfolio ~ interactive shell'},
+      {c:'t-ow',v:'Welcome. This terminal knows Francesca.'},
+      {c:'',v:'ask naturally or type  help  for commands'},
+      {c:'t-og',v:'  "francesca personality"  /  "work experience"  /  "projects"'},
+      {c:'t-od',v:'──────────────────────────────────────────────────────'},
+    ]);
   }
 
 });
