@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================
   // 3. HERO ROLE TYPEWRITER
   // =========================
-  const heroRoles = ["Marketing Data Analyst", "Analytics Engineer", "Full-Funnel Strategist"];
+  const heroRoles = ["Data Analyst", "Analytics Engineer", "BI Developer"];
   let hri = 0, hci = 0, hDeleting = false;
   const heroRoleEl = document.getElementById('heroRoleText');
   function heroTypeEffect() {
